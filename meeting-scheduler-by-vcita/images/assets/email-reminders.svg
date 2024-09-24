@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="74" height="77" viewBox="0 0 74 77">
+    <defs>
+        <path id="a" d="M.088.032h.3V19.29h-.3z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#5CE8AD" d="M62.184 57.836a6.668 6.668 0 1 1-13.335 0 6.668 6.668 0 1 1 13.335 0"/>
+        <path stroke="#000" stroke-linejoin="bevel" stroke-width=".6" d="M53.981 53.53v8.88M58.418 57.973h-8.88"/>
+        <path stroke="#000" stroke-width=".6" d="M35.152 45.455h37.76v25.638H51.26l-5.856 5.856v-5.856H35.152z"/>
+        <path stroke="#000" stroke-linejoin="bevel" stroke-width=".6" d="M1.301 17.144l29.152 23.252 36.15-23.638"/>
+        <path stroke="#000" stroke-width=".6" d="M66.604 45.455v-28.84l-65.488.381v42.775h34.036"/>
+        <path stroke="#000" stroke-linejoin="bevel" stroke-width=".6" d="M14.389 5.99v15.56"/>
+        <g transform="translate(19.64 .2)">
+            <mask id="b" fill="#fff">
+                <use xlink:href="#a"/>
+            </mask>
+            <path stroke="#000" stroke-linejoin="bevel" stroke-width="3.6" d="M.238.032v19.257" mask="url(#b)"/>
+        </g>
+        <path stroke="#000" stroke-linejoin="bevel" stroke-width=".6" d="M26.136 6.703v15.561"/>
+    </g>
+</svg>

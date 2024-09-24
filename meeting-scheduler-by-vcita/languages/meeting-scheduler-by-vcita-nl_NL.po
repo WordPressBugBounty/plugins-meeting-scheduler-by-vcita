@@ -1,0 +1,1241 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: meeting-scheduler-by-vcita 4.2.7\n"
+"POT-Creation-Date: 2020-09-07 17:13+0200\n"
+"PO-Revision-Date: 2020-09-07 17:13+0200\n"
+"Last-Translator: \n"
+"Language-Team: vcita\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../vcita-add-to-site.php:67
+msgid "Show widget on site"
+msgstr "Toon widget op de website"
+
+#: ../vcita-add-to-site.php:67
+msgid "Show on site"
+msgstr "Toon op de website"
+
+#: ../vcita-add-to-site.php:79
+msgid "Hooray! Your clients can book with you right from your site"
+msgstr "Hoera! Uw cliënten kunnen direct van de website een afspraak boeken"
+
+#: ../vcita-add-to-site.php:83
+msgid "The widget will be added to your site once you connect to vcita"
+msgstr ""
+"De widget zal aan uw website toegevoegd worden als u zich in verbinding "
+"stelt met vcita"
+
+#: ../vcita-add-to-site.php:85 ../vcita-add-to-site.php:96
+#: ../vcita-main.php:63 ../vcita-scheduler.php:145
+#: ../vcita-utility-functions.php:430
+msgid "Connect to vcita"
+msgstr "Verbind met vcita"
+
+#: ../vcita-add-to-site.php:91
+msgid ""
+"The scheduling widget is already shown on your site by another vcita plugin "
+"you use. Hence, we disabled the option to turn this switch on."
+msgstr ""
+
+#: ../vcita-add-to-site.php:93
+msgid "Turn the switch on to add vcita`s scheduling widget to your site!"
+msgstr ""
+"Activeer de knop om vcita's boekings widget aan uw website toe te voegen! "
+
+#: ../vcita-add-to-site.php:108
+msgid "Mobile preview"
+msgstr "Mobiel voorbeeldscherm"
+
+#: ../vcita-add-to-site.php:109
+msgid "(also supported on desktop)"
+msgstr "(ook ondersteund op desktop) "
+
+#: ../vcita-add-to-site.php:121
+msgid "Let's talk!"
+msgstr ""
+
+#: ../vcita-add-to-site.php:125 ../vcita-add-to-site.php:211
+msgid "Thanks for stopping by! We’re here to help…"
+msgstr ""
+
+#: ../vcita-add-to-site.php:129 ../vcita-add-to-site.php:174
+msgid "Schedule Now"
+msgstr "Boek Nu"
+
+#: ../vcita-add-to-site.php:146
+msgid "Take design from"
+msgstr "Neem het ontwerp van"
+
+#: ../vcita-add-to-site.php:147
+msgid ""
+"You can either set the widget design here, or on vcita website if you wish "
+"to utilize more advanced features"
+msgstr ""
+"U kunt het ontwerp van de widget hier instellen of op de vcita website als u "
+"van meer geavanceerde functies gebruik wenst te maken "
+
+#: ../vcita-add-to-site.php:152 ../vcita-add-to-site.php:159
+msgid "Plugin"
+msgstr "Plugin"
+
+#: ../vcita-add-to-site.php:163
+msgid "Edit on vcita"
+msgstr ""
+
+#: ../vcita-add-to-site.php:169
+msgid "Design"
+msgstr "Ontwerp"
+
+#: ../vcita-add-to-site.php:173
+msgid "Button text"
+msgstr "Tekst Knop"
+
+#: ../vcita-add-to-site.php:178
+msgid "Button color"
+msgstr "Kleur Knop"
+
+#: ../vcita-add-to-site.php:184
+msgid "Text color"
+msgstr "Tekst Kleur"
+
+#: ../vcita-add-to-site.php:190
+msgid "Hover color"
+msgstr "Hover Kleur"
+
+#: ../vcita-add-to-site.php:198
+msgid "Pop up after 5 seconds"
+msgstr "Pop Up na 5 seconden"
+
+#: ../vcita-add-to-site.php:206
+msgid "Widget title"
+msgstr "Titel Widget"
+
+#: ../vcita-add-to-site.php:207
+msgid "Let's Talk!"
+msgstr ""
+
+#: ../vcita-add-to-site.php:210
+msgid "Widget text"
+msgstr "Tekst Widget "
+
+#: ../vcita-add-to-site.php:214
+msgid "Widget image (Optional)"
+msgstr "Fotobestand Widget (optioneel) "
+
+#: ../vcita-add-to-site.php:218
+msgid "Clear"
+msgstr ""
+
+#: ../vcita-add-to-site.php:232
+msgid "Save"
+msgstr "Opslaan"
+
+#: ../vcita-add-to-site.php:237
+msgid "Not satisfied with the result?"
+msgstr "Niet tevreden met het resultaat?"
+
+#: ../vcita-add-to-site.php:240
+msgid "Reset to default"
+msgstr "Resetten tot standaard instellingen"
+
+#: ../vcita-add-to-site.php:250
+msgid "Contact Form"
+msgstr "Contactformulier "
+
+#: ../vcita-add-to-site.php:262 ../vcita-add-to-site.php:297
+#: ../vcita-utility-functions.php:448
+msgid "Preview"
+msgstr "Voorbeeldscherm "
+
+#: ../vcita-add-to-site.php:268
+msgid "Turn switch on to add your vcita contact form on your website"
+msgstr ""
+"Activeer de knop om uw vcita contactformulier aan uw website toe te voegen"
+
+#: ../vcita-add-to-site.php:271
+msgid "Your vcita contact form is active on your site."
+msgstr "Uw vcita contactformulier is actief op uw website."
+
+#: ../vcita-add-to-site.php:273
+msgid "Edit form"
+msgstr "Pas het formulier aan"
+
+#: ../vcita-add-to-site.php:278
+msgid ""
+"The scheduling widget is already presented on your site. We block the option "
+"to turn contact page on here as well."
+msgstr ""
+
+#: ../vcita-add-to-site.php:285
+msgid "Scheduling Page"
+msgstr "Boekingspagina"
+
+#: ../vcita-add-to-site.php:303
+msgid "Turn switch on to add a scheduling page to your website"
+msgstr "Activeer de knop om een boekingspagina aan uw website toe te voegen."
+
+#: ../vcita-add-to-site.php:306
+msgid "Your scheduling page is active on your site"
+msgstr "Uw boekingspagina is geactiveerd op uw website "
+
+#: ../vcita-add-to-site.php:310
+msgid ""
+"The scheduling widget is already presented on your site. We block the option "
+"to turn scheduling page on here as well."
+msgstr ""
+
+#: ../vcita-add-to-site.php:319
+msgid "More options"
+msgstr "Meer mogelijkheden"
+
+#: ../vcita-add-to-site.php:321
+msgid ""
+"Enable clients to book meetings with your right from your Facebook / Google "
+"page"
+msgstr ""
+"Stel cliënten in staat om direct vanaf uw Facebook / Google Pagina "
+"besprekingen met u te boeken  "
+
+#: ../vcita-add-to-site.php:330
+msgid "Add a book button to your Google page"
+msgstr "Voeg een boekingsknop aan uw Google pagina toe "
+
+#: ../vcita-add-to-site.php:333
+msgid "Add Google Reserve"
+msgstr "Voeg Google Reserveringen toe "
+
+#: ../vcita-add-to-site.php:342
+msgid "Add a book button to your Facebook page"
+msgstr "Voeg een boekingsknop aan uw Facebook pagina toe "
+
+#: ../vcita-add-to-site.php:345
+msgid "Add on Facebook"
+msgstr "Voeg aan Facebook toe "
+
+#: ../vcita-custom-impl.php:22
+msgid "Turn your own site elements into SMART booking buttons"
+msgstr "Zet uw eigen website elementen om in SMART boekings knoppen "
+
+#: ../vcita-custom-impl.php:24
+msgid ""
+"Super simple HTML will enable you to use your own buttons and release the "
+"full power of vcita Scheduling."
+msgstr ""
+"De super eenvoudige HTML stelt u in staat uw eigen knoppen toe te passen en "
+"met volle kracht gebruik te kunnen maken van vcita Boekingen."
+
+#: ../vcita-custom-impl.php:35
+msgid "Scheduling Button"
+msgstr "Boekingsknoppen "
+
+#: ../vcita-custom-impl.php:37
+msgid "Turn any element on your site into a scheduling button"
+msgstr "Stel elk element op uw website in werking als boekingsknop"
+
+#: ../vcita-custom-impl.php:43
+msgid ""
+"You can design your own button and place it anywhere you want on your site. "
+"Once a visitor clicks on it, your scheduling page on vcita will open."
+msgstr ""
+"U kunt uw eigen knop ontwerpen en waar dan ook op uw website plaatsen. "
+"Wanneer de bezoeker erop klikt, zal uw boekingspagina op vcita geopend "
+"worden. "
+
+#: ../vcita-custom-impl.php:56 ../vcita-custom-impl.php:93
+msgid "Schedule now"
+msgstr "Boek Nu"
+
+#: ../vcita-custom-impl.php:71
+msgid "Send Parameters"
+msgstr "Stuur Parameters"
+
+#: ../vcita-custom-impl.php:73
+msgid "Ease the scheduling process by adding parameters"
+msgstr "Vereenvoudig het boekingsproces door parameters toe te voegen"
+
+#: ../vcita-custom-impl.php:79
+msgid ""
+"Instead of making your clients manually fill the meeting details (i.e. "
+"choosing the service, time, price etc), you can simply send those as "
+"parameters when the user initiates the scheduling process."
+msgstr ""
+"In plaats van dat de cliënt handmatig de details van de bespreking invult "
+"(zoals het kiezen van de dienst, tijd, prijs etc.), kunt u eenvoudigweg deze "
+"parameters sturen als de gebruiker het boekingsproces initieert."
+
+#: ../vcita-custom-impl.php:91 ../vcita-custom-impl.php:116
+msgid ""
+"You can pass the parameters as one options string by using the data-options "
+"attribute"
+msgstr ""
+
+#: ../vcita-custom-impl.php:103
+msgid "Using vcita’s LiveSite SDK"
+msgstr "Gebruik van vcita's LiveSite SDK"
+
+#: ../vcita-custom-impl.php:105
+msgid ""
+"vCita LiveSite SDK offers a wealth of engagement tools to drive more "
+"business and deliver amazing customer service through your website. Please "
+"review the"
+msgstr ""
+"vCita LiveSite SDK biedt een overloed aan hulpmiddelen die ervoor zorgen dat "
+"u mbv uw website meer werk krijgt en geweldige klantenservice kunt bieden. "
+"Bekijkt u alstublieft de"
+
+#: ../vcita-custom-impl.php:107
+msgid "full documentation"
+msgstr "volledige documentatie"
+
+#: ../vcita-custom-impl.php:109
+msgid "for more details"
+msgstr "voor meer details"
+
+#: ../vcita-custom-impl.php:117
+msgid "Registration to your English Class"
+msgstr ""
+
+#: ../vcita-custom-impl.php:117
+msgid "Register to English Class"
+msgstr ""
+
+#: ../vcita-custom-impl.php:128
+msgid "Parameters list"
+msgstr "Lijst van Parameters"
+
+#: ../vcita-custom-impl.php:130
+msgid ""
+"Below you will find the parameters that you can pass with every scheduling "
+"action. Using those parameters will help you provide a quick and smooth "
+"scheduling experience"
+msgstr ""
+"Onderstaand treft u de parameters aan die u bij elke boekingsactie kunt "
+"sturen. Het gebruik van deze parameters zal u bij staan in het bieden van "
+"een vlotte en gestroomlijnde boekingservaring"
+
+#: ../vcita-custom-impl.php:137
+msgid "Option"
+msgstr "Optie"
+
+#: ../vcita-custom-impl.php:138
+msgid "Description"
+msgstr "Omschrijving"
+
+#: ../vcita-custom-impl.php:145
+msgid "Preselect date to show the scheduling on (MMDDYY or MMDDYYYY)"
+msgstr ""
+"Selecteer op voorhand datum om het boeken te tonen (MMDDJJ or MMDDJJJJ)"
+
+#: ../vcita-custom-impl.php:150
+msgid "Preselect a service by it's uid"
+msgstr "Selecteer op voorhand een dienst aan de hand van zijn uid"
+
+#: ../vcita-custom-impl.php:155
+msgid "Show only services matching the name (only if service not provided)"
+msgstr ""
+"Toon uitsluitend diensten met de naam die gelijk zijn als (uitsluitend als "
+"de dienst niet geleverd is)"
+
+#: ../vcita-custom-impl.php:160
+msgid "Preselect staff by it's uid"
+msgstr "Selecteer op voorhand werknemers aan de hand van hun uid"
+
+#: ../vcita-custom-impl.php:165
+msgid ""
+"services_first (default) to show the service selection step before a staff "
+"is selected or staff_first to show the staff selection step first and then "
+"show the services selection according to the selected staff member"
+msgstr ""
+"services_first (default) om de selectie aan diensten fase te tonen voordat "
+"een medewerker is geselecteerd of staff_first om de selectie aan medewerkers "
+"eerst te tonen en dan de selectie aan diensten volgens de geselecteerde "
+"medewerker"
+
+#: ../vcita-custom-impl.php:171
+msgid "Pre-fill email for the appointment"
+msgstr "Pre-Fill email voor de afspraak"
+
+#: ../vcita-custom-impl.php:177
+msgid "Pre-fill first_name for the appointment"
+msgstr "Pre-Fill voor_naam voor de afspraak"
+
+#: ../vcita-custom-impl.php:183
+msgid "Pre-fill last_name for the appointment"
+msgstr "Pre-Fill achter_naam voor de afspraak"
+
+#: ../vcita-custom-impl.php:188
+msgid "Pre-fill phone for the appointment"
+msgstr "Pre-Fill telefoonnummer voor de afspraak"
+
+#: ../vcita-custom-impl.php:192
+msgid "Pre-fill agenda for the appointment"
+msgstr "Pre-Fill agenda voor de afspraak"
+
+#: ../vcita-custom-impl.php:197
+msgid "Action source, will be displayed in the engagement"
+msgstr "Actie bron, zal worden getoond in het contact"
+
+#: ../vcita-main.php:33
+msgid "As you already use"
+msgstr ""
+
+#: ../vcita-main.php:35
+msgid ""
+"by vcita, you can edit the scheduling widget there. Alternatively you can "
+"deactivate all other vcita plugins installed on your site and configure your "
+"scheduling widget using this plugin. Set up widget using"
+msgstr ""
+
+#: ../vcita-main.php:39
+msgid "or"
+msgstr ""
+
+#: ../vcita-main.php:41
+msgid "deactivate all other vcita plugins"
+msgstr ""
+
+#: ../vcita-main.php:49 ../vcita-support.php:22
+#: ../php_assets/admin_header.php:53
+msgid "Hi"
+msgstr "Hoi"
+
+#: ../vcita-main.php:52
+msgid "Re-connect below to continue to settings and edit your plugin."
+msgstr ""
+
+#: ../vcita-main.php:56
+msgid ""
+"Quickly configure your online booking settings with our online booking wizard"
+msgstr ""
+"Verander snel uw online boekings instellingen met behulp van onze Online "
+"Boekings Wizard"
+
+#: ../vcita-main.php:71
+msgid "Start Wizard"
+msgstr "Start de Wizard"
+
+#: ../vcita-main.php:79
+msgid "Welcome to vcita!"
+msgstr "Welkom bij vcita!"
+
+#: ../vcita-main.php:81
+msgid ""
+"vcita is a self-service scheduling for you and your clients.<br>Save time on "
+"coordination and increase client satisfaction."
+msgstr ""
+"vcita is een self-service-boekingsservice voor u en uw cliënten.<brBespaar "
+"tijd op coördinatie en verhoog de klanttevredenheid.  "
+
+#: ../vcita-main.php:87 ../vcita-main.php:269
+msgid "Let’s get started"
+msgstr "Laten we beginnen"
+
+#: ../vcita-main.php:91 ../vcita-main.php:273
+msgid "Already have an account?"
+msgstr "Heeft u al een account?"
+
+#: ../vcita-main.php:93 ../vcita-main.php:275
+msgid "Connect"
+msgstr "Verbind nu"
+
+#: ../vcita-main.php:122
+msgid "See it in action"
+msgstr "Zie het in actie"
+
+#: ../vcita-main.php:123
+msgid "From visitor to client with few easy steps"
+msgstr ""
+
+#: ../vcita-main.php:131
+msgid "Some of vcita’s cool features"
+msgstr "Enkele van vcita's functies"
+
+#: ../vcita-main.php:140
+msgid "Schedule online – anytime, anywhere"
+msgstr "Plan online - altijd en overal"
+
+#: ../vcita-main.php:143
+msgid "Our online scheduler can be accessed from anywhere, anytime!"
+msgstr "U heeft altijd en overal toegang tot ons online boekingssysteem!"
+
+#: ../vcita-main.php:151
+msgid "The best experience for your clients"
+msgstr "De beste ervaring voor uw cliënten "
+
+#: ../vcita-main.php:154
+msgid "Let clients schedule online services and conduct video calls via Zoom."
+msgstr ""
+"Stel cliënten in staat online diensten te plannen en video besprekingen via "
+"Zoom uit te voeren."
+
+#: ../vcita-main.php:162
+msgid "Billing & Invoicing"
+msgstr "Facturering"
+
+#: ../vcita-main.php:165
+msgid "Handle your billing & Invoicing like a pro, and accept payments online"
+msgstr ""
+"Beheer uw facturering op professionele wijze en accepteer betalingen online"
+
+#: ../vcita-main.php:175
+msgid "Solo? Team? vcita fits all"
+msgstr "Solo? Een team? vcita past bij iedereen"
+
+#: ../vcita-main.php:178
+msgid ""
+"Whether you’re a one-person show or manage a team of employees, we’ve got "
+"you covered!"
+msgstr ""
+"Of u nu een one-man show persoon runt of een team aan werknemers managet, "
+"wij zorgen voor u!"
+
+#: ../vcita-main.php:186
+msgid "No coding needed"
+msgstr "Geen coding nodig"
+
+#: ../vcita-main.php:188
+msgid ""
+"Integrating vcita’s scheduling software with your online assets is super "
+"easy and requires no technical knowledge or coding."
+msgstr ""
+"Integratie van vcita's plannings software met uw eigen online assets is "
+"enorm eenvoudig en vereist geen technische kennis of coding."
+
+#: ../vcita-main.php:196
+msgid "Save the back-and-forth"
+msgstr "Bespaar uzelf veel gedoe"
+
+#: ../vcita-main.php:199
+msgid ""
+"Let your calendar work for you! Automatically confirm client scheduling "
+"requests based on your availability to save time on back & forth "
+"coordination."
+msgstr ""
+"Laat uw kalender het werk van u overnemen! Bevestig automatisch, gebaseerd "
+"op uw beschikbaarheid, de afspraak-verzoeken van de cliënt om tijd en het "
+"over en weer coördineren te besparen."
+
+#: ../vcita-main.php:207
+msgid "See what users say about our online scheduler"
+msgstr ""
+"Lees wat andere gebruikers te zeggen hebben over vcita's online "
+"boekingssysteem"
+
+#: ../vcita-main.php:209
+msgid "Rated 4.7/5 on Google My Business (308 votes)"
+msgstr "Beoordeling: 4.7/5 op Google Mijn Bedrijf (308 stemmen)"
+
+#: ../vcita-main.php:218
+msgid "Sales & marketing"
+msgstr "Sales & Marketing"
+
+#: ../vcita-main.php:221
+msgid ""
+"“Before it took 3 days to schedule an appointment with a client. Now it "
+"takes 30 seconds.”"
+msgstr ""
+"\"In het verleden nam het 3 dagen in beslag om een afspraak met een cliënt "
+"te maken. Nu is het in slechts 30 seconden geregeld.\""
+
+#: ../vcita-main.php:224
+msgid "Brandon Klayman"
+msgstr "Brandon Klayman"
+
+#: ../vcita-main.php:225
+msgid "Marketing & Sales Expert"
+msgstr "Marketing & Sales Expert"
+
+#: ../vcita-main.php:233
+msgid "Entertainment & arts"
+msgstr "Entertainment & Kunst"
+
+#: ../vcita-main.php:236
+msgid ""
+"“I was able to triple my income because I had given clients the ability to "
+"book their own appointments”"
+msgstr ""
+"\"Het heeft mij in staat gesteld mijn inkomen te verdrievoudigen omdat ik "
+"mijn cliënten in staat gesteld heb hun eigen afspraken te boeken\" "
+
+#: ../vcita-main.php:239
+msgid "Patrick Osei"
+msgstr "Patrick Osei"
+
+#: ../vcita-main.php:240
+msgid "Recording Studio Owner"
+msgstr "Eigenaar Recording Studio"
+
+#: ../vcita-main.php:248
+msgid "Beauty & fashion"
+msgstr "Beauty & Fashion"
+
+#: ../vcita-main.php:251
+msgid ""
+"“The online scheduling ability enables me to have a life as an entrepreneur "
+"and have a good flow to my day.”"
+msgstr ""
+"\"De mogelijkheid online afspraken te maken, stelt me in staat om als "
+"ondernemer ook nog een leven te hebben en een soepel verloop van mijn dag\""
+
+#: ../vcita-main.php:254
+msgid "Janay Mallela"
+msgstr "Janay Mallela"
+
+#: ../vcita-main.php:255
+msgid "Wedding Gown Designer"
+msgstr "Bruidsjurken Ontwerpster"
+
+#: ../vcita-main.php:262
+msgid "It’s time to get booked online"
+msgstr "Hoog tijd om online geboekt te worden!"
+
+#: ../vcita-main.php:264
+msgid "Join the thousands of users who use vcita to manage their meetings."
+msgstr ""
+
+#: ../vcita-main.php:291
+msgid "Your availability hours"
+msgstr "Uw beschikbare uren"
+
+#: ../vcita-main.php:293
+msgid "Set the time during which clients can book meetings with you."
+msgstr "Stel de uren in wanneer uw cliënten afspraken met u kunnen boeken."
+
+#: ../vcita-main.php:295
+msgid "Edit availbility"
+msgstr "Pas beschikbaarheid aan. "
+
+#: ../vcita-main.php:307
+msgid "Your services"
+msgstr "Uw diensten "
+
+#: ../vcita-main.php:309
+msgid "Here are the services your clients can book with you. You can"
+msgstr ""
+"Hier worden de diensten die uw cliënten bij u kunnen boeken vermeld. U kunt "
+"meer services"
+
+#: ../vcita-main.php:311
+msgid "add / edit"
+msgstr "toevoegen / verwijderen"
+
+#: ../vcita-main.php:313
+msgid "more services"
+msgstr " "
+
+#: ../vcita-main.php:324
+msgid "Sync your Calendars"
+msgstr "Synchroniseer uw Kalenders "
+
+#: ../vcita-main.php:326
+msgid ""
+"Sync your Outlook, iCal or Google Calendar with vcita to efficiently manage "
+"your calendar & avoid double bookings"
+msgstr ""
+"Synchroniseer uw Outlook, iCal of Google Kalendar met vcita om uw kalender "
+"efficiënt te managen en dubbele boekingen te voorkomen"
+
+#: ../vcita-main.php:331
+msgid "Sync calendar"
+msgstr "Synchroniseer Kalender "
+
+#: ../vcita-main.php:395
+msgid "Service name"
+msgstr "Omschrijving dienst"
+
+#: ../vcita-main.php:395
+msgid "Service duration"
+msgstr "Looptijd dienst"
+
+#: ../vcita-premium.php:12
+msgid "The best online scheduling<br>solution for just $12 a month"
+msgstr "De beste online boekings-software<br> voor slechts $12 per maand"
+
+#: ../vcita-premium.php:13
+msgid "Enjoy these awesome scheduling features:"
+msgstr ""
+
+#: ../vcita-premium.php:16
+msgid "Business Calendar"
+msgstr "Zaken kalender"
+
+#: ../vcita-premium.php:17
+msgid "Client portal"
+msgstr ""
+
+#: ../vcita-premium.php:18
+msgid "Online scheduling"
+msgstr "Boekingen"
+
+#: ../vcita-premium.php:19
+msgid "Customized scheduling form"
+msgstr ""
+
+#: ../vcita-premium.php:20
+msgid "Unlimitted meettings types and services"
+msgstr ""
+
+#: ../vcita-premium.php:21
+msgid "2 way sync with Google Calendar, iCal & Outlook"
+msgstr "Synchroniseer met Google Kalender / iCal / Outlook"
+
+#: ../vcita-premium.php:24
+msgid "Get it now!"
+msgstr ""
+
+#: ../vcita-premium.php:28
+msgid "just $12 a month"
+msgstr "voor slechts $12 per maand"
+
+#: ../vcita-scheduler.php:15
+msgid "Appointment Booking and Online Scheduling"
+msgstr ""
+
+#: ../vcita-scheduler.php:16
+msgid ""
+"This plugin shows your free time slot on your blog and allows you to book "
+"appointments with your clients 24x7x365. Very easy Ajax interface. Easy to "
+"setup and can be controlled completely from powerful admin area."
+msgstr ""
+"Deze plugin laat uw nog beschikbare zijnde tijden op uw blog zien en stelt u "
+"in staat 24 uur per dag, 365 dagen per jaar afspraken te maken met uw "
+"cliënten. Voorzien van de uitermate eenvoudige interface van Ajax. Eenvoudig "
+"in te stellen en kan volledig beheerd worden vanaf de krachtige "
+"administratie omgeving."
+
+#: ../vcita-scheduler.php:28
+msgid "vCita Plugin is already installed"
+msgstr ""
+
+#: ../vcita-scheduler.php:30
+msgid ""
+", please remove \"<b>Appointment Booking and Online Scheduling</b>\" and use "
+"the available one"
+msgstr ""
+
+#: ../vcita-scheduler.php:138
+msgid "Your online booking plugin is almost ready…!"
+msgstr "Uw online boekings-plugin is bijna klaar ..!"
+
+#: ../vcita-scheduler.php:141
+msgid ""
+"It’s great to see you added vcita’s online scheduling plugin to your site."
+"<br>To get your plugin up and running, just connect vcita to wordpress with "
+"a few easy steps."
+msgstr ""
+"Goed om te zien dat u vcita’s online boekings-plugin heeft toegevoegd aan uw "
+"website.<br> Om uw plugin in werking te zetten, verbind simpelweg vcita met "
+"WordPress met een paar eenvoudige stappen."
+
+#: ../vcita-scheduler.php:159
+msgid "Turn on the booking widget"
+msgstr "Zet de boekings-widget in werking"
+
+#: ../vcita-scheduler.php:161
+msgid ""
+"Your clients can not book meeting online with you at the moment. Please turn "
+"the booking<br>widget on to enable your clients to book online with you"
+msgstr ""
+"Uw cliënt kan momenteel niet online een bespreking met u boeken.  Zet "
+"alstublieft de boekings-widget<br> in werking om uw cliënten in staat te "
+"stellen online met u af te spreken."
+
+#: ../vcita-scheduler.php:165
+msgid "Turn on Widget"
+msgstr "Zet de widget in werking"
+
+#: ../vcita-scheduler.php:205
+msgid "You cannot activate this plugin, because you are using"
+msgstr ""
+
+#: ../vcita-scheduler.php:207
+msgid "Dismiss this notice."
+msgstr ""
+
+#: ../vcita-scheduler.php:249
+msgid "Quick feedback"
+msgstr "Korte feedback"
+
+#: ../vcita-scheduler.php:281
+msgid "If you have a moment, please let us know why you are deactivating:"
+msgstr ""
+"Mocht u in de gelegenheid zijn, laat ons dan alstublieft weten waarom u "
+"deactiveert:"
+
+#: ../vcita-scheduler.php:284
+msgid "The plugin didn't work"
+msgstr "De plugin functioneerde niet"
+
+#: ../vcita-scheduler.php:285
+msgid "I don't like to share this information with you"
+msgstr ""
+
+#: ../vcita-scheduler.php:286
+msgid "It's a temporary deactivation. I'm just debugging an issue"
+msgstr ""
+"Het betreft een tijdelijke deactivatie, ik ben slechts het probleem aan het "
+"debuggen"
+
+#: ../vcita-scheduler.php:287
+msgid "I found a better plugin"
+msgstr "Ik heb een betere plugin gevonden"
+
+#: ../vcita-scheduler.php:288
+msgid "Other"
+msgstr "Anders"
+
+#: ../vcita-scheduler.php:291
+msgid "Skip & deactivate"
+msgstr "Sla over en deactiveer"
+
+#: ../vcita-scheduler.php:292
+msgid "We can help: Support Service"
+msgstr "We assisteren u graag: neem contact met de klantenservice"
+
+#: ../vcita-scheduler.php:293
+msgid "Cancel"
+msgstr "Annuleer"
+
+#: ../vcita-scheduler.php:428
+msgid "Appointment Booking and Online Scheduling by vCita"
+msgstr ""
+
+#: ../vcita-scheduler.php:432
+msgid "vCita Online Scheduling"
+msgstr ""
+
+#: ../vcita-settings-functions.php:17 ../php_assets/admin_header.php:70
+msgid "Add to Site"
+msgstr "Voeg aan website toe"
+
+#: ../vcita-settings-functions.php:18
+msgid "Custom Implemetation"
+msgstr "Aanpasbare Implementatie "
+
+#: ../vcita-settings-functions.php:19 ../php_assets/admin_header.php:72
+msgid "Support"
+msgstr "Ondersteuning"
+
+#: ../vcita-settings-functions.php:20 ../php_assets/admin_header.php:73
+msgid "Premium"
+msgstr "Premium"
+
+#: ../vcita-settings-functions.php:27 ../php_assets/admin_header.php:69
+msgid "Settings"
+msgstr "Instellingen"
+
+#: ../vcita-settings-functions.php:32
+msgid "Upgrade to pro"
+msgstr ""
+
+#: ../vcita-support.php:24
+msgid "No worries! We are here to assist"
+msgstr "Maakt u zich geen zorgen, we staan klaar om u te assisteren"
+
+#: ../vcita-support.php:34 ../vcita-support.php:41
+#: ../vcita-utility-functions.php:233 ../vcita-utility-functions.php:338
+#: ../vcita-utility-functions.php:372
+msgid "Contact Us"
+msgstr "Neem Contact met ons Op"
+
+#: ../vcita-support.php:36
+msgid ""
+"Have questions? email our support team and get answers to any question you "
+"may have"
+msgstr ""
+"Heeft u vragen? Email ons ondersteuningsteam en krijg antwoord op elke vraag "
+"die u heeft"
+
+#: ../vcita-support.php:50
+msgid "Rate Us"
+msgstr "Spreek uw waardering uit  "
+
+#: ../vcita-support.php:52
+msgid ""
+"Enjoying vcita Scheduling? Please rate us 5 stars and help us spread the word"
+msgstr ""
+"Geniet u van vcita Boekingen? Geeft u ons alstublieft 5 sterren en help ons "
+"ons werk uit te breiden"
+
+#: ../vcita-support.php:57
+msgid "Rate Now"
+msgstr "Waardeer ons Nu"
+
+#: ../vcita-support.php:64
+msgid "Frequetly Asked Questions"
+msgstr "Veel Gestelde Vragen "
+
+#: ../vcita-support.php:71
+msgid "What is a service (also known as a meeting type / event type)?"
+msgstr ""
+"Wat is een dienst (tevens bekend onder de naam \"type bespreking\" / \"type "
+"evenement\")? "
+
+#: ../vcita-support.php:74
+msgid ""
+"When a client books a meeting he has to choose a meeting type (aka service) "
+"from your service list. Each new vCita account is configured with several "
+"default services that you can customize according to your needs. You can "
+"also create as many additional services as you require. To learn more click"
+msgstr ""
+"Wanneer een cliënt een bespreking boekt, dient hij te kiezen uit een type "
+"bespreking (ook bekend staand als \"dienst\") van uw lijst met diensten. Elk "
+"nieuw cvita account is geconfigureerd met meerdere standaard diensten die u "
+"kunt aanpassen aan uw benodigdheden. U kunt zoveel extra diensten toevoegen "
+"als u nodig acht. Om meer te weten te komen, klik"
+
+#: ../vcita-support.php:76 ../vcita-support.php:97 ../vcita-support.php:118
+#: ../vcita-support.php:130 ../vcita-support.php:142 ../vcita-support.php:154
+#: ../vcita-support.php:166
+msgid "here"
+msgstr "hier"
+
+#: ../vcita-support.php:83
+msgid "Can clients book an appointment with me outside my working hours?"
+msgstr "Kunnen cliënten afspraken boeken buiten de gebruikelijke boekingsuren?"
+
+#: ../vcita-support.php:86
+msgid ""
+"When using online scheduling your clients will be able to book an "
+"appointment at any time. However, you can customize the hours of "
+"availability to your liking. By default the set working days & hours are Mon-"
+"Fri 9am-5pm."
+msgstr ""
+"Wanneer u gebruik maakt van de online planning zijn uw cliënten te allen "
+"tijde in staat een afspraak te boeken. U kunt echter uw uren aan de voor u "
+"meest comfortabele tijden aanpassen. Standaard zijn de uren van Maandag t/m "
+"Vrijdag van 9 uur 's morgens tot 5 uur in de namiddag."
+
+#: ../vcita-support.php:92
+msgid "Can I set different working hours for certain dates?"
+msgstr "Kan ik verschillende boekingsuren voor specifieke data instellen? "
+
+#: ../vcita-support.php:95
+msgid ""
+"Yes. You can change and alter your availability status according to your "
+"needs. Check it out"
+msgstr ""
+"Ja. U kunt uw beschikbaarheidsstatus aanpassen aan uw benodigdheden. Lees "
+"meer over er"
+
+#: ../vcita-support.php:104
+msgid "Can I set specific working days & hours for a specific service?"
+msgstr ""
+"Kan ik specifieke werkdagen en uren instellen voor een specifieke dienst? "
+
+#: ../vcita-support.php:107
+msgid ""
+"Yes. you can customize and align your working hours per service to your "
+"availability. For example: if you provide manicure services only on Mondays "
+"and Thursdays you can define specific availability only for that service."
+msgstr ""
+"Ja. U kunt uw werkuren per dienst aanpassen en aansluiten bij uw "
+"beschikbaarheid. Bijvoorbeeld: als u alleen manicure kunt doen op Maandag en "
+"Donderdag, kunt u specifiek de beschikbaarheid voor deze dienst vastleggen."
+
+#: ../vcita-support.php:113
+msgid "Do I need to confirm the meeting after a client schedules online?"
+msgstr ""
+"Dien ik de bespreking te bevestigen wanneer een cliënt een bespreking online "
+"geboekt heeft?"
+
+#: ../vcita-support.php:116
+msgid ""
+"By default the meeting requests are automatically accepted (i.e. your "
+"clients will get a booking confirmation right after they schedule). If you "
+"wish, you can turn off the auto accept feature and manually confirm / "
+"decline every meeting request. Turn off auto accept"
+msgstr ""
+"De besprekingen worden als standaard instelling automatisch bevestigd "
+"(oftewel: uw cliënten ontvangen direct na boeking een bevestiging). Als u "
+"het nodig acht, kunt u deze functie aan- en uitzetten en handmatig elke "
+"boeking bevestigen of afzeggen. Zet de automatische bevestiging"
+
+#: ../vcita-support.php:125
+msgid "Can I send reminders to clients?"
+msgstr "Kan ik herinneringen naar cliënten sturen?"
+
+#: ../vcita-support.php:128
+msgid ""
+"Yes, By default your clients will get a reminder email 30 minutes before the "
+"meeting. You can change how many minutes / hours / days in advance, they "
+"will get the alert. You can also create another reminder if needed. "
+"Reminders can also be sent via sms. Customize your reminders"
+msgstr ""
+"Ja, mbv de standaard instelling zullen uw cliënten elke 30 minuten een "
+"herinnering voor de bespreking ontvangen. U kunt het aantal minuten / uren / "
+"dagen wanneer de cliënt deze herinnering ontvangt voortijdig aanpassen. "
+"Herinneringen kunnen tevens per SMS verstuurd worden. Pas uw herinneringen "
+"aan"
+
+#: ../vcita-support.php:137
+msgid "Can I sync my calendar with vCita?"
+msgstr "Kan ik mijn kalender met vcita synchroniseren? "
+
+#: ../vcita-support.php:140
+msgid ""
+"Yes, vCita’s calendar enables you to sync with all other calendars such as "
+"Gmail, iCal, Outlook etc. With a click of a button your vCita calendar will "
+"be integrated to your prepared calendar. You will be able to see all the "
+"meetings that are scheduled on vcita, and most importantly avoid double "
+"bookings. You can sync your calendar"
+msgstr ""
+"Ja, vcita's kalender stelt u in staat met alle andere kalenders zoals Gmail, "
+"iCal, Outlook etc. te synchroniseren. Met een eenvoudige klik op een knop "
+"zal uw kalender geïntegreerd worden met de door uw reeds voorbereide "
+"kalender. U zult in staat zijn alle besprekingen die gepland staan op cvita "
+"te zien,en het meest belangrijk, dubbele boekingen voorkomen. U kunt uw "
+"kalender synchroniseren"
+
+#: ../vcita-support.php:149
+msgid ""
+"I want to use vcita’s scheduling button just on specific pages on my site. "
+"Is it possible?"
+msgstr ""
+"Ik wil vcita's boekings-widget uitsluitend op specifieke pagina's van mijn "
+"website toepassen. Is dit mogelijk? "
+
+#: ../vcita-support.php:152
+msgid "Yes. Instructions are available"
+msgstr "Ja. De instructies vindt u"
+
+#: ../vcita-support.php:161
+msgid "What information can I ask my clients to provide during scheduling?"
+msgstr ""
+"Welke informatie kan ik van mijn cliënt verzoeken mij tijdens het boeken te "
+"voorzien?"
+
+#: ../vcita-support.php:164
+msgid ""
+"vCita enables you to fully personalize your meeting form. You can ask your "
+"clients to provide any type of information while they schedule a meeting. "
+"For example: a phone number, address, date of birth etc. You can customize "
+"your meeting form"
+msgstr ""
+"vCita stelt u in staat uw boekingsformulier volledig naar uw wens te "
+"personilaseren. U kunt van uw cliënten welke informatie dan ook verzoeken "
+"terwijl zij een boeking maken. Bijvoorbeeld: een telefoonnummer, adres, "
+"geboortedatum etc. U kunt uw boekingsformulier aan passen"
+
+#: ../vcita-support.php:172
+msgid "Is vcita HIPAA compliant?"
+msgstr "Is vcita conform HIPPA? "
+
+#: ../vcita-support.php:173
+msgid "Yes, vcita is HIPAA compliant."
+msgstr "Ja, vcita is conform HIPPA. "
+
+#: ../vcita-support.php:177
+msgid "More unanswered questions?"
+msgstr "Heeft u nog andere vragen?"
+
+#: ../vcita-support.php:179
+msgid "Head to"
+msgstr "Ga naar"
+
+#: ../vcita-utility-functions.php:246 ../vcita-utility-functions.php:316
+#: ../vcita-utility-functions.php:353 ../vcita-utility-functions.php:384
+msgid "Book Appointment"
+msgstr ""
+
+#: ../vcita-utility-functions.php:428
+msgid "To use vCita's sidebar please"
+msgstr ""
+
+#: ../vcita-utility-functions.php:435
+msgid "Contact requests will be sent to this email:"
+msgstr ""
+
+#: ../vcita-utility-functions.php:440
+msgid "Change Email"
+msgstr ""
+
+#: ../vcita-utility-functions.php:445
+msgid "Edit"
+msgstr "Bewerk"
+
+#: ../php_assets/admin_footer.php:3
+msgid "You are connected to vcita as"
+msgstr "U bent verbonden met vcita als"
+
+#: ../php_assets/admin_footer.php:6
+msgid "Sign out"
+msgstr "Log uit"
+
+#: ../php_assets/admin_footer.php:19 ../php_assets/admin_header.php:100
+msgid "Upgrade"
+msgstr "Upgrade"
+
+#: ../php_assets/admin_footer.php:25
+msgid "Schedule a demo"
+msgstr "Boek Nu"
+
+#: ../php_assets/admin_footer.php:31
+msgid "Support & Docs"
+msgstr "Ondersteuning"
+
+#: ../php_assets/admin_footer.php:37
+msgid "Suggest a feature"
+msgstr "Suggereer een functie"
+
+#: ../php_assets/admin_header.php:6
+msgid "Welcome Onboard!"
+msgstr "Welkom bij vcita!"
+
+#: ../php_assets/admin_header.php:9
+msgid ""
+"Your account on vcita was successfully created and you are ready to accept "
+"appointments online."
+msgstr ""
+"Uw account bij vcita was succesvol aangemaakt en alles is gereed om online "
+"afspraken te accepteren."
+
+#: ../php_assets/admin_header.php:10
+msgid ""
+"Your default working days are <b>Monday-Friday</b> from <b>9am</b> to "
+"<b>5pm</b>. You can edit those on the settings tab."
+msgstr ""
+"Uw standaard ingestelde werkdagen zijn <b>Maandag</b> t/m <b>Vrijdag</b> van "
+"<b>9</b> to <b>5</b>. U kunt dit aanpassen met behulp van de instellingen tab"
+
+#: ../php_assets/admin_header.php:11
+msgid "Go ahead to customize your scheduling button look and feel."
+msgstr ""
+"Ga lekker aan de slag met het aanpassen van de look & feel van de boekings-"
+"knop"
+
+#: ../php_assets/admin_header.php:12
+msgid "Happy Scheduling,"
+msgstr "Veel plezier bij het afspraken boeken!"
+
+#: ../php_assets/admin_header.php:13 ../php_assets/admin_header.php:43
+#: ../php_assets/admin_header.php:59
+msgid "The vcita Team"
+msgstr "Het vcita Team"
+
+#: ../php_assets/admin_header.php:20
+msgid "Please reconnect vcita"
+msgstr ""
+
+#: ../php_assets/admin_header.php:22
+msgid "Two more steps to go:"
+msgstr ""
+
+#: ../php_assets/admin_header.php:23
+msgid "1. Please reconnect your vcita account to this plugin."
+msgstr ""
+
+#: ../php_assets/admin_header.php:24
+msgid ""
+"2. RECOMMENDED: After you reconnect please schedule a demo appointment with "
+"yourself through your site to make sure that  everything works properly."
+msgstr ""
+
+#: ../php_assets/admin_header.php:27
+msgid "Reconnect vcita"
+msgstr "Verbind met vcita"
+
+#: ../php_assets/admin_header.php:35
+msgid "Fresh Scheduling Experience"
+msgstr ""
+
+#: ../php_assets/admin_header.php:37
+msgid "Hey"
+msgstr ""
+
+#: ../php_assets/admin_header.php:38
+msgid "Thank you for updating the plugin."
+msgstr ""
+
+#: ../php_assets/admin_header.php:39
+msgid ""
+"What's new in this update? absolutely everything. To provide you a better "
+"experience we gave the plugin a fresh new design and coded everything from "
+"scratch."
+msgstr ""
+
+#: ../php_assets/admin_header.php:40
+msgid ""
+"Although the code is brand new, our team worked very hard to make sure that "
+"all vcita features you had in the previous version will remain active. In "
+"any event, we advise you to take a quick review of your site just to make "
+"sure that everything works as before."
+msgstr ""
+
+#: ../php_assets/admin_header.php:41
+msgid "If you have any issues you are welcome to contact"
+msgstr ""
+
+#: ../php_assets/admin_header.php:41
+msgid "our support"
+msgstr "Ondersteuning"
+
+#: ../php_assets/admin_header.php:42
+msgid "Enjoy,"
+msgstr ""
+
+#: ../php_assets/admin_header.php:51
+msgid "Thanks for activating vcita scheduler"
+msgstr ""
+
+#: ../php_assets/admin_header.php:54
+msgid "We've noticed that you are using other vcita plugins"
+msgstr ""
+
+#: ../php_assets/admin_header.php:55
+msgid ""
+"In order to customize your scheduling button you need to deactivate them"
+msgstr ""
+
+#: ../php_assets/admin_header.php:69
+msgid "Main"
+msgstr "Hoofd"
+
+#: ../php_assets/admin_header.php:71
+msgid "Custom Implementation"
+msgstr "Aanpasbare Implementatie "
+
+#: ../php_assets/admin_header.php:97
+msgid "Online Booking by vcita"
+msgstr "Online Boeking door vcita"
+
+#~ msgid "Manage your business<br>from a to z with vcita:"
+#~ msgstr "Manage uw bedrijf<br>van A tot Z met vcita"
+
+#~ msgid "Online payments"
+#~ msgstr "Online betalingen "
+
+#~ msgid "Client management (CRM)"
+#~ msgstr "Cliënten Beheer (CRM)"
+
+#~ msgid "Marketing & coupons"
+#~ msgstr "Marketing & Coupons"
+
+#~ msgid "Check available plans"
+#~ msgstr "Bekijk de beschikbare plannen "
+
+#~ msgid "Not sure what you’re looking for? we’d be happy to advise."
+#~ msgstr ""
+#~ "Bent u er niet zeker van welk plan het beste bij past? We staan u graag "
+#~ "bij in het maken van de juiste keuze. "
+
+#~ msgid "Click here"
+#~ msgstr "Klik hier"
+
+#~ msgid "to book a quick consultation with our customer Success Team."
+#~ msgstr ""
+#~ "om een kort consultatiegesprek met ons Cliënten Succes Team te boeken"
+
+#~ msgid "here2"
+#~ msgstr "hier"
+
+#~ msgid "Shedule Now"
+#~ msgstr "Забронировать сейчас"

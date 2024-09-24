@@ -1,0 +1,793 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b92de48b-aa9b-4ffd-83f5-33d010b66c49" name="Default" comment="" />
+    <ignored path="meeting-scheduler-by-vcita.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vcita-scheduler.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="431" column="41" selection-start-line="431" selection-start-column="41" selection-end-line="431" selection-end-column="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vcita-utility-functions.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="573">
+              <caret line="322" column="37" selection-start-line="322" selection-start-column="9" selection-end-line="322" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pages/vcita-add-to-site.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="532">
+              <caret line="295" column="30" selection-start-line="295" selection-start-column="30" selection-end-line="295" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>add-to</find>
+      <find>vcita_activate_func</find>
+      <find>wpshd_vcita_activation_func</find>
+      <find>wpshd_vcita_init</find>
+      <find>wpshd_vcita_create_initial_parameters</find>
+      <find>ruLoca</find>
+      <find>vcita_show_av_plans</find>
+      <find>proxy</find>
+      <find>WPSHD_VCITA_ASSETS_PATH</find>
+      <find>WPSHD_VCITA_JS_PATH</find>
+      <find>proxy_</find>
+      <find>vcita_enqueue_admin_scripts</find>
+      <find>PERM</find>
+      <find>ApiController</find>
+      <find>vcita_show</find>
+      <find>&lt;script</find>
+      <find>src=</find>
+      <find>script</find>
+      <find>plugi</find>
+      <find>src</find>
+      <find>im</find>
+      <find>Mixp</find>
+      <find>impo</find>
+      <find>MixpMan</find>
+      <find>track</find>
+      <find>this.tr</find>
+      <find>.def</find>
+      <find>vcita_send_deactivate_feedback</find>
+      <find>vcita_fetch_staff</find>
+      <find>Preview</find>
+    </findStrings>
+    <replaceStrings>
+      <replace />
+      <replace>delete ActionsQueue[user.wp_id];</replace>
+      <replace>.vcita_page__inner__section</replace>
+      <replace>class=&quot;vcita_page__inner__section&quot;</replace>
+      <replace>vcita_page__inner-section-code</replace>
+      <replace>vcita_page__inner__section</replace>
+      <replace>font-weight: 600</replace>
+      <replace>vcita_input__select</replace>
+      <replace>vcita_input__select-selected</replace>
+      <replace>vcita_input__select-items</replace>
+      <replace>vcita_input__select-hide</replace>
+      <replace>vcita_plus__list</replace>
+      <replace>vcita_plus__toggle</replace>
+      <replace>vcita_toggle__checkbox__container</replace>
+      <replace>vcita_toggle__checkbox</replace>
+      <replace>vcita_toggle__checkbox-container</replace>
+      <replace>vcita_btn__blue</replace>
+      <replace>vcita_input-email</replace>
+      <replace>vcita_time__slots</replace>
+      <replace>vcita_main__page-banner1-container</replace>
+      <replace>vcita_main__page-banner1-wrapper</replace>
+      <replace>vcita_page__inner__section-banner</replace>
+      <replace>vcita_custom__inner__section-inner-banner</replace>
+      <replace>vcita_пвлдпв__inner__section-banner</replace>
+      <replace>vcita_custom__inner__section-banner</replace>
+    </replaceStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/assets/style/add_to_site_v4.2.4.css" />
+        <option value="$PROJECT_DIR$/assets/js/add_to_site_v4.2.4.js" />
+        <option value="$PROJECT_DIR$/assets/js/main_v4.2.4.js" />
+        <option value="$PROJECT_DIR$/proxy_php.php" />
+        <option value="$PROJECT_DIR$/assets/js/utils_v4.2.4.js" />
+        <option value="$PROJECT_DIR$/assets/style/premium_v4.2.4.css" />
+        <option value="$PROJECT_DIR$/assets/js/mixpanel_v4.2.4.js" />
+        <option value="$PROJECT_DIR$/assets/js/plugins_page_v4.2.4.js" />
+        <option value="$PROJECT_DIR$/assets/style/style_v4.2.4.css" />
+        <option value="$PROJECT_DIR$/vcita-custom-impl.php" />
+        <option value="$PROJECT_DIR$/vcita-support.php" />
+        <option value="$PROJECT_DIR$/assets/js/main_v4.2.5.js" />
+        <option value="$PROJECT_DIR$/assets/js/proxy_connect_v4.2.5.js" />
+        <option value="$PROJECT_DIR$/assets/style/style_v4.2.5.css" />
+        <option value="$PROJECT_DIR$/assets/js/activate_v4.2.5.js" />
+        <option value="$PROJECT_DIR$/assets/js/mixpanel_v4.2.5.js" />
+        <option value="$PROJECT_DIR$/assets/style/custom_v4.2.5.css" />
+        <option value="$PROJECT_DIR$/vcita-widgets-functions.php" />
+        <option value="$PROJECT_DIR$/php_assets/admin_footer.php" />
+        <option value="$PROJECT_DIR$/assets/js/utils_v4.2.5.js" />
+        <option value="$PROJECT_DIR$/assets/style/style_v4.2.6.css" />
+        <option value="$PROJECT_DIR$/assets/js/proxy_connect_v4.2.6.js" />
+        <option value="$PROJECT_DIR$/assets/js/utils_v4.2.6.js" />
+        <option value="$PROJECT_DIR$/assets/style/premium_v4.2.6.css" />
+        <option value="$PROJECT_DIR$/vcita-premium.php" />
+        <option value="C:/wisestamp/wisestamp-web-editor/service/vcita/__init__.py" />
+        <option value="C:/wisestamp/wisestamp-web-editor/util/constants.py" />
+        <option value="$PROJECT_DIR$/assets/js/proxy_connect_v4.2.7.js" />
+        <option value="$PROJECT_DIR$/assets/js/custom_v4.2.7.js" />
+        <option value="$PROJECT_DIR$/assets/style/style_v4.2.7.css" />
+        <option value="$PROJECT_DIR$/assets/js/add_to_site_v4.2.7.js" />
+        <option value="$PROJECT_DIR$/vcita-main.php" />
+        <option value="$PROJECT_DIR$/vcita-ajax-function.php" />
+        <option value="$PROJECT_DIR$/vcita-api-functions.php" />
+        <option value="$PROJECT_DIR$/proxy_api.js" />
+        <option value="$PROJECT_DIR$/vcita-add-to-site.php" />
+        <option value="$PROJECT_DIR$/pages/vcita-premium.php" />
+        <option value="$PROJECT_DIR$/php_assets/admin_header.php" />
+        <option value="$PROJECT_DIR$/vcita-settings-functions.php" />
+        <option value="$USER_HOME$/git/hookshot/src/config.js" />
+        <option value="$USER_HOME$/git/hookshot/src/build.sh" />
+        <option value="$PROJECT_DIR$/readme.txt" />
+        <option value="$PROJECT_DIR$/assets/js/pc_v4.2.7.js" />
+        <option value="$PROJECT_DIR$/assets/js/utils_v4.2.7.js" />
+        <option value="$PROJECT_DIR$/php_assets/admin_scripts.php" />
+        <option value="$PROJECT_DIR$/pages/vcita-main.php" />
+        <option value="$PROJECT_DIR$/assets/js/main_v4.2.7.js" />
+        <option value="$PROJECT_DIR$/assets/js/mixpanel_v4.2.7.js" />
+        <option value="$PROJECT_DIR$/vcita-scheduler.php" />
+        <option value="$PROJECT_DIR$/vcita-utility-functions.php" />
+        <option value="$PROJECT_DIR$/pages/vcita-add-to-site.php" />
+      </list>
+    </option>
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="-10" />
+    <option name="width" value="1380" />
+    <option name="height" value="740" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="meeting-scheduler-by-vcita" type="b2602c69:ProjectViewProjectNode" />
+              <item name="meeting-scheduler-by-vcita" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="meeting-scheduler-by-vcita" type="b2602c69:ProjectViewProjectNode" />
+              <item name="meeting-scheduler-by-vcita" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="meeting-scheduler-by-vcita" type="b2602c69:ProjectViewProjectNode" />
+              <item name="meeting-scheduler-by-vcita" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="meeting-scheduler-by-vcita" type="b2602c69:ProjectViewProjectNode" />
+              <item name="meeting-scheduler-by-vcita" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="meeting-scheduler-by-vcita" type="b2602c69:ProjectViewProjectNode" />
+              <item name="meeting-scheduler-by-vcita" type="462c0819:PsiDirectoryNode" />
+              <item name="php_assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
+    <property name="last_opened_file_path" value="$USER_HOME$/git/backend-challenge" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.PHP" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Igor\Desktop\Projects\meeting-scheduler-by-vcita\pages" />
+      <recent name="C:\Users\Igor\Desktop\meeting-scheduler-by-vcita\assets\style" />
+      <recent name="C:\Users\Igor\Desktop\meeting-scheduler-by-vcita\php_assets" />
+      <recent name="C:\Users\Igor\Desktop\meeting-scheduler-by-vcita" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Igor\Desktop\Projects\meeting-scheduler-by-vcita\assets\style" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
+    <configuration default="true" type="DartTestRunConfigurationType" factoryName="Dart Test">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" value="" />
+      <option name="executablePath" />
+      <option name="filePath" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="mocha-javascript-test-runner">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory />
+      <pass-parent-env>true</pass-parent-env>
+      <ui>bdd</ui>
+      <extra-mocha-options />
+      <test-kind>DIRECTORY</test-kind>
+      <test-directory />
+      <recursive>false</recursive>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b92de48b-aa9b-4ffd-83f5-33d010b66c49" name="Default" comment="" />
+      <created>1584526487292</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1584526487292</updated>
+      <workItem from="1584526489748" duration="878000" />
+      <workItem from="1584529473791" duration="2379000" />
+      <workItem from="1584532173720" duration="25000" />
+      <workItem from="1584622994763" duration="259000" />
+      <workItem from="1585320913935" duration="8757000" />
+      <workItem from="1585385932925" duration="6468000" />
+      <workItem from="1585480075720" duration="846000" />
+      <workItem from="1585581777587" duration="19000" />
+      <workItem from="1585746824697" duration="11368000" />
+      <workItem from="1585827104686" duration="25445000" />
+      <workItem from="1586004431978" duration="611000" />
+      <workItem from="1586372770463" duration="228000" />
+      <workItem from="1586417744228" duration="42655000" />
+      <workItem from="1586596473582" duration="15088000" />
+      <workItem from="1586615222475" duration="3239000" />
+      <workItem from="1586624028342" duration="342000" />
+      <workItem from="1586630662562" duration="1660000" />
+      <workItem from="1586678769057" duration="6605000" />
+      <workItem from="1586777637971" duration="4923000" />
+      <workItem from="1586789176187" duration="140000" />
+      <workItem from="1586883013290" duration="26646000" />
+      <workItem from="1587014014405" duration="8092000" />
+      <workItem from="1587022453369" duration="531000" />
+      <workItem from="1587045221178" duration="3295000" />
+      <workItem from="1587310183586" duration="1307000" />
+      <workItem from="1587369011659" duration="591000" />
+      <workItem from="1587387360424" duration="3976000" />
+      <workItem from="1587392223921" duration="9414000" />
+      <workItem from="1587477568709" duration="1530000" />
+      <workItem from="1587482903279" duration="43437000" />
+      <workItem from="1587657215400" duration="2120000" />
+      <workItem from="1587665343917" duration="12545000" />
+      <workItem from="1588074669675" duration="13295000" />
+      <workItem from="1588103603708" duration="14971000" />
+      <workItem from="1588237648252" duration="23696000" />
+      <workItem from="1588520993597" duration="11985000" />
+      <workItem from="1588661376976" duration="31000" />
+      <workItem from="1588768998860" duration="2421000" />
+      <workItem from="1588778058630" duration="6911000" />
+      <workItem from="1588845407365" duration="6401000" />
+      <workItem from="1589126709942" duration="5240000" />
+      <workItem from="1589180654085" duration="14193000" />
+      <workItem from="1589298467456" duration="11000" />
+      <workItem from="1589298569836" duration="305000" />
+      <workItem from="1589354187858" duration="167000" />
+      <workItem from="1589354495349" duration="658000" />
+      <workItem from="1589355270945" duration="100000" />
+      <workItem from="1589355830146" duration="984000" />
+      <workItem from="1589357932671" duration="383000" />
+      <workItem from="1589359649967" duration="257000" />
+      <workItem from="1589384670156" duration="926000" />
+      <workItem from="1589439674390" duration="21437000" />
+      <workItem from="1589526108934" duration="7026000" />
+      <workItem from="1589541899875" duration="379000" />
+      <workItem from="1589695923758" duration="18411000" />
+      <workItem from="1589803613740" duration="5586000" />
+      <workItem from="1589813786509" duration="1922000" />
+      <workItem from="1589817307995" duration="202000" />
+      <workItem from="1589821135498" duration="454000" />
+      <workItem from="1589826047038" duration="1133000" />
+      <workItem from="1589861366304" duration="16581000" />
+      <workItem from="1589954267321" duration="32576000" />
+      <workItem from="1590411138856" duration="5330000" />
+      <workItem from="1590478325947" duration="6635000" />
+      <workItem from="1590507201304" duration="2279000" />
+      <workItem from="1590521371228" duration="1717000" />
+      <workItem from="1590591424215" duration="2412000" />
+      <workItem from="1590844176709" duration="5757000" />
+      <workItem from="1590934993280" duration="2669000" />
+      <workItem from="1590946707160" duration="75000" />
+      <workItem from="1591015627930" duration="2262000" />
+      <workItem from="1591098897002" duration="1525000" />
+      <workItem from="1591114125264" duration="2711000" />
+      <workItem from="1591260308952" duration="3987000" />
+      <workItem from="1591473584264" duration="87000" />
+      <workItem from="1591597960965" duration="333000" />
+      <workItem from="1591690643645" duration="625000" />
+      <workItem from="1591734212391" duration="631000" />
+      <workItem from="1591792278517" duration="1309000" />
+      <workItem from="1591802883779" duration="8241000" />
+      <workItem from="1591876464620" duration="437000" />
+      <workItem from="1591895077346" duration="734000" />
+      <workItem from="1592301882170" duration="673000" />
+      <workItem from="1592414515687" duration="1113000" />
+      <workItem from="1592474521982" duration="195000" />
+      <workItem from="1592826928426" duration="10417000" />
+      <workItem from="1592936100275" duration="609000" />
+      <workItem from="1593432488477" duration="667000" />
+      <workItem from="1593882689964" duration="5985000" />
+      <workItem from="1593954592943" duration="43000" />
+      <workItem from="1594061384892" duration="4037000" />
+      <workItem from="1594070801403" duration="8388000" />
+      <workItem from="1594240154521" duration="2309000" />
+      <workItem from="1594270400324" duration="134000" />
+      <workItem from="1594271068087" duration="629000" />
+      <workItem from="1594272866679" duration="5238000" />
+      <workItem from="1594460506476" duration="4563000" />
+      <workItem from="1594584890891" duration="4303000" />
+      <workItem from="1594625318620" duration="25000" />
+      <workItem from="1594669275776" duration="2145000" />
+      <workItem from="1594672254075" duration="200000" />
+      <workItem from="1594673921153" duration="91000" />
+      <workItem from="1594703152729" duration="30000" />
+      <workItem from="1594724941681" duration="4275000" />
+      <workItem from="1594911021988" duration="352000" />
+      <workItem from="1595153161334" duration="2898000" />
+      <workItem from="1595240356317" duration="6331000" />
+      <workItem from="1595502670132" duration="615000" />
+      <workItem from="1595506253633" duration="1211000" />
+      <workItem from="1595518210185" duration="13543000" />
+      <workItem from="1595601337764" duration="3921000" />
+      <workItem from="1595766442548" duration="30000" />
+      <workItem from="1595941473005" duration="1823000" />
+      <workItem from="1595944504778" duration="952000" />
+      <workItem from="1596043384620" duration="73000" />
+      <workItem from="1596044873991" duration="6602000" />
+      <workItem from="1596107739367" duration="18000" />
+      <workItem from="1596116962738" duration="2851000" />
+      <workItem from="1596121102926" duration="898000" />
+      <workItem from="1596390752828" duration="610000" />
+      <workItem from="1597940696690" duration="683000" />
+      <workItem from="1598372594555" duration="44000" />
+      <workItem from="1598376372704" duration="7817000" />
+      <workItem from="1598430570077" duration="785000" />
+      <workItem from="1598456566405" duration="987000" />
+      <workItem from="1598519368527" duration="17000" />
+      <workItem from="1599234426047" duration="1791000" />
+      <workItem from="1599480083794" duration="8996000" />
+      <workItem from="1599560736866" duration="1437000" />
+      <workItem from="1599564981383" duration="718000" />
+      <workItem from="1599579655679" duration="10000" />
+      <workItem from="1599636606381" duration="3608000" />
+      <workItem from="1600543544762" duration="4672000" />
+      <workItem from="1600585765875" duration="1017000" />
+      <workItem from="1600778109400" duration="2617000" />
+      <workItem from="1605009822964" duration="1184000" />
+      <workItem from="1605012514394" duration="2805000" />
+      <workItem from="1605034404459" duration="6347000" />
+      <workItem from="1605128910953" duration="8562000" />
+      <workItem from="1605174055332" duration="627000" />
+      <workItem from="1605175089574" duration="5635000" />
+      <workItem from="1605186166854" duration="693000" />
+      <workItem from="1605193487695" duration="1041000" />
+      <workItem from="1605209173128" duration="1997000" />
+      <workItem from="1605273381173" duration="19000" />
+      <workItem from="1605615756853" duration="33000" />
+      <workItem from="1605739575121" duration="757000" />
+      <workItem from="1605762468086" duration="5133000" />
+      <workItem from="1606478360381" duration="637000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="680031000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.32080537" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.329582" />
+      <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="11" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" side_tool="true" weight="0.3295302" />
+    </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31240544" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.329582" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.329582" />
+      <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="11" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="WordPressConfiguration" doNotAskAgain="true" />
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/assets/js/plugins_page.js" />
+    <entry file="file://$PROJECT_DIR$/assets/js/mixpanel.js" />
+    <entry file="file://$PROJECT_DIR$/assets/js/main.js" />
+    <entry file="file://$PROJECT_DIR$/assets/js/custom.js" />
+    <entry file="file://$PROJECT_DIR$/assets/js/utils.js" />
+    <entry file="file://$PROJECT_DIR$/assets/js/add_to_site.js" />
+    <entry file="file://$PROJECT_DIR$/assets/style/premium.css" />
+    <entry file="file://$PROJECT_DIR$/assets/js/proxy_connect_v4.2.1.js" />
+    <entry file="file://$PROJECT_DIR$/assets/js/proxy_connect_v4.2.2.js" />
+    <entry file="file://$PROJECT_DIR$/assets/js/utils_v4.2.2.js" />
+    <entry file="file://$PROJECT_DIR$/assets/style/main_v4.2.7.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="37" selection-start-column="37" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proxy_php.php" />
+    <entry file="file://$PROJECT_DIR$/assets/style/add_to_site_v4.2.7.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="1219" selection-start-column="1219" selection-end-column="1219" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/activate_v4.2.5.js" />
+    <entry file="file://$PROJECT_DIR$/vcita-widgets-functions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="44" column="73" selection-start-line="44" selection-start-column="73" selection-end-line="44" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/plugins_page_v4.2.5.js" />
+    <entry file="file://$PROJECT_DIR$/assets/style/premium_v4.2.7.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="311" selection-start-column="311" selection-end-column="311" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/wisestamp/wisestamp-web-editor/util/auth/decorators.py" />
+    <entry file="file://C:/wisestamp/wisestamp-web-editor/api_v2/vcita/create.py" />
+    <entry file="file://C:/wisestamp/wisestamp-web-editor/service/vcita/__init__.py" />
+    <entry file="file://C:/wisestamp/wisestamp-web-editor/util/env.py" />
+    <entry file="file://C:/wisestamp/wisestamp-web-editor/util/constants.py" />
+    <entry file="file://C:/wisestamp/wisestamp-web-editor/gcloud-config/production/dispatch.yaml" />
+    <entry file="file://$PROJECT_DIR$/assets/js/custom_v4.2.7.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/Core/Core_d.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="297" column="9" selection-start-line="297" selection-start-column="9" selection-end-line="297" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/style/style_v4.2.7.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/add_to_site_v4.2.7.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="166" column="24" lean-forward="true" selection-start-line="166" selection-start-column="24" selection-end-line="166" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/style/custom_v4.2.7.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vcita-ajax-function.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="36" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proxy_api.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="285" lean-forward="true" selection-end-line="786" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vcita-api-functions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="54" column="65" selection-start-line="54" selection-start-column="65" selection-end-line="54" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/git/hookshot/src/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="25" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/git/hookshot/src/router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/git/hookshot/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="109" column="12" selection-start-line="109" selection-start-column="6" selection-end-line="109" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/git/hookshot/src/build.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="25" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readme.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/pc_v4.2.7.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1549">
+          <caret column="5" selection-start-column="5" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/utils_v4.2.7.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="5" selection-start-column="5" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/vcita-custom-impl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="14" column="83" selection-start-line="14" selection-start-column="80" selection-end-line="14" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/vcita-premium.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/vcita-support.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="14" column="85" selection-start-line="14" selection-start-column="82" selection-end-line="14" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/php_assets/admin_header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="126" column="12" selection-start-line="126" selection-start-column="9" selection-end-line="126" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/php_assets/admin_footer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="35" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/php_assets/admin_scripts.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1071">
+          <caret line="63" column="35" selection-start-line="63" selection-start-column="35" selection-end-line="63" selection-end-column="35" />
+          <folding>
+            <element signature="e#66#72#0" expanded="true" />
+            <element signature="e#72#78#0" expanded="true" />
+            <element signature="e#60#66#0" expanded="true" />
+            <element signature="e#66#72#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/vcita-main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="566">
+          <caret line="366" column="28" selection-start-line="366" selection-start-column="11" selection-end-line="366" selection-end-column="28" />
+          <folding>
+            <element signature="n#style#0;n#td#0;n#tr#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/main_v4.2.7.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="62" column="1" selection-start-line="62" selection-start-column="1" selection-end-line="62" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/mixpanel_v4.2.7.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="130" column="32" selection-start-line="130" selection-start-column="32" selection-end-line="130" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vcita-settings-functions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-70">
+          <caret line="17" column="43" selection-start-line="17" selection-start-column="43" selection-end-line="17" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vcita-scheduler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="431" column="41" selection-start-line="431" selection-start-column="41" selection-end-line="431" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vcita-utility-functions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="573">
+          <caret line="322" column="37" selection-start-line="322" selection-start-column="9" selection-end-line="322" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/vcita-add-to-site.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="295" column="30" selection-start-line="295" selection-start-column="30" selection-end-line="295" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

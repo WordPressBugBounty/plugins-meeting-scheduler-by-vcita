@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="154" height="298" viewBox="0 0 154 298">
+    <defs>
+        <rect id="b" width="136.07" height="280.28" rx="19.8"/>
+        <filter id="a" width="124.3%" height="111.8%" x="-12.1%" y="-3.7%" filterUnits="objectBoundingBox">
+            <feOffset dy="6" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="4.5"/>
+            <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0"/>
+            <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter2"/>
+            <feGaussianBlur in="shadowOffsetOuter2" result="shadowBlurOuter2" stdDeviation="1.5"/>
+            <feColorMatrix in="shadowBlurOuter2" result="shadowMatrixOuter2" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.34 0"/>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"/>
+                <feMergeNode in="shadowMatrixOuter2"/>
+            </feMerge>
+        </filter>
+        <filter id="c" width="116.9%" height="108.2%" x="-8.5%" y="-2%" filterUnits="objectBoundingBox">
+            <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation="1.5"/>
+            <feOffset dy="-2" in="shadowBlurInner1" result="shadowOffsetInner1"/>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner1"/>
+            <feColorMatrix in="shadowInnerInner1" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.12 0"/>
+        </filter>
+        <rect id="d" width="123.75" height="267.96" x="6.16" y="6.16" rx="13.2"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd" transform="translate(9 3)">
+        <use fill="#000" filter="url(#a)" xlink:href="#b"/>
+        <use fill="#070707" xlink:href="#b"/>
+        <use fill="#000" filter="url(#c)" xlink:href="#b"/>
+        <use fill="#1D1D1D" xlink:href="#d"/>
+        <path fill="#070707" d="M34.76 5.94h66.66v2.2a7.48 7.48 0 0 1-7.48 7.48h-51.7a7.48 7.48 0 0 1-7.48-7.48v-2.2z"/>
+    </g>
+</svg>
