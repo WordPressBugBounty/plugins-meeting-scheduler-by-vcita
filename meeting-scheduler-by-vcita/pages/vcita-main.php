@@ -10,7 +10,12 @@ if (empty($uid)) {
 ?>
 
 <div class="vcita-wrap" dir="ltr">
-  <?php require_once WP_PLUGIN_DIR.'/'.WPSHD_VCITA_WIDGET_UNIQUE_ID.'/php_assets/admin_header.php' ?>
+  <?php
+      $file_path = WP_PLUGIN_DIR.'/'.WPSHD_VCITA_WIDGET_UNIQUE_ID.'/php_assets/admin_header.php';
+      if (file_exists($file_path)) {
+          require_once $file_path;
+      }
+  ?>
   <div class="vcita-wrap-inner">
     <?php if (WPSHD_VCITA_ANOTHER_PLUGIN) { ?>
       <?php if ($av_plugin_list) {

@@ -38,27 +38,39 @@ function wpshd_vcita_add_plugins_actions($actions, $plugin_file, $plugin_data, $
 }
 function wpshd_vcita_settings_menu()
 {
-  if (function_exists('rest_url')) {
-    define('WPSHD_VCITA_WIDGET_CALLBACK_URL', rest_url('vcita-wordpress/v1'));
-  }
-
-  // Whitelist of valid tabs
-  $valid_tabs = array(
-    'vcita-add-to-site', 
-    'vcita-custom-impl', 
-    'vcita-main', 
-    'vcita-premium', 
-    'vcita-support'
-  );
-
-  $tab = '/pages/vcita-main.php'; // Default tab
-
-  if (isset($_GET['tab'])) {
-    $requested_tab = sanitize_text_field($_GET['tab']);
-    if (in_array($requested_tab, $valid_tabs) && file_exists(dirname(__FILE__) . '/pages/' . $requested_tab . '.php')) {
-      $tab = '/pages/' . $requested_tab . '.php';
-    }
-  }
-
-  require_once WP_PLUGIN_DIR . '/' . WPSHD_VCITA_WIDGET_UNIQUE_ID . $tab;
+	if (function_exists('rest_url')) {
+		if (!defined('WPSHD_VCITA_WIDGET_CALLBACK_URL')) {
+			define('WPSHD_VCITA_WIDGET_CALLBACK_URL', rest_url('vcita-wordpress/v1'));
+		}
+	}
+	
+	// Whitelist of valid tabs
+	$valid_tabs = array(
+		'vcita-add-to-site',
+		'vcita-custom-impl',
+		'vcita-main',
+		'vcita-premium',
+		'vcita-support'
+	);
+	
+	$tab = '/pages/vcita-main.php'; // Default tab
+	
+	if (isset($_GET['tab'])) {
+		$requested_tab = sanitize_text_field($_GET['tab']);
+		if (in_array($requested_tab, $valid_tabs, true) && file_exists(dirname(__FILE__) . '/pages/' . $requested_tab . '.php')) {
+			$tab = '/pages/' . $requested_tab . '.php';
+		}
+	}
+	
+	if (defined('WPSHD_VCITA_WIDGET_UNIQUE_ID') && !empty(WPSHD_VCITA_WIDGET_UNIQUE_ID)) {
+		$file_path = WP_PLUGIN_DIR . '/' . WPSHD_VCITA_WIDGET_UNIQUE_ID . $tab;
+		if (file_exists($file_path)) {
+			require_once $file_path;
+		} else {
+			error_log('plugin file not found: ' . esc_html($file_path));
+		}
+	} else {
+		error_log('Константа WPSHD_VCITA_WIDGET_UNIQUE_ID не определена или пуста.');
+	}
 }
+

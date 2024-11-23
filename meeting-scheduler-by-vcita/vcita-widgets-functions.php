@@ -121,7 +121,7 @@ function wpshd_vcita_add_active_engage()
             const leb = document.querySelector('#livesite_engage_button a.ls-engage-button');
 
             if (leb != null) {
-              <?php if ($wpshd_vcita_widget['migrated']) { ?>
+              <?php if (isset($wpshd_vcita_widget['migrated']) && !empty($wpshd_vcita_widget['migrated'])) { ?>
               const lma = document.querySelector('#livesite_active_engage .ls-more-actions-C');
               if (lma != null) lma.style.display = 'block !important';
               <?php } ?>
