@@ -1,6 +1,16 @@
 <?php
 wp_enqueue_script('vcita-colorpicker', WPSHD_VCITA_ASSETS_PATH.'/assets/extra/colorpicker/js/colorpicker.js');
 wp_enqueue_script('vcita-add-to-site-script', WPSHD_VCITA_ASSETS_PATH.'assets/js/add_to_site_v.js');
+
+wp_localize_script(
+	'vcita-add-to-site-script',
+	'vcitaSchedulerData',
+	[
+		'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+		'nonce'   => wp_create_nonce( 'wpshd_vcita_nonce_action' ),
+	]
+);
+
 wp_enqueue_script('jquery-ui-tooltip');
 
 wp_enqueue_style('vcita-add-to-site-style', WPSHD_VCITA_ASSETS_PATH.'assets/style/add_to_site_v.css');
@@ -320,7 +330,7 @@ $av_plugin_list = wp_cache_get('WPSHD_VCITA_ANOTHER_PLUGIN_LIST');
                     <h3>
                         <?php echo __('More options', 'meeting-scheduler-by-vcita') ?>
                         <small>
-                            <?php echo __('Enable clients to book meetings with your right from your Facebook / Google page', 'meeting-scheduler-by-vcita') ?>
+                            <?php echo __('Enable clients to book meetings with you right from your Facebook / Google page', 'meeting-scheduler-by-vcita') ?>
                         </small>
                     </h3>
                     <div class="vcita__page__inner__section-no-padding flex flex-wrap hspaced">

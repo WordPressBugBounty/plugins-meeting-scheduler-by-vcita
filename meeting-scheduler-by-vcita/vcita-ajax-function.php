@@ -96,24 +96,36 @@ function vcita_logout_callback() {
 
 
 function vcita_save_user_data_callback() {
-	header( 'Content-Type: application/json' );
+	header('Content-Type: application/json');
 	$response = array();
 	
-	if ( isset( $_REQUEST[ 'data_name' ] ) && isset( $_REQUEST[ 'data_val' ] ) ) {
-		$data_name = sanitize_text_field( $_REQUEST[ 'data_name' ] );
-		$data_val  = sanitize_text_field( $_REQUEST[ 'data_val' ] );
-		
-		$wpshd_vcita_widget               = (array) get_option( WPSHD_VCITA_WIDGET_KEY );
-		$wpshd_vcita_widget[ $data_name ] = $data_val;
-		update_option( WPSHD_VCITA_WIDGET_KEY, $wpshd_vcita_widget );
-		
-		$response[ 'success' ] = true;
-	}
-	else {
-		$response[ 'error' ] = 'Request invalid';
+	// CSRF
+	if (!isset($_REQUEST['nonce']) || !wp_verify_nonce($_REQUEST['nonce'], 'wpshd_vcita_nonce_action')) {
+		wp_send_json_error('Invalid nonce');
+		wp_die();
 	}
 	
-	echo json_encode( $response );
+	if (!current_user_can('manage_options')) {
+		wp_send_json_error('Insufficient permissions');
+		wp_die();
+	}
+	
+	if (isset($_REQUEST['data_name']) && isset($_REQUEST['data_val'])) {
+		$data_name = sanitize_key($_REQUEST['data_name']);
+		$data_val  = sanitize_text_field($_REQUEST['data_val']);
+		
+		$wpshd_vcita_widget = (array) get_option(WPSHD_VCITA_WIDGET_KEY);
+		$wpshd_vcita_widget[$data_name] = $data_val;
+		
+		update_option(WPSHD_VCITA_WIDGET_KEY, $wpshd_vcita_widget);
+		
+		$response['success'] = true;
+	} else {
+		$response['error'] = 'Request invalid';
+	}
+	
+	// Возвращаем ответ
+	echo json_encode($response);
 	wp_die();
 }
 
@@ -122,6 +134,11 @@ function vcita_save_settings_callback() {
 	header( 'Content-Type: application/json' );
 	$response = array();
 	
+	// CSRF
+	if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'wpshd_vcita_nonce_action')) {
+		wp_send_json_error('Invalid nonce');
+		wp_die();
+	}
 	
 	if ( isset( $_POST[ 'btn_text' ] ) || isset( $_POST[ 'btn_color' ] ) || isset( $_POST[ 'txt_color' ] ) || isset( $_POST[ 'show_on_site' ] ) || isset( $_POST[ 'widget_title' ] ) || isset( $_POST[ 'widget_show' ] ) || isset( $_POST[ 'widget_text' ] ) || isset( $_FILES[ 'widget_img' ] ) || isset( $_POST[ 'calendar_page_active' ] ) || isset( $_POST[ 'contact_page_active' ] ) || isset( $_POST[ 'hover_color' ] ) || isset( $_POST[ 'vcita_design' ] ) ) {
 		

@@ -70,6 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
 function vcita_save_start_wizard(_this) {
   _this.classList.remove('clickme');
   const request = new XMLHttpRequest();
-  request.open('GET', `${window.$_ajaxurl}?action=vcita_save_data&data_name=start_wizard_clicked&data_val=1&nonce=${vcitaSchedulerData.nonce}`, true);
+  request.open('GET', `${window.$_ajaxurl}?action=vcita_save_data&data_name=start_wizard_clicked&data_val=1`, true);
   request.send();
 }

@@ -1,5 +1,3 @@
-
-
 const ApiController = function (wpid, callbackURL) {
   const DEBUG = window.WPSHD_VCITA_DEBUG;
   this.WPSHD_VCITA_URL = `https://app.${window.WPSHD_VCITA_SERVER_BASE}/app`;
@@ -69,13 +67,12 @@ const ApiController = function (wpid, callbackURL) {
 
   this.isInstalled = function () { return typeof _this.wpid == 'string' && _this.wpid.length > 0 };
   this.install = function () { return _this.sendGet(`${this.API_URL}/install?callback=${this.callbackURL}`) };
-  // vcitaSchedulerData
+
   this.saveData = function (key, data) {
     return _this.sendPost(this.AJAX_URL, {}, {
       action: 'vcita_save_data',
       data_name: key,
-      data_val: data,
-      nonce: vcitaSchedulerData.nonce
+      data_val: data
     });
   };
 

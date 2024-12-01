@@ -146,6 +146,7 @@ function vcita_reset_design(el) {
   vcita_save_design(el, null, d);
   VcitaMixpman.track('wp_sched_reset')
 }
+
 function vcita_save_design(target, form, data) {
   VcitaPreview.unsaved = false;
   if (target != null && target.getAttribute('type') !== 'checkbox' && target.tagName !== 'SELECT') {
@@ -156,8 +157,6 @@ function vcita_save_design(target, form, data) {
   }
   const fData = new FormData(form != null ? form : undefined);
   fData.append('action', 'vcita_save_settings');
-  fData.append('nonce', vcitaSchedulerData.nonce);
-  
   if (form != null && form instanceof HTMLElement) {
     const chbxs = form.querySelectorAll('[type=checkbox]');
     for (let i = 0; i < chbxs.length; i++) fData.set(chbxs[i].getAttribute('name'), chbxs[i].checked ? 1 : 0);

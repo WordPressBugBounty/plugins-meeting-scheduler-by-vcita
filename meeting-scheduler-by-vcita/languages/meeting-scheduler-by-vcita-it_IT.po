@@ -199,7 +199,7 @@ msgstr "Ulteriori opzione"
 
 #: ../vcita-add-to-site.php:321
 msgid ""
-"Enable clients to book meetings with your right from your Facebook / Google "
+"Enable clients to book meetings with you right from your Facebook / Google "
 "page"
 msgstr ""
 "Permetti ai clienti di prenotare gli appuntamenti con te direttamente dalla "

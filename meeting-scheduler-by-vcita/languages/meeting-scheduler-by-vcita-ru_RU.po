@@ -198,7 +198,7 @@ msgstr "Дополнительные опции"
 
 #: ../vcita-add-to-site.php:321
 msgid ""
-"Enable clients to book meetings with your right from your Facebook / Google "
+"Enable clients to book meetings with you right from your Facebook / Google "
 "page"
 msgstr ""
 "Добавьте опцию для клиентов назначать встречи с вами прямо с вашей страницы "

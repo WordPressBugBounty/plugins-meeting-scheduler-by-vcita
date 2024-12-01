@@ -3,7 +3,7 @@ Contributors: vcita
 Tags: scheduling, booking, events, calendar, meetings
 Requires at least: 4.6
 Tested up to: 6.4.2
-Stable tag: 4.5
+Stable tag: 4.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Let clients schedule meetings with you online! No more back & forth emails 
@@ -161,11 +161,11 @@ Please visit <a href="https://www.vcita.com/about/privacy_policy?invite=wp-v-sch
 
 == Changelog ==
 
+= 4.5.2 =
+ * security improvement
+
 = 4.5 =
  * security update and performance improvements
-
-= 4.4.6 =
- * fix link open in new tab instead of iframe
 
 = 4.4.5 =
  * file naming change

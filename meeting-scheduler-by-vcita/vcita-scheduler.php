@@ -3,7 +3,7 @@
 Plugin Name: Appointment Booking and Online Scheduling
 Plugin URI: https://www.vcita.com
 Description: This plugin shows your free time slot on your blog and allows you to book appointments with your clients 24x7x365. Very easy Ajax interface. Easy to setup and can be controlled completely from powerful admin area.
-Version: 4.5
+Version: 4.4.6
 Author: vCita.com
 Author URI: https://www.vcita.com
 License: GPLv2 or later
@@ -16,6 +16,7 @@ $wpshd_plug_name = __( 'Appointment Booking and Online Scheduling', 'meeting-sch
 $wpshd_plug_desc = __( 'This plugin shows your free time slot on your blog and allows you to book appointments with your clients 24x7x365. Very easy Ajax interface. Easy to setup and can be controlled completely from powerful admin area.', 'meeting-scheduler-by-vcita' );
 
 function vcita_enqueue_admin_scripts() {
+	
 	wp_enqueue_script( 'vcita-pc', plugins_url( 'assets/js/pc_v.js', __FILE__ ) );
 	wp_enqueue_script( 'vcita-ui', plugins_url( 'assets/js/utils_v.js', __FILE__ ) );
 	wp_enqueue_script( 'vcita-mixpman', plugins_url( 'assets/js/mixpanel_v.js', __FILE__ ) );
@@ -23,6 +24,15 @@ function vcita_enqueue_admin_scripts() {
 	wp_register_style( 'vcita-style', plugins_url( 'assets/style/style_v.css', __FILE__ ) );
 	wp_enqueue_style( 'vcita-style' );
 	wp_enqueue_script( 'jquery' );
+    
+    wp_localize_script(
+	    'vcita-pc',
+	    'vcitaSchedulerData',
+	    [
+		    'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+		    'nonce'   => wp_create_nonce( 'wpshd_vcita_nonce_action' ),
+	    ]
+    );
 }
 
 function wpshd_vcita_scheduler_other_plugin_installed_warning() {
@@ -485,7 +495,7 @@ define( 'WPSHD_VCITA_SERVER_PREFIX', "www." );
 define( 'WPSHD_VCITA_SERVER_BASE', WPSHD_VCITA_USE_MEET2KNOW ? "meet2know.com"
 	: "vcita.com" ); /* Don't include the protocol, added dynamically */
 define( 'WPSHD_VCITA_SERVER_URL', WPSHD_VCITA_SERVER_PREFIX . WPSHD_VCITA_SERVER_BASE );
-define( 'WPSHD_VCITA_WIDGET_VERSION', '4.5' );
+define( 'WPSHD_VCITA_WIDGET_VERSION', '4.4.6' );
 define( 'WPSHD_VCITA_WIDGET_PLUGIN_NAME', __( 'Appointment Booking and Online Scheduling by vCita', 'meeting-scheduler-by-vcita' ) );
 define( 'WPSHD_VCITA_WIDGET_KEY', 'vcita_scheduler' );
 define( 'WPSHD_VCITA_WIDGET_API_KEY', 'wp-v-schd' );

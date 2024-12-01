@@ -307,7 +307,20 @@ if (empty($uid)) {
 </div>
 <?php if (!WPSHD_VCITA_ANOTHER_PLUGIN) {
   if ($uid && !$needs_reconnect) { ?>
-    <?php wp_enqueue_script('vcita-main', plugins_url('assets/js/main_v.js', str_ireplace('/pages', '', __FILE__))); ?>
+    <?php
+      
+      wp_enqueue_script('vcita-main', plugins_url('assets/js/main_v.js', str_ireplace('/pages', '', __FILE__)));
+	  
+	  wp_localize_script(
+		  'vcita-main',
+		  'vcitaSchedulerData',
+		  [
+			  'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+			  'nonce'   => wp_create_nonce( 'wpshd_vcita_nonce_action' ),
+		  ]
+	  );
+      
+      ?>
   <?php } else { ?>
     <script type="text/javascript">
       document.addEventListener('DOMContentLoaded', () => {
