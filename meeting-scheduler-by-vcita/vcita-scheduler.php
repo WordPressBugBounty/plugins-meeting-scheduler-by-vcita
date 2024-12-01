@@ -3,7 +3,7 @@
 Plugin Name: Appointment Booking and Online Scheduling
 Plugin URI: https://www.vcita.com
 Description: This plugin shows your free time slot on your blog and allows you to book appointments with your clients 24x7x365. Very easy Ajax interface. Easy to setup and can be controlled completely from powerful admin area.
-Version: 4.4.6
+Version: 4.5.2
 Author: vCita.com
 Author URI: https://www.vcita.com
 License: GPLv2 or later
