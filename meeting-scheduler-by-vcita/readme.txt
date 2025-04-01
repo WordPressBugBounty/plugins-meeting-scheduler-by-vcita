@@ -2,8 +2,8 @@
 Contributors: vcita
 Tags: scheduling, booking, events, calendar, meetings
 Requires at least: 4.6
-Tested up to: 6.4.2
-Stable tag: 4.5.2
+Tested up to: 6.7.2
+Stable tag: 4.5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Let clients schedule meetings with you online! No more back & forth emails 
@@ -160,6 +160,9 @@ Please visit <a href="https://www.vcita.com/about/privacy_policy?invite=wp-v-sch
 
 
 == Changelog ==
+
+= 4.5.3 =
+ * verification for wordpress 6.7.2
 
 = 4.5.2 =
  * security improvement
