@@ -24,9 +24,9 @@ foreach ($wpshd_vcita_widget_config as $key => $val) {
     $wpshd_vcita_widget[$key] = $val;
 }
 
-echo '<style>:root { --vcita-schedule-button-button-color: ' . $wpshd_vcita_widget['btn_color'] . ';
-        --vcita-schedule-button-text-color: ' . $wpshd_vcita_widget['txt_color'] . ';
-        --vcita-schedule-button-hover-color: ' . $wpshd_vcita_widget['hover_color'] . '}</style>';
+echo '<style>:root { --vcita-schedule-button-button-color: ' . esc_attr($wpshd_vcita_widget['btn_color']) . ';
+        --vcita-schedule-button-text-color: ' . esc_attr($wpshd_vcita_widget['txt_color']) . ';
+        --vcita-schedule-button-hover-color: ' . esc_attr($wpshd_vcita_widget['hover_color']) . '}</style>';
 
 $needs_reconnect = wpshd_vcita_check_need_to_reconnect($wpshd_vcita_widget);
 
@@ -130,15 +130,15 @@ $av_plugin_list = wp_cache_get('WPSHD_VCITA_ANOTHER_PLUGIN_LIST');
                                             echo wp_get_attachment_image($wpshd_vcita_widget['widget_img']);
                                         } ?>
                                         <span>
-                                            <?php echo !empty($wpshd_vcita_widget['widget_title']) ? stripslashes($wpshd_vcita_widget['widget_title']) : __('Let\'s talk!', 'meeting-scheduler-by-vcita') ?>
+                                            <?php echo !empty($wpshd_vcita_widget['widget_title']) ? esc_html(stripslashes($wpshd_vcita_widget['widget_title'])) : __('Let\'s talk!', 'meeting-scheduler-by-vcita') ?>
                                         </span>
                                     </div>
                                     <div class="vcita__widget__preview__container-inner-text <?php echo !$wpshd_vcita_widget['widget_show'] ? 'hidden_from_view' : '' ?>">
-                                        <?php echo !empty($wpshd_vcita_widget['widget_text']) ? stripslashes($wpshd_vcita_widget['widget_text']) : __('Thanks for stopping by! We’re here to help…', 'meeting-scheduler-by-vcita') ?>
+                                        <?php echo !empty($wpshd_vcita_widget['widget_text']) ? esc_html(stripslashes($wpshd_vcita_widget['widget_text'])) : __('Thanks for stopping by! We\'re here to help…', 'meeting-scheduler-by-vcita') ?>
                                     </div>
                                     <div class="vcita__widget__preview__container-inner-button">
                                         <button onclick="event.preventDefault();event.stopPropagation();" class="vcita_schedule_button<?php echo !$wpshd_vcita_widget['widget_show'] ? ' big' : '' ?>">
-                                            <?php echo !empty($wpshd_vcita_widget['btn_text']) ? stripslashes($wpshd_vcita_widget['btn_text']) : __('Schedule Now', 'meeting-scheduler-by-vcita') ?>
+                                            <?php echo !empty($wpshd_vcita_widget['btn_text']) ? esc_html(stripslashes($wpshd_vcita_widget['btn_text'])) : __('Schedule Now', 'meeting-scheduler-by-vcita') ?>
                                         </button>
                                         <!--<span class="vcita_burger_btn"><span></span></span>-->
                                     </div>
@@ -183,25 +183,25 @@ $av_plugin_list = wp_cache_get('WPSHD_VCITA_ANOTHER_PLUGIN_LIST');
                         </section>
                         <section <?php echo $wpshd_vcita_widget['vcita_design'] ? 'class="hidden"' : '' ?>>
                             <h4><?php echo __('Button text', 'meeting-scheduler-by-vcita') ?></h4>
-                            <input type="text" placeholder="<?php echo __('Schedule Now', 'meeting-scheduler-by-vcita') ?>" style="width: 100%;" class="txt_input" name="btn_text" oninput="vcita_design_change(this)" value="<?php echo stripslashes($wpshd_vcita_widget['btn_text']) ?>">
+                            <input type="text" placeholder="<?php echo __('Schedule Now', 'meeting-scheduler-by-vcita') ?>" style="width: 100%;" class="txt_input" name="btn_text" oninput="vcita_design_change(this)" value="<?php echo esc_attr(stripslashes($wpshd_vcita_widget['btn_text'])) ?>">
                         </section>
                         <section class="divided flex flex-wrap hspaced <?php echo $wpshd_vcita_widget['vcita_design'] ? 'hidden' : '' ?>">
                             <div>
                                 <h4><?php echo __('Button color', 'meeting-scheduler-by-vcita') ?></h4>
-                                <span class="color_input" style="--selected-color: <?php echo $wpshd_vcita_widget['btn_color'] ?>" selected-color="<?php echo $wpshd_vcita_widget['btn_color'] ?>" style="width: 100%;">
-                                    <input type="text" placeholder="#01DCF7" class="txt_input" name="btn_color" readonly value="<?php echo $wpshd_vcita_widget['btn_color'] ?>">
+                                <span class="color_input" style="--selected-color: <?php echo esc_attr($wpshd_vcita_widget['btn_color']) ?>" selected-color="<?php echo esc_attr($wpshd_vcita_widget['btn_color']) ?>" style="width: 100%;">
+                                    <input type="text" placeholder="#01DCF7" class="txt_input" name="btn_color" readonly value="<?php echo esc_attr($wpshd_vcita_widget['btn_color']) ?>">
                                 </span>
                             </div>
                             <div>
                                 <h4><?php echo __('Text color', 'meeting-scheduler-by-vcita') ?></h4>
-                                <span class="color_input" style="--selected-color: <?php echo $wpshd_vcita_widget['txt_color'] ?>" selected-color="<?php echo $wpshd_vcita_widget['txt_color'] ?>" style="width: 100%;">
-                                    <input type="text" placeholder="#FFFFFF" class="txt_input" name="txt_color" readonly value="<?php echo $wpshd_vcita_widget['txt_color'] ?>">
+                                <span class="color_input" style="--selected-color: <?php echo esc_attr($wpshd_vcita_widget['txt_color']) ?>" selected-color="<?php echo esc_attr($wpshd_vcita_widget['txt_color']) ?>" style="width: 100%;">
+                                    <input type="text" placeholder="#FFFFFF" class="txt_input" name="txt_color" readonly value="<?php echo esc_attr($wpshd_vcita_widget['txt_color']) ?>">
                                 </span>
                             </div>
                             <div>
                                 <h4><?php echo __('Hover color', 'meeting-scheduler-by-vcita') ?></h4>
-                                <span class="color_input" style="--selected-color: <?php echo $wpshd_vcita_widget['hover_color'] ?>" selected-color="<?php echo $wpshd_vcita_widget['hover_color'] ?>" style="width: 100%;">
-                                    <input type="text" placeholder="#01DCF7" class="txt_input" name="hover_color" readonly value="<?php echo $wpshd_vcita_widget['hover_color'] ?>">
+                                <span class="color_input" style="--selected-color: <?php echo esc_attr($wpshd_vcita_widget['hover_color']) ?>" selected-color="<?php echo esc_attr($wpshd_vcita_widget['hover_color']) ?>" style="width: 100%;">
+                                    <input type="text" placeholder="#01DCF7" class="txt_input" name="hover_color" readonly value="<?php echo esc_attr($wpshd_vcita_widget['hover_color']) ?>">
                                 </span>
                             </div>
                         </section>
@@ -216,11 +216,11 @@ $av_plugin_list = wp_cache_get('WPSHD_VCITA_ANOTHER_PLUGIN_LIST');
                         </section>
                         <section class="vcita_section_toggle-view <?php echo !$wpshd_vcita_widget['widget_show'] || $wpshd_vcita_widget['vcita_design'] ? 'hidden_from_view' : '' ?>">
                             <h4><?php echo __('Widget title', 'meeting-scheduler-by-vcita') ?></h4>
-                            <input type="text" placeholder="<?php echo __('Let\'s Talk!', 'meeting-scheduler-by-vcita') ?>" style="width: 100%;" oninput="vcita_design_change(this)" class="txt_input" name="widget_title" value="<?php echo stripslashes($wpshd_vcita_widget['widget_title']) ?>">
+                            <input type="text" placeholder="<?php echo __('Let\'s Talk!', 'meeting-scheduler-by-vcita') ?>" style="width: 100%;" oninput="vcita_design_change(this)" class="txt_input" name="widget_title" value="<?php echo esc_attr(stripslashes($wpshd_vcita_widget['widget_title'])) ?>">
                         </section>
                         <section class="vcita_section_toggle-view <?php echo !$wpshd_vcita_widget['widget_show'] || $wpshd_vcita_widget['vcita_design'] ? 'hidden_from_view' : '' ?>">
                             <h4><?php echo __('Widget text', 'meeting-scheduler-by-vcita') ?></h4>
-                            <input type="text" placeholder="<?php echo __('Thanks for stopping by! We’re here to help…', 'meeting-scheduler-by-vcita') ?>" style="width: 100%;" oninput="vcita_design_change(this)" class="txt_input" name="widget_text" value="<?php echo stripslashes($wpshd_vcita_widget['widget_text']) ?>">
+                            <input type="text" placeholder="<?php echo __('Thanks for stopping by! We\'re here to help…', 'meeting-scheduler-by-vcita') ?>" style="width: 100%;" oninput="vcita_design_change(this)" class="txt_input" name="widget_text" value="<?php echo esc_attr(stripslashes($wpshd_vcita_widget['widget_text'])) ?>">
                         </section>
                         <section class="vcita_section_toggle-view vcita_image_attach_container <?php echo !$wpshd_vcita_widget['widget_show'] || $wpshd_vcita_widget['vcita_design'] ? 'hidden_from_view' : '' ?>">
                             <h4><?php echo __('Widget image (Optional)', 'meeting-scheduler-by-vcita') ?></h4>

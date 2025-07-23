@@ -39,9 +39,25 @@ function vcita_dismiss() {
 }
 
 function vcita_check_auth() {
+	// Authorization check - only administrators can access auth data
+	if (!current_user_can('manage_options')) {
+		wp_send_json_error('Insufficient permissions', 403);
+		wp_die();
+	}
+	
 	$wpshd_vcita_widget = (array) get_option( WPSHD_VCITA_WIDGET_KEY );
 	
-	wp_send_json( $wpshd_vcita_widget );
+	// Filter response to only include safe, necessary data
+	$safe_data = array(
+		'uid' => isset($wpshd_vcita_widget['uid']) ? sanitize_text_field($wpshd_vcita_widget['uid']) : '',
+		'success' => isset($wpshd_vcita_widget['success']) ? (bool) $wpshd_vcita_widget['success'] : false,
+		'migrated' => isset($wpshd_vcita_widget['migrated']) ? (bool) $wpshd_vcita_widget['migrated'] : false,
+		'show_on_site' => isset($wpshd_vcita_widget['show_on_site']) ? (int) $wpshd_vcita_widget['show_on_site'] : 0,
+		'contact_page_active' => isset($wpshd_vcita_widget['contact_page_active']) ? (int) $wpshd_vcita_widget['contact_page_active'] : 0,
+		'calendar_page_active' => isset($wpshd_vcita_widget['calendar_page_active']) ? (int) $wpshd_vcita_widget['calendar_page_active'] : 0,
+	);
+	
+	wp_send_json( $safe_data );
 }
 
 function vcita_vcita_deactivate_others_callback() {
@@ -140,6 +156,12 @@ function vcita_save_settings_callback() {
 		wp_die();
 	}
 	
+	// Authorization check - only administrators can manage widget settings
+	if (!current_user_can('manage_options')) {
+		wp_send_json_error('Insufficient permissions');
+		wp_die();
+	}
+	
 	if ( isset( $_POST[ 'btn_text' ] ) || isset( $_POST[ 'btn_color' ] ) || isset( $_POST[ 'txt_color' ] ) || isset( $_POST[ 'show_on_site' ] ) || isset( $_POST[ 'widget_title' ] ) || isset( $_POST[ 'widget_show' ] ) || isset( $_POST[ 'widget_text' ] ) || isset( $_FILES[ 'widget_img' ] ) || isset( $_POST[ 'calendar_page_active' ] ) || isset( $_POST[ 'contact_page_active' ] ) || isset( $_POST[ 'hover_color' ] ) || isset( $_POST[ 'vcita_design' ] ) ) {
 		
 		
@@ -203,58 +225,89 @@ function vcita_save_settings_callback() {
 		}
 		
 		
-		function isFileImage( $mimeType ) {
-			return in_array( $mimeType, [ 'image/jpeg', 'image/png', 'image/gif' ] );
-		}
-		
+		// Secure file upload handling
 		if ( isset( $_FILES[ 'widget_img' ] ) && $_FILES[ 'widget_img' ][ 'error' ] == UPLOAD_ERR_OK ) {
 			
+			// Check upload permissions
 			if ( ! current_user_can( 'upload_files' ) ) {
 				$response[ 'error' ] = 'You do not have permission to upload files';
 				echo json_encode( $response );
 				wp_die();
 			}
 			
-			if ( ! isFileImage( $_FILES[ 'widget_img' ][ 'type' ] ) ) {
-				$response[ 'error' ] = 'Invalid file type; must be jpeg, png, or gif';
+			// Use WordPress built-in secure file upload handling
+			if ( ! function_exists( 'wp_handle_upload' ) ) {
+				require_once( ABSPATH . 'wp-admin/includes/file.php' );
+			}
+			
+			// Define allowed file types and extensions
+			$allowed_types = array(
+				'jpg|jpeg|jpe' => 'image/jpeg',
+				'gif'          => 'image/gif',
+				'png'          => 'image/png',
+			);
+			
+			// Validate file extension
+			$file_ext = pathinfo( $_FILES[ 'widget_img' ][ 'name' ], PATHINFO_EXTENSION );
+			$file_ext = strtolower( $file_ext );
+			
+			$allowed_extensions = array( 'jpg', 'jpeg', 'jpe', 'gif', 'png' );
+			if ( ! in_array( $file_ext, $allowed_extensions ) ) {
+				$response[ 'error' ] = 'Invalid file extension. Only JPG, PNG, and GIF files are allowed.';
 				echo json_encode( $response );
 				wp_die();
 			}
 			
+			// Use WordPress file upload validation
+			$upload_overrides = array(
+				'test_form' => false,
+				'mimes'     => $allowed_types
+			);
 			
-			$wordpress_upload_dir = wp_upload_dir();
-			$widget_img           = $_FILES[ 'widget_img' ];
-			$new_file_path        = $wordpress_upload_dir[ 'path' ] . '/' . $widget_img[ 'name' ];
-			$new_file_mime        = mime_content_type( $widget_img[ 'tmp_name' ] );
-			$_error               = false;
+			$movefile = wp_handle_upload( $_FILES[ 'widget_img' ], $upload_overrides );
 			
-			
-			if ( empty( $widget_img ) || $widget_img[ 'error' ] || $widget_img[ 'size' ] > wp_max_upload_size() || ! in_array( $new_file_mime, get_allowed_mime_types() ) ) {
-				$_error = true;
-			}
-			
-			
-			$i = 1;
-			while ( file_exists( $new_file_path ) ) {
-				$i ++;
-				$new_file_path = $wordpress_upload_dir[ 'path' ] . '/' . $i . '_' . $widget_img[ 'name' ];
-			}
-			
-			
-			if ( move_uploaded_file( $widget_img[ 'tmp_name' ], $new_file_path ) && ! $_error ) {
-				$upload_id = wp_insert_attachment( array(
-					'guid'           => $new_file_path,
-					'post_mime_type' => $new_file_mime,
-					'post_title'     => preg_replace( '/\.[^.]+$/', '', $widget_img[ 'name' ] ),
+			if ( $movefile && ! isset( $movefile[ 'error' ] ) ) {
+				// Verify the uploaded file is actually an image
+				$image_info = getimagesize( $movefile[ 'file' ] );
+				if ( $image_info === false ) {
+					// Not a valid image file, delete it
+					wp_delete_file( $movefile[ 'file' ] );
+					$response[ 'error' ] = 'Uploaded file is not a valid image.';
+					echo json_encode( $response );
+					wp_die();
+				}
+				
+				// Create attachment record in database
+				$attachment = array(
+					'guid'           => $movefile[ 'url' ],
+					'post_mime_type' => $movefile[ 'type' ],
+					'post_title'     => sanitize_file_name( pathinfo( $_FILES[ 'widget_img' ][ 'name' ], PATHINFO_FILENAME ) ),
 					'post_content'   => '',
 					'post_status'    => 'inherit'
-				), $new_file_path );
+				);
 				
+				$upload_id = wp_insert_attachment( $attachment, $movefile[ 'file' ] );
 				
-				require_once( ABSPATH . 'wp-admin/includes/image.php' );
-				wp_update_attachment_metadata( $upload_id, wp_generate_attachment_metadata( $upload_id, $new_file_path ) );
-				$wpshd_vcita_widget[ 'widget_img' ] = $upload_id;
-				$response[ 'widget_img' ]           = wp_get_attachment_image( $upload_id );
+				if ( ! is_wp_error( $upload_id ) ) {
+					// Generate attachment metadata
+					require_once( ABSPATH . 'wp-admin/includes/image.php' );
+					$attachment_data = wp_generate_attachment_metadata( $upload_id, $movefile[ 'file' ] );
+					wp_update_attachment_metadata( $upload_id, $attachment_data );
+					
+					// Store the attachment ID
+					$wpshd_vcita_widget[ 'widget_img' ] = $upload_id;
+					$response[ 'widget_img' ] = wp_get_attachment_image( $upload_id );
+				} else {
+					// Error creating attachment, delete uploaded file
+					wp_delete_file( $movefile[ 'file' ] );
+					$response[ 'error' ] = 'Failed to create attachment.';
+					echo json_encode( $response );
+					wp_die();
+				}
+			} else {
+				$response[ 'error' ] = isset( $movefile[ 'error' ] ) ? $movefile[ 'error' ] : 'File upload failed.';
+				echo json_encode( $response );
+				wp_die();
 			}
 		}
 		
