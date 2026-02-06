@@ -509,6 +509,7 @@ function wpshd_vcita_widget_admin() {
 	$wpshd_vcita_widget = (array)get_option(WPSHD_VCITA_WIDGET_KEY);
 	$uid = isset($wpshd_vcita_widget['uid']) ? sanitize_text_field($wpshd_vcita_widget['uid']) : ''; // Очистка uid
 	$email = isset($wpshd_vcita_widget['email']) ? sanitize_email($wpshd_vcita_widget['email']) : ''; // Очистка email
+	$nonce = wp_create_nonce('wpshd_vcita_nonce_action');
 	?>
     <script type="text/javascript">
       jQuery(function ($) {
@@ -520,7 +521,7 @@ function wpshd_vcita_widget_admin() {
         });
         $('#vcita_config #switch-account').click(function (ev) {
           VcitaMixpman.track('wp_sched_logout');
-          $.post(`${window.$_ajaxurl}?action=vcita_logout`);
+          $.post(`${window.$_ajaxurl}?action=vcita_logout&nonce=<?php echo esc_js($nonce); ?>`);
           VcitaUI.openAuthWin(false, true);
         });
         $('#vcita_config .preview').click(function (e) {

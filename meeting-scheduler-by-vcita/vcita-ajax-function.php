@@ -8,6 +8,17 @@ add_action( 'wp_ajax_vcita_save_data', 'vcita_save_user_data_callback' );
 add_action( 'wp_ajax_vcita_deactivate_others', 'vcita_vcita_deactivate_others_callback' );
 
 function vcita_dismiss() {
+	// CSRF protection
+	if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'wpshd_vcita_nonce_action' ) ) {
+		wp_send_json_error( 'Invalid nonce', 403 );
+		wp_die();
+	}
+	
+	// Authorization check - only administrators can dismiss notifications
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_send_json_error( 'Unauthorized', 403 );
+		wp_die();
+	}
 	
 	if ( isset( $_GET[ 'dismiss' ] ) ) {
 		$wpshd_vcita_widget                   = (array) get_option( WPSHD_VCITA_WIDGET_KEY );
@@ -61,6 +72,18 @@ function vcita_check_auth() {
 }
 
 function vcita_vcita_deactivate_others_callback() {
+	// CSRF protection
+	if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'wpshd_vcita_nonce_action' ) ) {
+		wp_send_json_error( 'Invalid nonce', 403 );
+		wp_die();
+	}
+	
+	// Authorization check - only administrators can deactivate plugins
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_send_json_error( 'Unauthorized', 403 );
+		wp_die();
+	}
+	
 	$av_plugin_list = wp_cache_get( 'WPSHD_VCITA_ANOTHER_PLUGIN_LIST' );
 	
 	if ( ! $av_plugin_list ) {
@@ -87,6 +110,12 @@ function vcita_vcita_deactivate_others_callback() {
 
 
 function vcita_logout_callback() {
+	// CSRF protection
+	if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'wpshd_vcita_nonce_action' ) ) {
+		wp_send_json_error( 'Invalid nonce', 403 );
+		wp_die();
+	}
+	
 	if ( current_user_can( 'delete_plugins' ) ) {
 		$wpshd_vcita_widget              = wpshd_vcita_clean_expert_data();
 		$wpshd_vcita_widget[ 'dismiss' ] = false;

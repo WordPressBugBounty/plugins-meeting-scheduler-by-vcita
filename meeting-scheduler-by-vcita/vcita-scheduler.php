@@ -3,7 +3,7 @@
 Plugin Name: Appointment Booking and Online Scheduling
 Plugin URI: https://www.vcita.com
 Description: This plugin shows your free time slot on your blog and allows you to book appointments with your clients 24x7x365. Very easy Ajax interface. Easy to setup and can be controlled completely from powerful admin area.
-Version: 4.5.5
+Version: 4.6.0
 Author: vCita.com
 Author URI: https://www.vcita.com
 License: GPLv2 or later
@@ -78,12 +78,12 @@ function vcita_activate_func() {
         
         function wpshd_ntf_dismiss() {
           window.VcitaMixpman.track("wp_sched_close_widget_notification", { created_at: new Date().toISOString() });
-          jQuery.get(`${window.$_ajaxurl}?action=vcita_dismiss&dismiss=true`);
+          jQuery.get(`${window.$_ajaxurl}?action=vcita_dismiss&dismiss=true&nonce=${vcitaSchedulerData.nonce}`);
         }
         
         function wpshd_ntf_dismiss_switch() {
           window.VcitaMixpman.track("wp_sched_close_connect_notification", { created_at: new Date().toISOString() });
-          jQuery.get(`${window.$_ajaxurl}?action=vcita_dismiss&dismiss_switch=true`);
+          jQuery.get(`${window.$_ajaxurl}?action=vcita_dismiss&dismiss_switch=true&nonce=${vcitaSchedulerData.nonce}`);
         }
         
         function wpshd_ntf_connect_click() {
@@ -91,7 +91,7 @@ function vcita_activate_func() {
         }
         
         function wpshd_ntf_turn_on_click() {
-          jQuery.get(`${window.$_ajaxurl}?action=vcita_dismiss&switch_on=true`);
+          jQuery.get(`${window.$_ajaxurl}?action=vcita_dismiss&switch_on=true&nonce=${vcitaSchedulerData.nonce}`);
           window.VcitaMixpman.track("wp_sched_clicked_widget_notification", { created_at: new Date().toISOString() });
         }
       </script>';

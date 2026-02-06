@@ -4,12 +4,14 @@ if ( ! isset( $wpshd_vcita_widget[ 'wp_id' ] ) ) {
 	$wpshd_vcita_widget[ 'wp_id' ] = '';
 }
 $needs_reconnect = wpshd_vcita_check_need_to_reconnect( $wpshd_vcita_widget );
+$vcita_nonce = wp_create_nonce( 'wpshd_vcita_nonce_action' );
 ?>
 <script type="text/javascript">
   window.$_ajaxurl = '<?php echo admin_url( 'admin-ajax.php' ) ?>'
   window.$_adminurl = '<?php echo admin_url( 'admin.php' ) ?>'
   window.WPSHD_VCITA_LOCALE = '<?php echo get_locale() ?>'
   window.WPSHD_VCITA_WIDGET_ID = '<?php echo WPSHD_VCITA_WIDGET_UNIQUE_ID?>'
+  window.WPSHD_VCITA_NONCE = '<?php echo esc_js( $vcita_nonce ); ?>'
   
   if (window.WPSHD_VCITA_LOCALE === 'en_GB') {
     window.WPSHD_VCITA_LOCALE = 'en-gb'
@@ -257,7 +259,7 @@ $needs_reconnect = wpshd_vcita_check_need_to_reconnect( $wpshd_vcita_widget );
     $('#switch-account')
       .click(function () {
         VcitaMixpman.track('wp_sched_logout')
-        jQuery.post(`${ window.$_ajaxurl }?action=vcita_logout`)
+        jQuery.post(`${ window.$_ajaxurl }?action=vcita_logout&nonce=${ window.WPSHD_VCITA_NONCE }`)
         VcitaUI.openAuthWin(false, true)
       })
     $('#vcita__input-email').keypress(function (e) { if (e.keyCode == 13) $('#start-signup').click() })
