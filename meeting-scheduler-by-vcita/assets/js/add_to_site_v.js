@@ -88,7 +88,6 @@ function vcita_widget_popup_toggle(show) {
     jQuery('.vcita_schedule_button').addClass('big');
     jQuery('.vcita__widget__preview__container-inner').addClass('no-background');
   }
-  VcitaMixpman.track('wp_sched_popup_widget', {action: (show ? 'on' : 'off')});
 }
 
 function vcita_design_change(e) {
@@ -144,7 +143,6 @@ function vcita_reset_design(el) {
   inp.value = "";
   inp.classList.remove('to_be_cleared');
   vcita_save_design(el, null, d);
-  VcitaMixpman.track('wp_sched_reset')
 }
 function vcita_save_design(target, form, data) {
   VcitaPreview.unsaved = false;
@@ -381,7 +379,6 @@ function vcita_widget_show_toggle(_this, show) {
   const sm = h3.querySelectorAll('small');
   for (let i = 0; i < sm.length; i++) sm[i].classList.toggle('hidden');
   if (p.nextElementSibling == null) p.classList.remove('no-margin');
-  VcitaMixpman.track('wp_sched_switch', {action: (show ? 'on' : 'off')});
   vcita_save_design(_this, null, {'show_on_site': show ? 1 : 0})
 }
 
@@ -399,7 +396,6 @@ function vcita_toggle_design_view(el, v) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  VcitaMixpman.track('wp_sched_change_tab', {tab: 'add'});
   VcitaPreview = new VcitaPreviewObj();
   VcitaPreview.init();
   vcita_create_selects();

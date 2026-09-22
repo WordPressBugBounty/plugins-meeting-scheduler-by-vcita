@@ -9,6 +9,5 @@ function vcita_get_sample_html(_this) {
   }
 }
 document.addEventListener('DOMContentLoaded', () => {
-  VcitaMixpman.track('wp_sched_change_tab', { tab: 'custom' });
-  jQuery('.language-markup').mouseenter(() => { VcitaMixpman.track('wp_sched_html_sample') })
+  jQuery('.language-markup').mouseenter(() => { })
 })

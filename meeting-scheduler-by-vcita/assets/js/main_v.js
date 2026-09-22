@@ -64,7 +64,6 @@ function vcita_fetch_availability(add_preloader = false) {
 
 document.addEventListener('DOMContentLoaded', () => {
   vcita_fetch_staff();
-  VcitaMixpman.track('wp_sched_change_tab', { tab: 'main' });
 });
 
 function vcita_save_start_wizard(_this) {

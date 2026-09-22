@@ -39,8 +39,6 @@ const UIController = function (homeUrl, widget_data = {}) {
                     window.location.reload();
                     return false
                   } else {
-                    VcitaMixpman.track('wp_vpay_completed_registration');
-                    VcitaMixpman.track('wp_vpay_welcome');
                     window.location = `${window.$_adminurl}?page=${window.WPSHD_VCITA_WIDGET_ID}${encodeURIComponent('/vcita-settings-functions.php')}&registered=true`
                   }
                 }
@@ -68,21 +66,18 @@ const UIController = function (homeUrl, widget_data = {}) {
   this.openEditAvailabilityWin = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    VcitaMixpman.track('wp_vpay_edit_availability');
     window.open(wpshd_vcita_redirect('/app/settings/calendar_settings'), '_blank')
   };
 
   this.openEditServicesWin = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    VcitaMixpman.track('wp_vpay_edit_services');
     window.open(wpshd_vcita_redirect('/app/settings/services'), '_blank')
   };
 
   this.openEditSettingsWin = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    VcitaMixpman.track('wp_vpay_setup');
     window.open(wpshd_vcita_redirect('/app/dashboard?wizard=os'), '_blank')
   };
 
@@ -93,17 +88,14 @@ const UIController = function (homeUrl, widget_data = {}) {
   };
 
   this.openSyncCalendarWin = () => {
-    VcitaMixpman.track('wp_vpay_sync');
     window.open(wpshd_vcita_redirect('/app/settings/calendar_settings'), '_blank')
   };
 
   this.openSyncFacebookWin = () => {
-    VcitaMixpman.track('wp_vpay_facebook');
     window.open(wpshd_vcita_redirect('/app/facebook-pages'), '_blank')
   };
 
   this.openSyncGoogleWin = () => {
-    VcitaMixpman.track('wp_vpay_google');
     window.open(wpshd_vcita_redirect('/app/reserve-with-google'), '_blank');
   };
 

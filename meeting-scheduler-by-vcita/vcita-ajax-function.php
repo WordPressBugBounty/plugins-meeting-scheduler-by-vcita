@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 add_action( 'wp_ajax_vcita_dismiss', 'vcita_dismiss' );
 add_action( 'wp_ajax_vcita_logout', 'vcita_logout_callback' );
 add_action( 'wp_ajax_vcita_check_auth', 'vcita_check_auth' );
@@ -9,7 +13,7 @@ add_action( 'wp_ajax_vcita_deactivate_others', 'vcita_vcita_deactivate_others_ca
 
 function vcita_dismiss() {
 	// CSRF protection
-	if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'wpshd_vcita_nonce_action' ) ) {
+	if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ), 'wpshd_vcita_nonce_action' ) ) {
 		wp_send_json_error( 'Invalid nonce', 403 );
 		wp_die();
 	}
@@ -73,7 +77,7 @@ function vcita_check_auth() {
 
 function vcita_vcita_deactivate_others_callback() {
 	// CSRF protection
-	if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'wpshd_vcita_nonce_action' ) ) {
+	if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ), 'wpshd_vcita_nonce_action' ) ) {
 		wp_send_json_error( 'Invalid nonce', 403 );
 		wp_die();
 	}
@@ -111,7 +115,7 @@ function vcita_vcita_deactivate_others_callback() {
 
 function vcita_logout_callback() {
 	// CSRF protection
-	if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'wpshd_vcita_nonce_action' ) ) {
+	if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ), 'wpshd_vcita_nonce_action' ) ) {
 		wp_send_json_error( 'Invalid nonce', 403 );
 		wp_die();
 	}
@@ -145,7 +149,7 @@ function vcita_save_user_data_callback() {
 	$response = array();
 	
 	// CSRF
-	if (!isset($_REQUEST['nonce']) || !wp_verify_nonce($_REQUEST['nonce'], 'wpshd_vcita_nonce_action')) {
+	if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ), 'wpshd_vcita_nonce_action')) {
 		wp_send_json_error('Invalid nonce');
 		wp_die();
 	}
@@ -157,7 +161,7 @@ function vcita_save_user_data_callback() {
 	
 	if (isset($_REQUEST['data_name']) && isset($_REQUEST['data_val'])) {
 		$data_name = sanitize_key($_REQUEST['data_name']);
-		$data_val  = sanitize_text_field($_REQUEST['data_val']);
+		$data_val  = sanitize_text_field( wp_unslash( $_REQUEST['data_val'] ) );
 		
 		$wpshd_vcita_widget = (array) get_option(WPSHD_VCITA_WIDGET_KEY);
 		$wpshd_vcita_widget[$data_name] = $data_val;
@@ -180,7 +184,7 @@ function vcita_save_settings_callback() {
 	$response = array();
 	
 	// CSRF
-	if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'wpshd_vcita_nonce_action')) {
+	if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'wpshd_vcita_nonce_action')) {
 		wp_send_json_error('Invalid nonce');
 		wp_die();
 	}
@@ -198,15 +202,15 @@ function vcita_save_settings_callback() {
 		
 		
 		if ( isset( $_POST[ 'show_on_site' ] ) ) {
-			$wpshd_vcita_widget[ 'show_on_site' ] = filter_var( $_POST[ 'show_on_site' ], FILTER_VALIDATE_INT );
-			if ( $_POST[ 'show_on_site' ] ) {
+			$wpshd_vcita_widget[ 'show_on_site' ] = filter_var( wp_unslash( $_POST[ 'show_on_site' ] ), FILTER_VALIDATE_INT );
+			if ( $wpshd_vcita_widget[ 'show_on_site' ] ) {
 				$wpshd_vcita_widget[ 'dismiss_switch' ] = false;
 				unset( $wpshd_vcita_widget[ 'dismiss_switch_time' ] );
 			}
 		}
 		
 		if ( isset( $_POST[ 'vcita_design' ] ) ) {
-			$wpshd_vcita_widget[ 'vcita_design' ] = filter_var( $_POST[ 'vcita_design' ], FILTER_VALIDATE_INT );
+			$wpshd_vcita_widget[ 'vcita_design' ] = filter_var( wp_unslash( $_POST[ 'vcita_design' ] ), FILTER_VALIDATE_INT );
 		}
 		
 		
@@ -222,12 +226,12 @@ function vcita_save_settings_callback() {
 			] as $field
 		) {
 			if ( isset( $_POST[ $field ] ) ) {
-				$wpshd_vcita_widget[ $field ] = sanitize_text_field( $_POST[ $field ] );
+				$wpshd_vcita_widget[ $field ] = sanitize_text_field( wp_unslash( $_POST[ $field ] ) );
 			}
 		}
 		
 		
-		if ( isset( $_POST[ 'widget_img_clear' ] ) && $_POST[ 'widget_img_clear' ] ) {
+		if ( isset( $_POST[ 'widget_img_clear' ] ) && sanitize_text_field( wp_unslash( $_POST[ 'widget_img_clear' ] ) ) ) {
 			if ( ! empty( $wpshd_vcita_widget[ 'widget_img' ] ) ) {
 				wp_delete_attachment( $wpshd_vcita_widget[ 'widget_img' ], true );
 				$wpshd_vcita_widget[ 'widget_img' ] = '';
@@ -235,19 +239,30 @@ function vcita_save_settings_callback() {
 		}
 		
 		
+		// Both callbacks are named explicitly. The trash callback used to be built
+		// as 'wpshd_vcita_trash_' . $page, which produces
+		// wpshd_vcita_trash_contact_page_active / ..._calendar_page_active - neither
+		// of which exists, so switching either page off threw a fatal and the
+		// setting never cleared.
 		foreach (
 			[
-				'calendar_page_active' => 'wpshd_vcita_make_sure_calendar_page_published',
-				'contact_page_active'  => 'wpshd_vcita_make_sure_page_published'
-			] as $page => $callback
+				'calendar_page_active' => [
+					'publish' => 'wpshd_vcita_make_sure_calendar_page_published',
+					'trash'   => 'wpshd_vcita_trash_current_calendar_page',
+				],
+				'contact_page_active'  => [
+					'publish' => 'wpshd_vcita_make_sure_page_published',
+					'trash'   => 'wpshd_vcita_trash_contact_page',
+				],
+			] as $page => $callbacks
 		) {
 			if ( isset( $_POST[ $page ] ) ) {
-				if ( $_POST[ $page ] && $wpshd_vcita_widget[ 'uid' ] ) {
-					call_user_func( $callback, $wpshd_vcita_widget, true );
+				if ( sanitize_text_field( wp_unslash( $_POST[ $page ] ) ) && $wpshd_vcita_widget[ 'uid' ] ) {
+					call_user_func( $callbacks[ 'publish' ], $wpshd_vcita_widget, true );
 					$wpshd_vcita_widget[ $page ] = 1;
 				}
 				else {
-					call_user_func( 'wpshd_vcita_trash_' . $page, $wpshd_vcita_widget );
+					call_user_func( $callbacks[ 'trash' ], $wpshd_vcita_widget );
 					$wpshd_vcita_widget[ $page ] = 0;
 				}
 			}
@@ -255,7 +270,8 @@ function vcita_save_settings_callback() {
 		
 		
 		// Secure file upload handling
-		if ( isset( $_FILES[ 'widget_img' ] ) && $_FILES[ 'widget_img' ][ 'error' ] == UPLOAD_ERR_OK ) {
+		if ( isset( $_FILES[ 'widget_img' ], $_FILES[ 'widget_img' ][ 'error' ], $_FILES[ 'widget_img' ][ 'name' ] )
+		     && (int) $_FILES[ 'widget_img' ][ 'error' ] === UPLOAD_ERR_OK ) {
 			
 			// Check upload permissions
 			if ( ! current_user_can( 'upload_files' ) ) {
@@ -277,7 +293,9 @@ function vcita_save_settings_callback() {
 			);
 			
 			// Validate file extension
-			$file_ext = pathinfo( $_FILES[ 'widget_img' ][ 'name' ], PATHINFO_EXTENSION );
+			$uploaded_name = isset( $_FILES[ 'widget_img' ][ 'name' ] )
+				? sanitize_file_name( wp_unslash( $_FILES[ 'widget_img' ][ 'name' ] ) ) : '';
+			$file_ext = pathinfo( $uploaded_name, PATHINFO_EXTENSION );
 			$file_ext = strtolower( $file_ext );
 			
 			$allowed_extensions = array( 'jpg', 'jpeg', 'jpe', 'gif', 'png' );
@@ -310,7 +328,7 @@ function vcita_save_settings_callback() {
 				$attachment = array(
 					'guid'           => $movefile[ 'url' ],
 					'post_mime_type' => $movefile[ 'type' ],
-					'post_title'     => sanitize_file_name( pathinfo( $_FILES[ 'widget_img' ][ 'name' ], PATHINFO_FILENAME ) ),
+					'post_title'     => sanitize_file_name( pathinfo( $uploaded_name, PATHINFO_FILENAME ) ),
 					'post_content'   => '',
 					'post_status'    => 'inherit'
 				);
@@ -357,71 +375,59 @@ function vcita_save_settings_callback() {
 }
 
 function vcita_send_get($url, $options = array()) {
-	$ch = curl_init();
-	
-	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	
-	$output = curl_exec($ch);
-	$error = curl_error($ch);
-	$httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-	curl_close($ch);
-	
-	if (empty($error) && $httpcode === 200) {
-		return json_decode($output, true);
-	} elseif (empty($error) && $httpcode !== 200) {
+	$response = wp_remote_get( $url, array( 'timeout' => 15 ) );
+
+	if ( is_wp_error( $response ) ) {
 		return array(
-			'error'       => $output,
-			'description' => 'Request was not successful',
-			'http_code'   => $httpcode,
-		);
-	} else {
-		return array(
-			'error'       => $error,
+			'error'       => $response->get_error_message(),
 			'description' => 'Request was not successful',
 		);
 	}
+
+	$output   = wp_remote_retrieve_body( $response );
+	$httpcode = (int) wp_remote_retrieve_response_code( $response );
+
+	if ( 200 === $httpcode ) {
+		return json_decode( $output, true );
+	}
+
+	return array(
+		'error'       => $output,
+		'description' => 'Request was not successful',
+		'http_code'   => $httpcode,
+	);
 }
 
 
 function vcita_send_post($url, $options = array()) {
-	$ch = curl_init();
-	
-	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_POST, 1);
-	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	
-	
-	if (!empty($options['post_data'])) {
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $options['post_data']);
+	$args = array( 'timeout' => 15 );
+
+	if ( ! empty( $options[ 'post_data' ] ) ) {
+		$args[ 'body' ] = $options[ 'post_data' ];
 	}
-	
-	
-	$output = curl_exec($ch);
-	$error = curl_error($ch);
-	$httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-	curl_close($ch);
-	
-	
-	if (empty($error) && $httpcode === 200) {
-		return json_decode($output, true);
-	} elseif (empty($error) && $httpcode !== 200) {
+
+	$response = wp_remote_post( $url, $args );
+
+	if ( is_wp_error( $response ) ) {
 		return array(
-			'error'       => $output,
+			'error'       => $response->get_error_message(),
 			'description' => 'Request was not successful',
-			'status'      => $httpcode,
-		);
-	} else {
-		return array(
-			'error'       => $error,
-			'description' => 'Request was not successful',
-			'status'      => $httpcode,
+			'status'      => 0,
 		);
 	}
+
+	$output   = wp_remote_retrieve_body( $response );
+	$httpcode = (int) wp_remote_retrieve_response_code( $response );
+
+	if ( 200 === $httpcode ) {
+		return json_decode( $output, true );
+	}
+
+	return array(
+		'error'       => $output,
+		'description' => 'Request was not successful',
+		'status'      => $httpcode,
+	);
 }
 
 

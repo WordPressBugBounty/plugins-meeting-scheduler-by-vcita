@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: Appointment Booking and Online Scheduling
+Plugin Name: Online Booking & Scheduling Calendar by vcita
 Plugin URI: https://www.vcita.com
 Description: This plugin shows your free time slot on your blog and allows you to book appointments with your clients 24x7x365. Very easy Ajax interface. Easy to setup and can be controlled completely from powerful admin area.
-Version: 4.6.0
+Version: 4.6.3
 Author: vCita.com
 Author URI: https://www.vcita.com
 License: GPLv2 or later
@@ -12,16 +12,16 @@ Text Domain: meeting-scheduler-by-vcita
 Domain Path: /languages
 */
 
-$wpshd_plug_name = __( 'Appointment Booking and Online Scheduling', 'meeting-scheduler-by-vcita' );
-$wpshd_plug_desc = __( 'This plugin shows your free time slot on your blog and allows you to book appointments with your clients 24x7x365. Very easy Ajax interface. Easy to setup and can be controlled completely from powerful admin area.', 'meeting-scheduler-by-vcita' );
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 function vcita_enqueue_admin_scripts() {
 	
-	wp_enqueue_script( 'vcita-pc', plugins_url( 'assets/js/pc_v.js', __FILE__ ) );
-	wp_enqueue_script( 'vcita-ui', plugins_url( 'assets/js/utils_v.js', __FILE__ ) );
-	wp_enqueue_script( 'vcita-mixpman', plugins_url( 'assets/js/mixpanel_v.js', __FILE__ ) );
+	wp_enqueue_script( 'vcita-pc', plugins_url( 'assets/js/pc_v.js', __FILE__ ), array(), WPSHD_VCITA_WIDGET_VERSION, false );
+	wp_enqueue_script( 'vcita-ui', plugins_url( 'assets/js/utils_v.js', __FILE__ ), array(), WPSHD_VCITA_WIDGET_VERSION, false );
 	
-	wp_register_style( 'vcita-style', plugins_url( 'assets/style/style_v.css', __FILE__ ) );
+	wp_register_style( 'vcita-style', plugins_url( 'assets/style/style_v.css', __FILE__ ), array(), WPSHD_VCITA_WIDGET_VERSION );
 	wp_enqueue_style( 'vcita-style' );
 	wp_enqueue_script( 'jquery' );
     
@@ -36,7 +36,7 @@ function vcita_enqueue_admin_scripts() {
 }
 
 function wpshd_vcita_scheduler_other_plugin_installed_warning() {
-	echo "<div id='vcita-warning' class='error'><p><b>" . __( "vCita Plugin is already installed", 'meeting-scheduler-by-vcita' ) . "</b>" . __( ', please remove "<b>Appointment Booking and Online Scheduling</b>" and use the available one', 'meeting-scheduler-by-vcita' ) . "</p></div>";
+	echo "<div id='vcita-warning' class='error'><p><b>" . esc_html__( "vCita Plugin is already installed", 'meeting-scheduler-by-vcita' ) . "</b>" . wp_kses_post( __( ', please remove "<b>Appointment Booking and Online Scheduling</b>" and use the available one', 'meeting-scheduler-by-vcita' ) ) . "</p></div>";
 }
 
 /**
@@ -45,15 +45,15 @@ function wpshd_vcita_scheduler_other_plugin_installed_warning() {
 function wpshd_vcita_scheduler_check_plugin_available() {
 	// Check if vCita plugin already installed.
 	$active_plugins = get_option( 'active_plugins' );
-	$found          = array();
+	$wpshd_vcita_found          = array();
 	
 	foreach ( $active_plugins as $filename ) {
 		if ( strpos( $filename, 'by-vcita' ) !== false && ( strpos( $filename, 'meeting-scheduler-by-vcita' ) === false || strpos( $filename, 'meeting-scheduler-by-vcita' ) > 0 ) ) {
-			$found[] = $filename;
+			$wpshd_vcita_found[] = $filename;
 		}
 	}
 	
-	return $found;
+	return $wpshd_vcita_found;
 }
 
 function vcita_activate_func() {
@@ -65,34 +65,25 @@ function vcita_activate_func() {
 		$wpshd_vcita_widget[ 'email' ] = '';
 	}
 	
-	if ( ! isset( $_GET[ 'page' ] ) || ! preg_match( '/' . WPSHD_VCITA_WIDGET_UNIQUE_ID . '\//', $_GET[ 'page' ] ) ) {
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only navigation state, not form processing
+	if ( ! isset( $_GET[ 'page' ] ) || ! preg_match( '/' . WPSHD_VCITA_WIDGET_UNIQUE_ID . '\//', sanitize_text_field( wp_unslash( $_GET[ 'page' ] ) ) ) ) {
 		
-		wp_enqueue_script( 'vcita-mixpman', plugins_url( 'assets/js/mixpanel_v.js', __FILE__ ) );
 		
 		echo '<script type="text/javascript">
-        document.addEventListener("DOMContentLoaded", function () {
-          if (!window.VcitaMixpman) {
-            window.VcitaMixpman = new MixpMan("78aa39b3aa49594f172cfccda537ef1a", "' . $wpshd_vcita_widget[ 'wp_id' ] . '", "' . $wpshd_vcita_widget[ 'email' ] . '");
-          }
-        });
         
         function wpshd_ntf_dismiss() {
-          window.VcitaMixpman.track("wp_sched_close_widget_notification", { created_at: new Date().toISOString() });
           jQuery.get(`${window.$_ajaxurl}?action=vcita_dismiss&dismiss=true&nonce=${vcitaSchedulerData.nonce}`);
         }
         
         function wpshd_ntf_dismiss_switch() {
-          window.VcitaMixpman.track("wp_sched_close_connect_notification", { created_at: new Date().toISOString() });
           jQuery.get(`${window.$_ajaxurl}?action=vcita_dismiss&dismiss_switch=true&nonce=${vcitaSchedulerData.nonce}`);
         }
         
         function wpshd_ntf_connect_click() {
-          window.VcitaMixpman.track("wp_sched_clicked_connect_notification", { created_at: new Date().toISOString() });
         }
         
         function wpshd_ntf_turn_on_click() {
           jQuery.get(`${window.$_ajaxurl}?action=vcita_dismiss&switch_on=true&nonce=${vcitaSchedulerData.nonce}`);
-          window.VcitaMixpman.track("wp_sched_clicked_widget_notification", { created_at: new Date().toISOString() });
         }
       </script>';
 		
@@ -129,12 +120,12 @@ function vcita_activate_func() {
 			
 			echo '<div class="wpschd_admin_notice">
         <div class="wpschd_admin_notice_close" onclick="wpshd_ntf_dismiss();this.parentNode.remove()"></div>
-        <div class="wpschd_admin_notice-image"><img src="' . WPSHD_VCITA_ASSETS_PATH . '/images/icon-256x256.png"/></div>
+        <div class="wpschd_admin_notice-image"><img src="' . esc_url( WPSHD_VCITA_ASSETS_PATH ) . '/images/icon-256x256.png"/></div>
         <div class="wpschd_admin_notice-text">
-          <header>' . __( 'Your online booking plugin is almost ready…!', 'meeting-scheduler-by-vcita' ) . '</header>
-          <article>' . __( 'It’s great to see you added vcita’s online scheduling plugin to your site.<br>To get your plugin up and running, just connect vcita to wordpress with a few easy steps.', 'meeting-scheduler-by-vcita' ) . '</article>
+          <header>' . esc_html__( 'Your online booking plugin is almost ready…!', 'meeting-scheduler-by-vcita' ) . '</header>
+          <article>' . wp_kses_post( __( 'It’s great to see you added vcita’s online scheduling plugin to your site.<br>To get your plugin up and running, just connect vcita to wordpress with a few easy steps.', 'meeting-scheduler-by-vcita' ) ) . '</article>
           <footer>
-            <a class="vcita__btn__blue" onclick="wpshd_ntf_connect_click()" href="' . get_admin_url( '', '', 'admin' ) . 'admin.php?page=' . WPSHD_VCITA_WIDGET_UNIQUE_ID . '/vcita-settings-functions.php&show_login=true">' . __( 'Connect to vcita', 'meeting-scheduler-by-vcita' ) . '</a>
+            <a class="vcita__btn__blue" onclick="wpshd_ntf_connect_click()" href="' . esc_url( get_admin_url( '', '', 'admin' ) ) . 'admin.php?page=' . esc_attr( WPSHD_VCITA_WIDGET_UNIQUE_ID ) . '/vcita-settings-functions.php&show_login=true">' . esc_html__( 'Connect to vcita', 'meeting-scheduler-by-vcita' ) . '</a>
           </footer>
         </div>
       </div>';
@@ -146,12 +137,12 @@ function vcita_activate_func() {
 			
 			echo '<div class="wpschd_admin_notice">
         <div class="wpschd_admin_notice_close" onclick="wpshd_ntf_dismiss_switch();this.parentNode.remove()"></div>
-        <div class="wpschd_admin_notice-image"><img src="' . WPSHD_VCITA_ASSETS_PATH . '/images/icon-256x256.png"/></div>
+        <div class="wpschd_admin_notice-image"><img src="' . esc_url( WPSHD_VCITA_ASSETS_PATH ) . '/images/icon-256x256.png"/></div>
         <div class="wpschd_admin_notice-text">
-          <header>' . __( 'Turn on the booking widget', 'meeting-scheduler-by-vcita' ) . '</header>
-          <article>' . __( 'Your clients can not book meeting online with you at the moment. Please turn the booking<br>widget on to enable your clients to book online with you', 'meeting-scheduler-by-vcita' ) . '</article>
+          <header>' . esc_html__( 'Turn on the booking widget', 'meeting-scheduler-by-vcita' ) . '</header>
+          <article>' . wp_kses_post( __( 'Your clients can not book meeting online with you at the moment. Please turn the booking<br>widget on to enable your clients to book online with you', 'meeting-scheduler-by-vcita' ) ) . '</article>
           <footer>
-            <a class="vcita__btn__blue" href="javascript:void(0)" onclick="wpshd_ntf_turn_on_click();this.closest(\'.wpschd_admin_notice\').remove()">' . __( 'Turn on Widget', 'meeting-scheduler-by-vcita' ) . '</a>
+            <a class="vcita__btn__blue" href="javascript:void(0)" onclick="wpshd_ntf_turn_on_click();this.closest(\'.wpschd_admin_notice\').remove()">' . esc_html__( 'Turn on Widget', 'meeting-scheduler-by-vcita' ) . '</a>
           </footer>
         </div>
       </div>';
@@ -162,23 +153,23 @@ function vcita_activate_func() {
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
 	}
 	
-	$all_plugins = get_plugins();
+	$wpshd_vcita_all_plugins = get_plugins();
 	$class_str   = '';
 	
-	foreach ( $all_plugins as $wp_file => $wp_plugin ) {
-		if ( strpos( $wp_file, 'by-vcita' ) !== false && ( strpos( $wp_file, 'meeting-scheduler-by-vcita' ) === false || strpos( $wp_file, 'meeting-scheduler-by-vcita' ) > 0 ) ) {
-			$class_str .= ',.edit[aria-label*="' . $wp_plugin[ 'Name' ] . '"]';
+	foreach ( $wpshd_vcita_all_plugins as $wpshd_vcita_wp_file => $wpshd_vcita_wp_plugin ) {
+		if ( strpos( $wpshd_vcita_wp_file, 'by-vcita' ) !== false && ( strpos( $wpshd_vcita_wp_file, 'meeting-scheduler-by-vcita' ) === false || strpos( $wpshd_vcita_wp_file, 'meeting-scheduler-by-vcita' ) > 0 ) ) {
+			$class_str .= ',.edit[aria-label*="' . $wpshd_vcita_wp_plugin[ 'Name' ] . '"]';
 		}
 	}
 	
-	$prefix    = '<b>' . WPSHD_VCITA_WIDGET_PLUGIN_NAME . '</b>';
+	$prefix    = '<b>' . esc_html__( 'Appointment Booking and Online Scheduling by vCita', 'meeting-scheduler-by-vcita' ) . '</b>';
 	$class     = "error notice is-dismissible";
 	$class_str = substr( $class_str, 1 );
 	
 	if ( $class_str ) { ?>
         <script type="text/javascript">
           document.addEventListener('DOMContentLoaded', function () {
-            const plugs = document.querySelectorAll('<?php echo $class_str ?>')
+            const plugs = document.querySelectorAll('<?php echo esc_js( $class_str ) ?>')
             const pl = plugs.length
             
             for (let i = 0; i < pl; i++) {
@@ -187,10 +178,10 @@ function vcita_activate_func() {
                 ev.stopPropagation()
                 
                 document.querySelector('.wp-header-end')
-                  .insertAdjacentHTML('afterend', '<div class="<?php echo $class ?>">' +
-                    '<p><?php echo __( 'You cannot activate this plugin, because you are using', 'meeting-scheduler-by-vcita' ) ?> <?php echo $prefix ?></p>' +
+                  .insertAdjacentHTML('afterend', '<div class="<?php echo esc_attr( $class ) ?>">' +
+                    '<p><?php echo esc_js( __( 'You cannot activate this plugin, because you are using', 'meeting-scheduler-by-vcita' ) ) ?> <?php echo wp_kses_post( $prefix ) ?></p>' +
                     '<button type="button" onclick="this.parentNode.remove()" class="notice-dismiss"><span class="screen-reader-text">' +
-                    '<?php echo __( 'Dismiss this notice.', 'meeting-scheduler-by-vcita' ) ?>' +
+                    '<?php echo esc_js( __( 'Dismiss this notice.', 'meeting-scheduler-by-vcita' ) ) ?>' +
                     '</span></button></div>')
                 
                 window.scrollTo(0, 0)
@@ -216,13 +207,6 @@ function vcita_admin_footer_script() {
             return;
           }
         
-          if (data.msg && window.VcitaMixpman) {
-            VcitaMixpman.track("wp_sched_deactivation", { reason: data.msg });
-          } else if (data.el != undefined && window.VcitaMixpman) {
-            if (data.el == null) {
-              VcitaMixpman.track("wp_sched_deactivation", { reason: "no reason" });
-            } else VcitaMixpman.track("wp_sched_deactivation", { reason: data.el.textContent });
-          }
         
           if (window.vcita_deactivate_url != undefined && window.vcita_deactivate_url != null) {
             window.location.href = window.vcita_deactivate_url;
@@ -231,11 +215,11 @@ function vcita_admin_footer_script() {
         
         function wpshd_vcita_snooze_rate(e, _this) {
           e.preventDefault();
-          wpshd_vcita_put_lsr_data("' . $wpshd_vcita_widget[ 'uid' ] . '", {
+          wpshd_vcita_put_lsr_data("' . esc_js( $wpshd_vcita_widget[ 'uid' ] ) . '", {
             dismiss: false,
             wait: true,
             date: new Date().getTime(),
-            version: "' . WPSHD_VCITA_WIDGET_VERSION . '"
+            version: "' . esc_js( WPSHD_VCITA_WIDGET_VERSION ) . '"
           });
         }
         
@@ -260,18 +244,18 @@ function vcita_admin_footer_script() {
           if (open) {
             window.open("https://wordpress.org/support/plugin/meeting-scheduler-by-vcita/reviews/#new-post", "_blank");
           }
-          wpshd_vcita_put_lsr_data("' . $wpshd_vcita_widget[ 'uid' ] . '", {
+          wpshd_vcita_put_lsr_data("' . esc_js( $wpshd_vcita_widget[ 'uid' ] ) . '", {
             dismiss: true,
             wait: false,
             date: new Date().getTime(),
-            version: "' . WPSHD_VCITA_WIDGET_VERSION . '"
+            version: "' . esc_js( WPSHD_VCITA_WIDGET_VERSION ) . '"
           });
         }
         
         (function () {
           jQuery("[data-slug=\'meeting-scheduler-by-vcita\'] .deactivate a").click(function () {
             window.vcita_deactivate_url = this.getAttribute("href");
-            tb_show("' . __( 'Quick feedback', 'meeting-scheduler-by-vcita' ) . '", "/?TB_inline&inlineId=vcita__deactivate__modal-container");
+            tb_show("' . esc_js( __( 'Quick feedback', 'meeting-scheduler-by-vcita' ) ) . '", "/?TB_inline&inlineId=vcita__deactivate__modal-container");
             jQuery("#TB_window").addClass("vcita_tb_window");
             jQuery("#TB_ajaxContent").addClass("vcita_tb_content");
             return false;
@@ -283,26 +267,26 @@ function vcita_admin_footer_script() {
             let rdata = localStorage.getItem("wpshd_rate_state");
             if (rdata !== null) {
               rdata = JSON.parse(rdata);
-              if (!rdata["' . $wpshd_vcita_widget[ 'uid' ] . '"]) {
-                rdata["' . $wpshd_vcita_widget[ 'uid' ] . '"] = {
+              if (!rdata["' . esc_js( $wpshd_vcita_widget[ 'uid' ] ) . '"]) {
+                rdata["' . esc_js( $wpshd_vcita_widget[ 'uid' ] ) . '"] = {
                   dismiss: false,
                   wait: false,
                   date: new Date().getTime(),
-                  version: "' . WPSHD_VCITA_WIDGET_VERSION . '"
+                  version: "' . esc_js( WPSHD_VCITA_WIDGET_VERSION ) . '"
                 }
               }
             } else {
               rdata = {
-                "' . $wpshd_vcita_widget[ 'uid' ] . '": {
+                "' . esc_js( $wpshd_vcita_widget[ 'uid' ] ) . '": {
                   dismiss: false,
                   wait: false,
                   date: new Date().getTime(),
-                  version: "' . WPSHD_VCITA_WIDGET_VERSION . '"
+                  version: "' . esc_js( WPSHD_VCITA_WIDGET_VERSION ) . '"
                 }
               };
             }
-            const rd = rdata["' . $wpshd_vcita_widget[ 'uid' ] . '"];
-            if (rd.dismiss && rd.version === "' . WPSHD_VCITA_WIDGET_VERSION . '") return false;
+            const rd = rdata["' . esc_js( $wpshd_vcita_widget[ 'uid' ] ) . '"];
+            if (rd.dismiss && rd.version === "' . esc_js( WPSHD_VCITA_WIDGET_VERSION ) . '") return false;
             if (rd.wait) {
               const day = 24 * 60 * 60 * 1000;
               const diffDays = Math.round(Math.abs((rd.date - new Date().getTime()) / day));
@@ -311,14 +295,14 @@ function vcita_admin_footer_script() {
             document.addEventListener("DOMContentLoaded", () => {
               const txt = `<div class="notice notice-info" style="position:relative">
                 <button type="button" class="notice-dismiss" onclick="this.parentNode.remove()"></button>
-                <div style="font-size:20px;font-weight:bold;margin-top:10px"><img style="vertical-align:middle" src="' . plugins_url( WPSHD_VCITA_WIDGET_UNIQUE_ID . '/images/settings.png' ) . '"/>&nbsp;&nbsp;' . addslashes( __( 'Enjoying vcita?', 'meeting-scheduler-by-vcita' ) ) . '</div>
+                <div style="font-size:20px;font-weight:bold;margin-top:10px"><img style="vertical-align:middle" src="' . esc_url( plugins_url( WPSHD_VCITA_WIDGET_UNIQUE_ID . '/images/settings.png' ) ) . '"/>&nbsp;&nbsp;' . esc_js( __( 'Enjoying vcita?', 'meeting-scheduler-by-vcita' ) ) . '</div>
                 <div style="font-size:16px;margin-top:10px">
-                <div>' . addslashes( __( 'Can you please help us with a BIG favor and rate vcita 5 stars.', 'meeting-scheduler-by-vcita' ) ) . '</div>
+                <div>' . esc_js( __( 'Can you please help us with a BIG favor and rate vcita 5 stars.', 'meeting-scheduler-by-vcita' ) ) . '</div>
                 <div style="text-align:left;margin:10px 0">
                 <button class="button-primary" onclick="wpshd_vcita_goToRate(event,this);this.closest(\'.notice\').remove()">
-                ' . addslashes( __( 'Rate 5 Stars', 'meeting-scheduler-by-vcita' ) ) . '</button>
-                &nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" style="text-decoration:none" onclick="wpshd_vcita_snooze_rate(event,this);this.closest(\'.notice\').remove()">' . addslashes( __( 'maybe later', 'meeting-scheduler-by-vcita' ) ) . '</a>
-                &nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" style="text-decoration:none" onclick="wpshd_vcita_goToRate(event,this,false);this.closest(\'.notice\').remove()">' . addslashes( __( 'already rated', 'meeting-scheduler-by-vcita' ) ) . '</a>
+                ' . esc_js( __( 'Rate 5 Stars', 'meeting-scheduler-by-vcita' ) ) . '</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" style="text-decoration:none" onclick="wpshd_vcita_snooze_rate(event,this);this.closest(\'.notice\').remove()">' . esc_js( __( 'maybe later', 'meeting-scheduler-by-vcita' ) ) . '</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" style="text-decoration:none" onclick="wpshd_vcita_goToRate(event,this,false);this.closest(\'.notice\').remove()">' . esc_js( __( 'already rated', 'meeting-scheduler-by-vcita' ) ) . '</a>
                 </div></div></div>`;
               document.querySelector(".wp-header-end").insertAdjacentHTML("afterend", txt);
             })
@@ -330,39 +314,28 @@ function vcita_admin_footer_script() {
         }())
       </script>';
 		
-		wp_register_style( 'vcita-plugins-page-style', plugins_url( 'assets/style/plugins_page_v.css', __FILE__ ) );
+		wp_register_style( 'vcita-plugins-page-style', plugins_url( 'assets/style/plugins_page_v.css', __FILE__ ), array(), WPSHD_VCITA_WIDGET_VERSION );
 		
 		wp_enqueue_script( 'thickbox' );
 		wp_enqueue_script( 'vcita-plugins-page-script' );
 		wp_enqueue_style( 'thickbox' );
 		wp_enqueue_style( 'vcita-plugins-page-style' );
 		
-		wp_enqueue_script( 'vcita-mixpman', plugins_url( 'assets/js/mixpanel_v.js', __FILE__ ) );
 		
-		echo '<script type="text/javascript">
-      document.addEventListener("DOMContentLoaded", function () {  
-        if (!window.VcitaMixpman) {
-          window.VcitaMixpman = new MixpMan("78aa39b3aa49594f172cfccda537ef1a", "' . $wpshd_vcita_widget[ 'wp_id' ] . '", "' . $wpshd_vcita_widget[ 'email' ] . '");
-        }});' .
-			
-			( $wpshd_vcita_widget[ 'just_activated' ]
-				? 'window.setTimeout(function(){VcitaMixpman.track("wp_sched_activate")},2000)' : '' ) .
-			
-			'</script>
-      <div id="vcita__deactivate__modal-container" style="display:none;">
+		echo '      <div id="vcita__deactivate__modal-container" style="display:none;">
         <form id="vcita__deactivate__modal-container-inner">
-          <h3>' . __( 'If you have a moment, please let us know why you are deactivating:', 'meeting-scheduler-by-vcita' ) . '</h3>
+          <h3>' . esc_html__( 'If you have a moment, please let us know why you are deactivating:', 'meeting-scheduler-by-vcita' ) . '</h3>
           <section>
-            <div><input name="reason" type="radio"><label>' . __( 'The plugin didn\'t work', 'meeting-scheduler-by-vcita' ) . '</label></div>
-            <div><input name="reason" type="radio"><label>' . __( 'I don\'t like to share this information with you', 'meeting-scheduler-by-vcita' ) . '</label></div>
-            <div><input name="reason" type="radio"><label>' . __( 'It\'s a temporary deactivation. I\'m just debugging an issue', 'meeting-scheduler-by-vcita' ) . '</label></div>
-            <div><input name="reason" type="radio"><label>' . __( 'I found a better plugin', 'meeting-scheduler-by-vcita' ) . '</label></div>
-            <div><input name="reason" type="radio"><label>' . __( 'Other', 'meeting-scheduler-by-vcita' ) . '</label></div>
+            <div><input name="reason" type="radio"><label>' . esc_html__( 'The plugin didn\'t work', 'meeting-scheduler-by-vcita' ) . '</label></div>
+            <div><input name="reason" type="radio"><label>' . esc_html__( 'I don\'t like to share this information with you', 'meeting-scheduler-by-vcita' ) . '</label></div>
+            <div><input name="reason" type="radio"><label>' . esc_html__( 'It\'s a temporary deactivation. I\'m just debugging an issue', 'meeting-scheduler-by-vcita' ) . '</label></div>
+            <div><input name="reason" type="radio"><label>' . esc_html__( 'I found a better plugin', 'meeting-scheduler-by-vcita' ) . '</label></div>
+            <div><input name="reason" type="radio"><label>' . esc_html__( 'Other', 'meeting-scheduler-by-vcita' ) . '</label></div>
           </section>
           <section>
-            <button onclick="vcita_send_deactivate_feedback(event,{el:document.querySelector(\'#vcita__deactivate__modal-container-inner :checked ~ label\')})">' . __( 'Skip & deactivate', 'meeting-scheduler-by-vcita' ) . '</button>
-            <button onclick="vcita_send_deactivate_feedback(event,{msg:\'support\'})">' . __( 'We can help: Support Service', 'meeting-scheduler-by-vcita' ) . '</button>
-            <button onclick="vcita_send_deactivate_feedback(event,{close:true})"><b>' . __( 'Cancel', 'meeting-scheduler-by-vcita' ) . '</b></button>
+            <button onclick="vcita_send_deactivate_feedback(event,{el:document.querySelector(\'#vcita__deactivate__modal-container-inner :checked ~ label\')})">' . esc_html__( 'Skip & deactivate', 'meeting-scheduler-by-vcita' ) . '</button>
+            <button onclick="vcita_send_deactivate_feedback(event,{msg:\'support\'})">' . esc_html__( 'We can help: Support Service', 'meeting-scheduler-by-vcita' ) . '</button>
+            <button onclick="vcita_send_deactivate_feedback(event,{close:true})"><b>' . esc_html__( 'Cancel', 'meeting-scheduler-by-vcita' ) . '</b></button>
           </section>
         </form>
       </div>';
@@ -376,22 +349,29 @@ function vcita_admin_footer_script() {
 
 function vcita_set_rest() {
 	
+	// Authorization for non-public actions is enforced inside vcita_callback()
+	// (capability + nonce checks); public_actions additionally go through the
+	// ownership guard in wpshd_vcita_process_action(). permission_callback is declared
+	// explicitly here so the route's auth model isn't left to WP's implicit
+	// (and deprecated) default.
 	register_rest_route( 'vcita-wordpress/v1', '/actions/(?P<action>.+)', array(
 		'methods'  => array( 'GET', 'POST' ),
 		'callback' => 'vcita_callback',
+		'permission_callback' => '__return_true',
 	), true );
 }
 
 function vcita_update_message( $data, $r ) {
 	if ( isset( $data[ 'upgrade_notice' ] ) ) {
-		printf( '<div class="update-message">%s</div>', wpautop( $data[ 'upgrade_notice' ] ) );
+		printf( '<div class="update-message">%s</div>', wp_kses_post( wpautop( $data[ 'upgrade_notice' ] ) ) );
 	}
 }
 
 function wpshd_vcita_check_redirect() {
 	if ( get_option( 'wpshd_vcita_redirect_needed', false ) ) {
 		delete_option( 'wpshd_vcita_redirect_needed' );
-		exit( wp_redirect( get_admin_url( '', '', 'admin' ) . 'admin.php?page=' . WPSHD_VCITA_WIDGET_UNIQUE_ID . '/vcita-settings-functions.php' ) );
+		wp_safe_redirect( get_admin_url( '', '', 'admin' ) . 'admin.php?page=' . WPSHD_VCITA_WIDGET_UNIQUE_ID . '/vcita-settings-functions.php' );
+		exit;
 	}
 }
 
@@ -402,11 +382,11 @@ function wpshd_vcita_activation_func() {
 		$av_plugin_list                            = wp_cache_get( 'WPSHD_VCITA_ANOTHER_PLUGIN_LIST' );
 		$wpshd_vcita_widget[ 'deactivate_showed' ] = true;
 		
-		$found = array();
-		foreach ( $av_plugin_list as $av_plugin ) {
-			$found[] = $av_plugin[ 'file' ];
+		$wpshd_vcita_found = array();
+		foreach ( $av_plugin_list as $wpshd_vcita_av_plugin ) {
+			$wpshd_vcita_found[] = $wpshd_vcita_av_plugin[ 'file' ];
 		}
-		deactivate_plugins( $found );
+		deactivate_plugins( $wpshd_vcita_found );
 		
 		add_option( 'wpshd_vcita_redirect_needed', true );
 	}
@@ -435,49 +415,41 @@ function wpshd_register_wp_rest_settings() {
 	define( 'WPSHD_VCITA_WIDGET_CALLBACK_URL', rest_url( null, 'vcita-wordpress/v1' ) );
 }
 
-function wpshd_vcita_load_translations() {
-	load_plugin_textdomain( 'meeting-scheduler-by-vcita', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-}
-
-if ( WP_DEBUG && WP_DEBUG_DISPLAY && ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
-	@ ini_set( 'display_errors', 1 );
-}
-
-$av_plugins = wpshd_vcita_scheduler_check_plugin_available( 'vcita_scheduler' );
+$wpshd_vcita_av_plugins = wpshd_vcita_scheduler_check_plugin_available( 'vcita_scheduler' );
 
 if ( ! function_exists( 'get_plugins' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/plugin.php';
 }
 
-$all_plugins = get_plugins();
+$wpshd_vcita_all_plugins = get_plugins();
 
-if ( $av_plugins ) {
+if ( $wpshd_vcita_av_plugins ) {
 	define( 'WPSHD_VCITA_ANOTHER_PLUGIN', 1 );
-	$all_plugin_data = array();
+	$wpshd_vcita_all_plugin_data = array();
 	
-	foreach ( $all_plugins as $wp_file => $wp_plugin ) {
-		if ( in_array( $wp_file, $av_plugins ) ) {
-			$wp_plugin[ 'file' ] = $wp_file;
+	foreach ( $wpshd_vcita_all_plugins as $wpshd_vcita_wp_file => $wpshd_vcita_wp_plugin ) {
+		if ( in_array( $wpshd_vcita_wp_file, $wpshd_vcita_av_plugins ) ) {
+			$wpshd_vcita_wp_plugin[ 'file' ] = $wpshd_vcita_wp_file;
 			
-			if ( strpos( $wp_file, 'crm-customer-relationship-management-by-vcita' ) !== false || strpos( $wp_file, 'lead-capturing-call-to-actions-by-vcita' ) !== false ) {
-				$wp_plugin[ 'url' ] = plugin_dir_path( $wp_file ) . 'vcita-settings-functions.php';
-				array_unshift( $all_plugin_data, $wp_plugin );
+			if ( strpos( $wpshd_vcita_wp_file, 'crm-customer-relationship-management-by-vcita' ) !== false || strpos( $wpshd_vcita_wp_file, 'lead-capturing-call-to-actions-by-vcita' ) !== false ) {
+				$wpshd_vcita_wp_plugin[ 'url' ] = plugin_dir_path( $wpshd_vcita_wp_file ) . 'vcita-settings-functions.php';
+				array_unshift( $wpshd_vcita_all_plugin_data, $wpshd_vcita_wp_plugin );
 			}
-			else if ( strpos( $wp_file, 'paypal-payment-button-by-vcita' ) !== false || strpos( $wp_file, 'event-registration-calendar-by-vcita' ) !== false || strpos( $wp_file, 'contact-form-with-a-meeting-scheduler-by-vcita' ) !== false ) {
-				$wp_plugin[ 'url' ] = 'live-site';
-				$all_plugin_data[]  = $wp_plugin;
+			else if ( strpos( $wpshd_vcita_wp_file, 'paypal-payment-button-by-vcita' ) !== false || strpos( $wpshd_vcita_wp_file, 'event-registration-calendar-by-vcita' ) !== false || strpos( $wpshd_vcita_wp_file, 'contact-form-with-a-meeting-scheduler-by-vcita' ) !== false ) {
+				$wpshd_vcita_wp_plugin[ 'url' ] = 'live-site';
+				$wpshd_vcita_all_plugin_data[]  = $wpshd_vcita_wp_plugin;
 			}
 			else {
-				$all_plugin_data[] = $wp_plugin;
+				$wpshd_vcita_all_plugin_data[] = $wpshd_vcita_wp_plugin;
 			}
 		}
 	}
 	
-	wp_cache_set( 'WPSHD_VCITA_ANOTHER_PLUGIN_LIST', $all_plugin_data );
-	foreach ( $all_plugin_data as $av_plugin ) {
-		$found[] = $av_plugin[ 'file' ];
+	wp_cache_set( 'WPSHD_VCITA_ANOTHER_PLUGIN_LIST', $wpshd_vcita_all_plugin_data );
+	foreach ( $wpshd_vcita_all_plugin_data as $wpshd_vcita_av_plugin ) {
+		$wpshd_vcita_found[] = $wpshd_vcita_av_plugin[ 'file' ];
 	}
-	deactivate_plugins( $found );
+	deactivate_plugins( $wpshd_vcita_found );
 	delete_option( 'wpshd_vcita_redirect_needed' );
 	
 	if ( WPSHD_VCITA_ANOTHER_PLUGIN ) {
@@ -490,17 +462,18 @@ else {
 }
 
 define( 'WPSHD_VCITA_USE_MEET2KNOW', false );
-define( 'WPSHD_VCITA_DEBUG', ( isset( $_GET[ 'WPSHD_DEBUG' ] ) && $_GET[ 'WPSHD_DEBUG' ] == 'true' ? true : false ) );
+// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only navigation state, not form processing
+define( 'WPSHD_VCITA_DEBUG', ( isset( $_GET[ 'WPSHD_DEBUG' ] ) && sanitize_text_field( wp_unslash( $_GET[ 'WPSHD_DEBUG' ] ) ) === 'true' ? true : false ) );
 define( 'WPSHD_VCITA_SERVER_PREFIX', "www." );
 define( 'WPSHD_VCITA_SERVER_BASE', WPSHD_VCITA_USE_MEET2KNOW ? "meet2know.com"
 	: "vcita.com" ); /* Don't include the protocol, added dynamically */
 define( 'WPSHD_VCITA_SERVER_URL', WPSHD_VCITA_SERVER_PREFIX . WPSHD_VCITA_SERVER_BASE );
-define( 'WPSHD_VCITA_WIDGET_VERSION', '4.4.6' );
-define( 'WPSHD_VCITA_WIDGET_PLUGIN_NAME', __( 'Appointment Booking and Online Scheduling by vCita', 'meeting-scheduler-by-vcita' ) );
+define( 'WPSHD_VCITA_WIDGET_VERSION', '4.6.3' );
+define( 'WPSHD_VCITA_WIDGET_PLUGIN_NAME', 'Appointment Booking and Online Scheduling by vCita' );
 define( 'WPSHD_VCITA_WIDGET_KEY', 'vcita_scheduler' );
 define( 'WPSHD_VCITA_WIDGET_API_KEY', 'wp-v-schd' );
 define( 'WPSHD_VCITA_WIDGET_INVITE_CODE', 'WP-V-SCHD' );
-define( 'WPSHD_VCITA_WIDGET_MENU_NAME', __( 'vCita Online Scheduling', 'meeting-scheduler-by-vcita' ) );
+define( 'WPSHD_VCITA_WIDGET_MENU_NAME', 'vCita Online Scheduling' );
 define( 'WPSHD_VCITA_WIDGET_SHORTCODE', 'vCitaMeetingScheduler' );
 define( 'WPSHD_VCITA_CALENDAR_WIDGET_SHORTCODE', 'vCitaSchedulingCalendar' );
 define( 'WPSHD_VCITA_WIDGET_UNIQUE_ID', basename( __DIR__ ) );
@@ -508,12 +481,12 @@ define( 'WPSHD_VCITA_WIDGET_UNIQUE_LOCATION', __FILE__ );
 define( 'WPSHD_VCITA_WIDGET_SHOW_EMAIL_PRIVACY', 'true' );
 define( 'WPSHD_VCITA_WIDGET_DEMO_UID', 'wordpress.demo' );  /*	vCita.com/meet2know.com demo user uid: wordpress.demo */
 
-$assets_path = plugin_dir_url( __FILE__ );
-if ( is_ssl() && strpos( $assets_path, 'http:' ) !== false ) {
-	$assets_path = str_replace( 'http:', 'https:', $assets_path );
+$wpshd_vcita_assets_path = plugin_dir_url( __FILE__ );
+if ( is_ssl() && strpos( $wpshd_vcita_assets_path, 'http:' ) !== false ) {
+	$wpshd_vcita_assets_path = str_replace( 'http:', 'https:', $wpshd_vcita_assets_path );
 }
 
-define( 'WPSHD_VCITA_ASSETS_PATH', $assets_path );
+define( 'WPSHD_VCITA_ASSETS_PATH', $wpshd_vcita_assets_path );
 define( 'WPSHD_VCITA_JS_PATH', WPSHD_VCITA_ASSETS_PATH . 'assets/js' );
 define( 'WPSHD_VCITA_CSS_PATH', WPSHD_VCITA_ASSETS_PATH . 'assets/style' );
 
@@ -533,7 +506,6 @@ add_action( 'wp_head', 'wpshd_vcita_add_active_engage' );
 
 add_action( 'admin_notices', 'vcita_activate_func' );
 add_action( 'admin_footer', 'vcita_admin_footer_script' );
-add_action( 'plugins_loaded', 'wpshd_vcita_load_translations', 0 );
 
 add_shortcode( WPSHD_VCITA_WIDGET_SHORTCODE, 'wpshd_vcita_add_contact' );
 add_shortcode( WPSHD_VCITA_CALENDAR_WIDGET_SHORTCODE, 'wpshd_vcita_add_calendar' );

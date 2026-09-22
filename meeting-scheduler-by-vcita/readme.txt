@@ -1,9 +1,9 @@
-=== Online Booking & Scheduling Calendar for WordPress by vcita  ===
+=== Online Booking & Scheduling Calendar by vcita ===
 Contributors: vcita
 Tags: scheduling, booking, events, calendar, meetings
-Requires at least: 4.6
-Tested up to: 6.7.2
-Stable tag: 4.5.5
+Requires at least: 4.7
+Tested up to: 7.1
+Stable tag: 4.6.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Let clients schedule meetings with you online! No more back & forth emails 
@@ -110,11 +110,11 @@ FREE 14 DAYS TRIAL. No credit card needed
 == Installation ==
 
 
-= Recommended installation for Online Booking & Scheduling for WordPress by vcita =
+= Recommended installation for Online Booking & Scheduling Calendar by vcita =
 
 1.  Connect to WordPress admin panel
 2.  Click the "Plugins" menu on the left and choose "Add New".
-3.  Search for "Online Booking & Scheduling for WordPress by vcita" and install it.
+3.  Search for "Online Booking & Scheduling Calendar by vcita" and install it.
 4.  After the plugin installation has finished, activate the plugin and click on the “let’s get started” button to create your account on vcita.
 5.  Navigate to the "Add to Site" tab and customise your widget look and feel.
 6.  Navigate to the settings tab and click on the "Start Wizard" button. Set up your scheduling preferences using vcita's super friendly scheduling wizard.
@@ -160,6 +160,26 @@ Please visit <a href="https://www.vcita.com/about/privacy_policy?invite=wp-v-sch
 
 
 == Changelog ==
+
+= 4.6.3 =
+ * Privacy: Removed all third-party analytics from the plugin. Mixpanel and Hotjar are no longer loaded, and no usage data or account details are sent to any third party.
+ * Fixed: The mobile preview on the "Add to Site" screen now displays your site correctly. It previously pointed at the wrong address on any site using a non-standard port or installed in a subdirectory, so the preview appeared empty.
+
+= 4.6.2 =
+ * Fixed: Upgrading the plugin no longer disconnects your vcita account. Previously, every version update cleared the stored connection and prompted you to reconnect before the scheduling widget would work again.
+ * Security & standards: Full WordPress coding standards and security pass across the plugin, resolving all issues reported by the Plugin Check tool - output escaping, input sanitization and nonce verification, direct file access protection, use of the WordPress HTTP API in place of cURL, and removal of unused bundled files.
+
+= 4.6.1 =
+ * Security: Fixed CVE-2026-14433 - Unauthenticated stored XSS via the business_id parameter in the /wp-json/vcita-wordpress/v1/actions/connect REST route. The ownership guard now fails closed instead of silently passing on a malformed or unreachable proxy response, business_id is validated against the vcita uid format before being stored, and all output sites now escape the value with esc_js()/esc_html(). The ownership check's remote lookup now uses wp_remote_get() instead of file_get_contents().
+
+= 4.6.0 =
+ * Security: Fixed CSRF vulnerabilities in admin AJAX actions. Added nonce verification to logout, dismiss, and plugin deactivation functions.
+ * Security: Fixed CVE-2025-32238 - Sensitive information exposure in authentication check
+ * Security: Fixed arbitrary file upload vulnerability that could lead to remote code execution
+ * Security: Fixed XSS vulnerabilities in widget title, text, and button fields
+ * Security: Improved file upload validation with WordPress built-in security functions
+ * Security: Added proper authorization checks to all sensitive AJAX operations
+ * Security: Added proper output escaping to prevent XSS attacks
 
 = 4.5.5 =
  * Security Update

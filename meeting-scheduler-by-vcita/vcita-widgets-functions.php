@@ -1,16 +1,21 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 function wpshd_vcita_add_active_engage()
 {
-    wp_enqueue_style('vcita-widget-style', WPSHD_VCITA_CSS_PATH.'/widget_v.css');
+    wp_enqueue_style('vcita-widget-style', WPSHD_VCITA_CSS_PATH.'/widget_v.css', array(), WPSHD_VCITA_WIDGET_VERSION);
 
     $wpshd_vcita_widget = (array)get_option(WPSHD_VCITA_WIDGET_KEY);
-    $wpshd_vcita_widget_config = create_default_settings_data($wpshd_vcita_widget);
+    $wpshd_vcita_widget_config = wpshd_vcita_create_default_settings_data($wpshd_vcita_widget);
     foreach ($wpshd_vcita_widget_config as $akey => $val) $wpshd_vcita_widget[$akey] = $val;
     if (WPSHD_VCITA_ANOTHER_PLUGIN) $wpshd_vcita_widget['show_on_site'] = 0;
     $wpshd_disable = false;
 
-    if (isset($_GET['WPSCHD_DISABLE_BUTTON']) && $_GET['WPSCHD_DISABLE_BUTTON'] == '1') {
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only navigation state, not form processing
+    if (isset($_GET['WPSCHD_DISABLE_BUTTON']) && sanitize_text_field( wp_unslash( $_GET['WPSCHD_DISABLE_BUTTON'] ) ) === '1') {
       $wpshd_disable = true;
     }
 
@@ -19,7 +24,7 @@ function wpshd_vcita_add_active_engage()
         <style>#livesite_active_engage .ls-more-actions-C {display: none}</style>
       <?php } ?>
       <script type="text/javascript">
-        var vcUrl = '<?php echo WPSHD_VCITA_SERVER_URL ?>/widgets/active_engage/<?php echo wpshd_vcita_get_uid() ?>/loader.js?format=js';
+        var vcUrl = '<?php echo esc_js(WPSHD_VCITA_SERVER_URL) ?>/widgets/active_engage/<?php echo esc_js(wpshd_vcita_get_uid()) ?>/loader.js?format=js';
         var script = document.createElement('script');
         script.src = '//' + vcUrl;
         script.type = 'text/javascript';
@@ -42,7 +47,7 @@ function wpshd_vcita_add_active_engage()
           if (sfound) return;
 
           <?php if (!$wpshd_vcita_widget['vcita_design']) { ?>
-          document.cookie = "livesite_<?php echo $wpshd_vcita_widget['uid'] ?>_engage=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+          document.cookie = "livesite_<?php echo esc_js($wpshd_vcita_widget['uid']) ?>_engage=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
           <?php } ?>
 
           
@@ -59,22 +64,22 @@ function wpshd_vcita_add_active_engage()
               // inlineActions: false,
               activeEngageAction: "schedule",
               //mobileQuickAction: "schedule",
-              activeEngageActionText: '<?php echo $wpshd_vcita_widget['btn_text'] ? $wpshd_vcita_widget['btn_text'] : 'Schedule now'?>',
-              engageButtonText: '<?php echo $wpshd_vcita_widget['btn_text'] ? stripslashes($wpshd_vcita_widget['btn_text']) : 'Schedule now'?>',
-              activeEngageTitle: "<?php echo $wpshd_vcita_widget['widget_title'] ? stripslashes($wpshd_vcita_widget['widget_title']) : 'Let\'s talk!' ?>",
-              activeEngageText: "<?php echo $wpshd_vcita_widget['widget_text'] ? stripslashes($wpshd_vcita_widget['widget_text']) : 'Thanks for stopping by! We\'re here to help…' ?>",
+              activeEngageActionText: <?php echo wp_json_encode( $wpshd_vcita_widget['btn_text'] ? $wpshd_vcita_widget['btn_text'] : 'Schedule now' )?>,
+              engageButtonText: <?php echo wp_json_encode( $wpshd_vcita_widget['btn_text'] ? $wpshd_vcita_widget['btn_text'] : 'Schedule now' )?>,
+              activeEngageTitle: <?php echo wp_json_encode( $wpshd_vcita_widget['widget_title'] ? $wpshd_vcita_widget['widget_title'] : 'Let\'s talk!' ) ?>,
+              activeEngageText: <?php echo wp_json_encode( $wpshd_vcita_widget['widget_text'] ? $wpshd_vcita_widget['widget_text'] : 'Thanks for stopping by! We\'re here to help…' ) ?>,
             <?php if ($wpshd_vcita_widget['widget_img']) { ?>
-              imageUrl: "<?php echo wp_get_attachment_image_url($wpshd_vcita_widget['widget_img']) ?>",
+              imageUrl: "<?php echo esc_url( wp_get_attachment_image_url($wpshd_vcita_widget['widget_img']) ) ?>",
             <?php } else { ?>
               imageUrl: "",
             <?php } ?>
               textPoweredBy: 'Powered by vcita',
-              themeActionColor: '<?php echo $wpshd_vcita_widget['btn_color'] ?>',
-              themeActionHover: '<?php echo $wpshd_vcita_widget['hover_color'] ?>',
-              themeActionText: '<?php echo $wpshd_vcita_widget['txt_color'] ?>',
-              themeMainActionColor: '<?php echo $wpshd_vcita_widget['btn_color'] ?>',
-              themeMainActionHover: '<?php echo $wpshd_vcita_widget['hover_color'] ?>',
-              themeMainActionText: '<?php echo $wpshd_vcita_widget['txt_color'] ?>'
+              themeActionColor: '<?php echo esc_js( $wpshd_vcita_widget['btn_color'] ) ?>',
+              themeActionHover: '<?php echo esc_js( $wpshd_vcita_widget['hover_color'] ) ?>',
+              themeActionText: '<?php echo esc_js( $wpshd_vcita_widget['txt_color'] ) ?>',
+              themeMainActionColor: '<?php echo esc_js( $wpshd_vcita_widget['btn_color'] ) ?>',
+              themeMainActionHover: '<?php echo esc_js( $wpshd_vcita_widget['hover_color'] ) ?>',
+              themeMainActionText: '<?php echo esc_js( $wpshd_vcita_widget['txt_color'] ) ?>'
 			  }
           };
             <?php } ?>

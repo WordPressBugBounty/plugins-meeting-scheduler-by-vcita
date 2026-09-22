@@ -1,16 +1,20 @@
 <?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 $wpshd_vcita_widget = (array) get_option( WPSHD_VCITA_WIDGET_KEY );
 if ( ! isset( $wpshd_vcita_widget[ 'wp_id' ] ) ) {
 	$wpshd_vcita_widget[ 'wp_id' ] = '';
 }
-$needs_reconnect = wpshd_vcita_check_need_to_reconnect( $wpshd_vcita_widget );
+$wpshd_vcita_needs_reconnect = wpshd_vcita_check_need_to_reconnect( $wpshd_vcita_widget );
 $vcita_nonce = wp_create_nonce( 'wpshd_vcita_nonce_action' );
 ?>
 <script type="text/javascript">
-  window.$_ajaxurl = '<?php echo admin_url( 'admin-ajax.php' ) ?>'
-  window.$_adminurl = '<?php echo admin_url( 'admin.php' ) ?>'
-  window.WPSHD_VCITA_LOCALE = '<?php echo get_locale() ?>'
-  window.WPSHD_VCITA_WIDGET_ID = '<?php echo WPSHD_VCITA_WIDGET_UNIQUE_ID?>'
+  window.$_ajaxurl = '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ) ?>'
+  window.$_adminurl = '<?php echo esc_url( admin_url( 'admin.php' ) ) ?>'
+  window.WPSHD_VCITA_LOCALE = '<?php echo esc_js( get_locale() ) ?>'
+  window.WPSHD_VCITA_WIDGET_ID = '<?php echo esc_js( WPSHD_VCITA_WIDGET_UNIQUE_ID )?>'
   window.WPSHD_VCITA_NONCE = '<?php echo esc_js( $vcita_nonce ); ?>'
   
   if (window.WPSHD_VCITA_LOCALE === 'en_GB') {
@@ -21,14 +25,14 @@ $vcita_nonce = wp_create_nonce( 'wpshd_vcita_nonce_action' );
   }
   
   window.WPSHD_VCITA_DEBUG = false
-  window.WPSHD_VCITA_ROOT = '<?php echo WPSHD_VCITA_WIDGET_UNIQUE_ID ?>'
+  window.WPSHD_VCITA_ROOT = '<?php echo esc_js( WPSHD_VCITA_WIDGET_UNIQUE_ID ) ?>'
   window.WPSHD_VCITA_DATA = <?php echo json_encode( $wpshd_vcita_widget )?>;
-  window.WPSHD_VCITA_SERVER_BASE = '<?php echo WPSHD_VCITA_SERVER_BASE ?>'
+  window.WPSHD_VCITA_SERVER_BASE = '<?php echo esc_js( WPSHD_VCITA_SERVER_BASE ) ?>'
   window.WPSHD_VCITA_USE_MEET2KNOW = <?php echo WPSHD_VCITA_USE_MEET2KNOW ? 'true' : 'false' ?>;
   window.addEventListener('wpshd_vcita_widget_installed', () => { window.WPSHD_VCITA_WIDGET_INSTALLED = true })
   
   function wpshd_vcita_redirect (url) {
-    const base = '<?php echo WPSHD_VCITA_SERVER_BASE ?>'
+    const base = '<?php echo esc_js( WPSHD_VCITA_SERVER_BASE ) ?>'
     return `https://app.${ base }${ url }`
   }
   <?php if (WPSHD_VCITA_DEBUG) { ?>
@@ -42,7 +46,7 @@ $vcita_nonce = wp_create_nonce( 'wpshd_vcita_nonce_action' );
 	  <?php if (isset( $wpshd_vcita_widget[ 'uid' ] ) && $wpshd_vcita_widget[ 'uid' ]) { ?>
         url_save = wpshd_vcita_redirect('/app/settings/upgrade_page')
 	  <?php } else { ?>
-        url_save = 'https://www.<?php echo WPSHD_VCITA_SERVER_BASE; ?>/pricing'
+        url_save = 'https://www.<?php echo esc_js( WPSHD_VCITA_SERVER_BASE ); ?>/pricing'
 	  <?php } ?>
     
     const url = url_save;
@@ -50,9 +54,6 @@ $vcita_nonce = wp_create_nonce( 'wpshd_vcita_nonce_action' );
     // added instead of the popup/dialog to be opened in a new tab
     window.open(url, '_blank')
     
-    if (ev_name) {
-      VcitaMixpman.track(ev_name)
-    }
   }
   
   document.addEventListener('DOMContentLoaded', () => {
@@ -60,13 +61,11 @@ $vcita_nonce = wp_create_nonce( 'wpshd_vcita_nonce_action' );
     if (vc != null) vc.style.opacity = '1'
   })
   
-  window.WPSHD_VCITA_VERSION = '<?php echo WPSHD_VCITA_WIDGET_VERSION; ?>'
+  window.WPSHD_VCITA_VERSION = '<?php echo esc_js( WPSHD_VCITA_WIDGET_VERSION ); ?>'
   window.VcitaUI
-    = new UIController('<?php echo plugins_url( WPSHD_VCITA_WIDGET_UNIQUE_ID ) ?>',<?php echo json_encode( $wpshd_vcita_widget ) ?>)
+    = new UIController('<?php echo esc_url( plugins_url( WPSHD_VCITA_WIDGET_UNIQUE_ID ) ) ?>',<?php echo json_encode( $wpshd_vcita_widget ) ?>)
   window.VcitaApi
-    = new ApiController('<?php echo $wpshd_vcita_widget[ 'wp_id' ] ?>', '<?php echo WPSHD_VCITA_WIDGET_CALLBACK_URL ?>')
-  window.VcitaMixpman
-    = new MixpMan('78aa39b3aa49594f172cfccda537ef1a', '<?php echo $wpshd_vcita_widget[ 'wp_id' ]?>', '<?php echo $wpshd_vcita_widget[ 'email' ]?>')
+    = new ApiController('<?php echo esc_js( $wpshd_vcita_widget[ 'wp_id' ] ) ?>', '<?php echo esc_url( WPSHD_VCITA_WIDGET_CALLBACK_URL ) ?>')
   
   window.dispatchEvent(new CustomEvent('vcita_api_initialized', {
     bubbles: true,
@@ -84,7 +83,8 @@ $vcita_nonce = wp_create_nonce( 'wpshd_vcita_nonce_action' );
       }
     }
   }
-  <?php if ( isset( $_GET[ 'show_login' ] ) && ( ! isset( $wpshd_vcita_widget[ 'uid' ] ) || ! $wpshd_vcita_widget[ 'uid' ] ) ) {
+  <?php // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only navigation state, not form processing
+  if ( isset( $_GET[ 'show_login' ] ) && ( ! isset( $wpshd_vcita_widget[ 'uid' ] ) || ! $wpshd_vcita_widget[ 'uid' ] ) ) {
 	  echo 'window.VcitaUI.openAuthWin(true);';
   } ?>
   <?php if (isset( $wpshd_vcita_widget[ 'uid' ] ) && $wpshd_vcita_widget[ 'uid' ]) { ?>
@@ -93,28 +93,28 @@ $vcita_nonce = wp_create_nonce( 'wpshd_vcita_nonce_action' );
       let rdata = localStorage.getItem('wpshd_rate_state')
       if (rdata !== null) {
         rdata = JSON.parse(rdata)
-        if ( !rdata['<?php echo $wpshd_vcita_widget[ 'uid' ] ?>']) {
-          rdata['<?php echo $wpshd_vcita_widget[ 'uid' ] ?>'] = {
+        if ( !rdata['<?php echo esc_js( $wpshd_vcita_widget[ 'uid' ] ) ?>']) {
+          rdata['<?php echo esc_js( $wpshd_vcita_widget[ 'uid' ] ) ?>'] = {
             dismiss: false,
             wait   : false,
             date   : new Date().getTime(),
-            version: '<?php echo WPSHD_VCITA_WIDGET_VERSION; ?>'
+            version: '<?php echo esc_js( WPSHD_VCITA_WIDGET_VERSION ); ?>'
           }
         }
       }
       else {
         rdata = {
-          '<?php echo $wpshd_vcita_widget[ 'uid' ] ?>': {
+          '<?php echo esc_js( $wpshd_vcita_widget[ 'uid' ] ) ?>': {
             dismiss: false,
             wait   : false,
             date   : new Date().getTime(),
-            version: '<?php echo WPSHD_VCITA_WIDGET_VERSION; ?>'
+            version: '<?php echo esc_js( WPSHD_VCITA_WIDGET_VERSION ); ?>'
           }
         }
       }
       
-      const rd = rdata['<?php echo $wpshd_vcita_widget[ 'uid' ] ?>']
-      if (rd.dismiss && rd.version === '<?php echo WPSHD_VCITA_WIDGET_VERSION; ?>') {
+      const rd = rdata['<?php echo esc_js( $wpshd_vcita_widget[ 'uid' ] ) ?>']
+      if (rd.dismiss && rd.version === '<?php echo esc_js( WPSHD_VCITA_WIDGET_VERSION ); ?>') {
         return false
       }
       if (rd.wait) {
@@ -135,7 +135,6 @@ $vcita_nonce = wp_create_nonce( 'wpshd_vcita_nonce_action' );
   <?php if (
   $wpshd_vcita_widget[ 'new_install' ] && ( ! isset( $wpshd_vcita_widget[ 'track_new' ] ) || ! $wpshd_vcita_widget[ 'track_new' ] )
   ) { ?>
-  VcitaMixpman.track('wp_sched_added_to_new_site')
   
   <?php
   $wpshd_vcita_widget[ 'track_new' ] = true;
@@ -167,14 +166,13 @@ $vcita_nonce = wp_create_nonce( 'wpshd_vcita_nonce_action' );
   $wpshd_vcita_widget[ 'migrated' ] && ( ! isset( $wpshd_vcita_widget[ 'migrated_popup_showed' ] ) || ! $wpshd_vcita_widget[ 'migrated_popup_showed' ] ) && ! WPSHD_VCITA_ANOTHER_PLUGIN
   ) { ?>
   // VcitaUI.constructPopup({}, VcitaUI.getMigratedPopupHTML(<?php echo json_encode( $wpshd_vcita_widget ) ?>));
-  VcitaMixpman.track('wp_sched_upgrade')
   <?php
   $wpshd_vcita_widget[ 'migrated_popup_showed' ] = true;
   update_option( WPSHD_VCITA_WIDGET_KEY, $wpshd_vcita_widget );
   ?>
   <?php } ?>
   function vcita_sync_business () {
-	  <?php if ($wpshd_vcita_widget[ 'uid' ] && ! $needs_reconnect) { ?>
+	  <?php if ($wpshd_vcita_widget[ 'uid' ] && ! $wpshd_vcita_needs_reconnect) { ?>
     VcitaApi.getBusiness()
       .then((data) => {
         if (WPSHD_VCITA_DEBUG) console.log(data)
@@ -188,7 +186,7 @@ $vcita_nonce = wp_create_nonce( 'wpshd_vcita_nonce_action' );
         if (typeof plan.expires_on === 'string') {
           const d = new Date(plan.expires_on)
           const now = new Date()
-          const vcita_premium_url = '<?php echo get_admin_url( '', '', 'admin' ) . 'admin.php?page=' . WPSHD_VCITA_WIDGET_UNIQUE_ID . '/vcita-premium.php' ?>'
+          const vcita_premium_url = '<?php echo esc_url( get_admin_url( '', '', 'admin' ) . 'admin.php?page=' . WPSHD_VCITA_WIDGET_UNIQUE_ID . '/vcita-premium.php' ) ?>'
           
           if (d.getTime() < now.getTime()) {
             ac.classList.add('vcita-danger')
@@ -242,23 +240,18 @@ $vcita_nonce = wp_create_nonce( 'wpshd_vcita_nonce_action' );
       .click(function (ev) {
         ev.preventDefault()
         ev.stopPropagation()
-        VcitaMixpman.track('wp_sched_login_vcita')
         VcitaUI.openAuthWin(false, false)
-        if (ev.target.classList.contains('reconnect')) VcitaMixpman.track('wp_sched_reconnect_click')
       })
     $('.start-signup')
       .click(function () {
-        VcitaMixpman.track('wp_sched_join_vcita', { tab: 'main' })
         VcitaUI.openAuthWin(true, false)
       })
     $('.start-signup-add')
       .click(function () {
-        VcitaMixpman.track('wp_sched_join_vcita', { tab: 'add' })
         VcitaUI.openAuthWin(true, false)
       })
     $('#switch-account')
       .click(function () {
-        VcitaMixpman.track('wp_sched_logout')
         jQuery.post(`${ window.$_ajaxurl }?action=vcita_logout&nonce=${ window.WPSHD_VCITA_NONCE }`)
         VcitaUI.openAuthWin(false, true)
       })
