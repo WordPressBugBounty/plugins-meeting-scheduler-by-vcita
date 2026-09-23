@@ -47,10 +47,30 @@ const ApiController = function (wpid, callbackURL) {
       .then(() => {
         const email = jQuery('#vcita__input-email').val();
         let url = `/oauth/authorize?response_type=code&client_id=${this.clientId}&lang=${window.WPSHD_VCITA_LOCALE}`;
-        if (reg) url += '&registration=true&intent=["add_online_scheduling"]';
+        if (reg) url += '&intent=["add_online_scheduling"]';
         if (logout) url += '&logout=true';
         url += `&redirect_uri=${encodeURIComponent(`${_this.API_URL}/callback`)}&state=${_this.wpid}&invite=WP-V-SCHD`;
-        return `${this.WPSHD_VCITA_URL}${url}${(typeof email == 'string' && email.length > 0 ? `&email=${email}` : '')}`
+
+        const authUrl = `${this.WPSHD_VCITA_URL}${url}${(typeof email == 'string' && email.length > 0 ? `&email=${email}` : '')}`;
+
+        // Sign-up used to pass registration=true to /app/oauth/authorize, which
+        // made app.vcita.com bounce to the marketing sign-up page and drop
+        // client_id, redirect_uri and - critically - state. state carries the
+        // wp_id and is the only thing telling the scheduler proxy which site to
+        // link, so the account was created but the plugin never heard back.
+        //
+        // Go to the sign-up page directly, but hand it the whole authorize URL as
+        // redirect_to so the OAuth parameters travel with the user instead of
+        // relying on session state. invite and lang are repeated on the sign-up
+        // URL so attribution survives too.
+        if (reg) {
+          const authPath = authUrl.replace(/^https?:\/\/[^/]+/, '');
+          return `https://www.${window.WPSHD_VCITA_SERVER_BASE}/signup`
+            + `?redirect_to=${encodeURIComponent(authPath)}`
+            + `&invite=WP-V-SCHD&lang=${window.WPSHD_VCITA_LOCALE}`;
+        }
+
+        return authUrl
       })
       .catch((err) => { throw err })
   };

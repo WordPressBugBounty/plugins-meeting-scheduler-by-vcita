@@ -3,7 +3,7 @@
 Plugin Name: Online Booking & Scheduling Calendar by vcita
 Plugin URI: https://www.vcita.com
 Description: This plugin shows your free time slot on your blog and allows you to book appointments with your clients 24x7x365. Very easy Ajax interface. Easy to setup and can be controlled completely from powerful admin area.
-Version: 4.6.5
+Version: 4.6.6
 Author: vCita.com
 Author URI: https://www.vcita.com
 License: GPLv2 or later
@@ -468,7 +468,7 @@ define( 'WPSHD_VCITA_SERVER_PREFIX', "www." );
 define( 'WPSHD_VCITA_SERVER_BASE', WPSHD_VCITA_USE_MEET2KNOW ? "meet2know.com"
 	: "vcita.com" ); /* Don't include the protocol, added dynamically */
 define( 'WPSHD_VCITA_SERVER_URL', WPSHD_VCITA_SERVER_PREFIX . WPSHD_VCITA_SERVER_BASE );
-define( 'WPSHD_VCITA_WIDGET_VERSION', '4.6.5' );
+define( 'WPSHD_VCITA_WIDGET_VERSION', '4.6.6' );
 define( 'WPSHD_VCITA_WIDGET_PLUGIN_NAME', 'Appointment Booking and Online Scheduling by vCita' );
 define( 'WPSHD_VCITA_WIDGET_KEY', 'vcita_scheduler' );
 define( 'WPSHD_VCITA_WIDGET_API_KEY', 'wp-v-schd' );

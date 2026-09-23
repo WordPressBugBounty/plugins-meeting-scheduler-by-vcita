@@ -3,7 +3,7 @@ Contributors: vcita
 Tags: scheduling, booking, events, calendar, meetings
 Requires at least: 4.7
 Tested up to: 7.1
-Stable tag: 4.6.5
+Stable tag: 4.6.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Let clients schedule meetings with you online! No more back & forth emails 
@@ -160,6 +160,9 @@ Please visit <a href="https://www.vcita.com/about/privacy_policy?invite=wp-v-sch
 
 
 == Changelog ==
+
+= 4.6.6 =
+ * Fixed: Creating a new vcita account from "Let's get started" left the plugin disconnected - the account was created but the plugin was never told about it, so you still saw the connect prompt. Sign-up now carries the connection details with it, so the plugin connects as soon as you finish creating your account.
 
 = 4.6.5 =
  * Fixed: If your browser blocked the vcita sign-in pop-up, connecting left you on a blank "Authentication OK" page. Your account was connected, but you had to navigate back by hand. You are now returned to the plugin automatically.
