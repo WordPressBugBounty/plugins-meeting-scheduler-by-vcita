@@ -19,7 +19,7 @@ function wpshd_vcita_admin_actions()
   }
 
   add_submenu_page(WPSHD_VCITA_WIDGET_UNIQUE_ID . '/vcita-settings-functions.php', __('Add to Site', 'meeting-scheduler-by-vcita'), __('Add to Site', 'meeting-scheduler-by-vcita'), 'edit_posts', get_admin_url('','','admin').'admin.php?page='.WPSHD_VCITA_WIDGET_UNIQUE_ID.'/vcita-settings-functions.php&tab=vcita-add-to-site');
-  add_submenu_page(WPSHD_VCITA_WIDGET_UNIQUE_ID . '/vcita-settings-functions.php', __('Custom Implemetation', 'meeting-scheduler-by-vcita'), __('Custom Implemetation', 'meeting-scheduler-by-vcita'), 'edit_posts', get_admin_url('','','admin').'admin.php?page='.WPSHD_VCITA_WIDGET_UNIQUE_ID.'/vcita-settings-functions.php&tab=vcita-custom-impl');
+  add_submenu_page(WPSHD_VCITA_WIDGET_UNIQUE_ID . '/vcita-settings-functions.php', __('Custom Implementation', 'meeting-scheduler-by-vcita'), __('Custom Implementation', 'meeting-scheduler-by-vcita'), 'edit_posts', get_admin_url('','','admin').'admin.php?page='.WPSHD_VCITA_WIDGET_UNIQUE_ID.'/vcita-settings-functions.php&tab=vcita-custom-impl');
   add_submenu_page(WPSHD_VCITA_WIDGET_UNIQUE_ID . '/vcita-settings-functions.php', __('Support', 'meeting-scheduler-by-vcita'), __('Support', 'meeting-scheduler-by-vcita'), 'edit_posts', get_admin_url('','','admin').'admin.php?page='.WPSHD_VCITA_WIDGET_UNIQUE_ID.'/vcita-settings-functions.php&tab=vcita-support');
   add_submenu_page(WPSHD_VCITA_WIDGET_UNIQUE_ID . '/vcita-settings-functions.php', __('Premium', 'meeting-scheduler-by-vcita'), __('Premium', 'meeting-scheduler-by-vcita'), 'edit_posts', get_admin_url('','','admin').'admin.php?page='.WPSHD_VCITA_WIDGET_UNIQUE_ID.'/vcita-settings-functions.php&tab=vcita-premium');
 }

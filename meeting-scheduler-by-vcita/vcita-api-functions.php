@@ -107,9 +107,22 @@ function wpshd_vcita_process_action($action, $data = array()) {
 			$wpshd_vcita_widget['email'] = filter_var($data['user_data']['email'], FILTER_VALIDATE_EMAIL);
 			update_option(WPSHD_VCITA_WIDGET_KEY, $wpshd_vcita_widget);
 
+			// This page is normally rendered inside the pop-up opened by
+			// openAuthWin(), which closes itself and lets the opener refresh.
+			// When the browser blocks that pop-up the flow completes in the main
+			// tab instead, where window.close() is a no-op - which left the user
+			// stranded on a bare "Authentication OK" page even though the
+			// connection had succeeded. Send them back to the plugin in that case.
+			$wpshd_vcita_return_url = admin_url( 'admin.php?page=' . WPSHD_VCITA_WIDGET_UNIQUE_ID . '/vcita-settings-functions.php' );
+
 			echo '<h1>Authentication OK</h1>
                   <script type="text/javascript">
-                    window.close();
+                    try {
+                      if (window.opener && !window.opener.closed) { window.close(); }
+                    } catch (e) {}
+                    setTimeout(function () {
+                      window.location.replace(' . wp_json_encode( $wpshd_vcita_return_url ) . ');
+                    }, 400);
                   </script>';
 		} else if (isset($data['error'])) {
 			echo esc_html($data['message'] ?? 'Some error occurred');

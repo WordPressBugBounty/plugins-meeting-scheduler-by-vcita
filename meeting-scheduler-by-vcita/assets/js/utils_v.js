@@ -22,6 +22,14 @@ const UIController = function (homeUrl, widget_data = {}) {
   };
 
   this.openAuthWin = (reg = false, logout = false) => {
+    // The auth URL resolves asynchronously - on a fresh install getAuthURL()
+    // first registers the site with the scheduler proxy over the network. Opening
+    // the window after that await puts window.open() outside the user-gesture
+    // window, so browsers block it and the click silently does nothing. Open the
+    // window synchronously here, while the gesture is still live, and point it at
+    // the URL once we have it.
+    const win = window.open('', '_blank');
+
     VcitaApi.getAuthURL(reg, logout)
       .then((new_location) => {
         const onClose = () => {
@@ -30,8 +38,12 @@ const UIController = function (homeUrl, widget_data = {}) {
             'method': 'POST',
             'success': (resp) => {
               try {
-                console.log('responce after login',resp);
-                const ud = JSON.parse(resp);
+                // wp_send_json() replies with Content-Type: application/json, so
+                // jQuery has already parsed this into an object. Calling
+                // JSON.parse() on it threw, the catch below swallowed it, and the
+                // reload never ran - so after connecting you had to refresh by
+                // hand to see that it had worked. Accept either shape.
+                const ud = (typeof resp === 'string') ? JSON.parse(resp) : resp;
                 if (typeof ud.uid == 'string' && ud.uid.length > 0) {
                   if (!reg) {
                     localStorage.removeItem('wpshd_is_trial');
@@ -53,13 +65,30 @@ const UIController = function (homeUrl, widget_data = {}) {
           }
         };
         
-        const win = window.open(new_location, '_blank');
+        if (!win || win.closed) {
+          // The popup was blocked outright. Navigate this tab instead so the
+          // user can still connect, rather than the button doing nothing.
+          window.location.href = new_location;
+          return;
+        }
+
+        win.location = new_location;
+
         const isCloseInterval = setInterval(() => {
-          if(win.closed) {
+          // win was never null-checked here: when the popup was blocked this
+          // threw "Cannot read properties of null" every 500ms, forever.
+          if (!win || win.closed) {
             clearInterval(isCloseInterval);
             onClose();
           }
         },500)
+      })
+      .catch((err) => {
+        // There was no catch here: if registering the site failed, the promise
+        // rejected silently and the button looked dead.
+        if (win && !win.closed) { win.close(); }
+        console.error('vcita: could not start authentication', err);
+        window.alert('vcita could not be reached. Please check your connection and try again.');
       })
   };
 
