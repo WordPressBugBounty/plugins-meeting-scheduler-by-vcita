@@ -58,18 +58,24 @@ function wpshd_vcita_process_action($action, $data = array()) {
 		return new WP_REST_Response('Unauthorized', 401);
 	}
 	
-	if ($action == 'install' && isset($data['wp_id'])) {
-		$wpshd_vcita_widget = (array)get_option(WPSHD_VCITA_WIDGET_KEY);
-		$wpshd_vcita_widget['wp_id'] = sanitize_text_field($data['wp_id']);
-		update_option(WPSHD_VCITA_WIDGET_KEY, $wpshd_vcita_widget);
-	}
-	else if (in_array($action, $public_actions)) {
+	// Only the sign-in result is handled here. Up to 4.6.6 an "install" action also saved a wp_id
+	// that any user with edit_posts could send. The site now registers with the proxy on the
+	// server, in wpshd_vcita_site_id().
+	if (in_array($action, $public_actions)) {
 		header('Content-Type: text/html');
 
+		// Checked first, so a stray request costs no call to the proxy.
+		$refusal = wpshd_vcita_callback_refusal();
+		if ($refusal !== '') {
+			wpshd_vcita_log('Connect refused: ' . $refusal);
+			echo '<h1>' . esc_html__('This sign-in was not started from this site', 'meeting-scheduler-by-vcita') . '</h1><p>'
+				. esc_html__('Go back to the vcita plugin in WordPress and click Connect again.', 'meeting-scheduler-by-vcita') . '</p>';
+			return new WP_REST_Response('Unauthorized', 403);
+		}
+
 		$wpshd_vcita_widget = (array)get_option(WPSHD_VCITA_WIDGET_KEY);
-		$fetchUrl = 'https://us-central1-scheduler-272415.cloudfunctions.net/scheduler-proxy/business/' . rawurlencode($wpshd_vcita_widget['wp_id']);
-		$proxyResponse = wp_remote_get($fetchUrl);
-		$business = is_wp_error($proxyResponse) ? null : json_decode(wp_remote_retrieve_body($proxyResponse), true);
+		$proxyResponse = empty($wpshd_vcita_widget['wp_id']) ? null : wpshd_vcita_proxy_get('/business/' . rawurlencode($wpshd_vcita_widget['wp_id']));
+		$business = (is_array($proxyResponse) && 200 === $proxyResponse['code']) ? $proxyResponse['body'] : null;
 
 		$submitted_business_id = isset($data['user_data']['business_id']) ? sanitize_text_field($data['user_data']['business_id']) : '';
 
@@ -106,6 +112,7 @@ function wpshd_vcita_process_action($action, $data = array()) {
 			$wpshd_vcita_widget['name'] = sanitize_text_field($data['user_data']['business_name']);
 			$wpshd_vcita_widget['email'] = filter_var($data['user_data']['email'], FILTER_VALIDATE_EMAIL);
 			update_option(WPSHD_VCITA_WIDGET_KEY, $wpshd_vcita_widget);
+			delete_transient(WPSHD_VCITA_CONNECT_PENDING);
 
 			// This page is normally rendered inside the pop-up opened by
 			// openAuthWin(), which closes itself and lets the opener refresh.

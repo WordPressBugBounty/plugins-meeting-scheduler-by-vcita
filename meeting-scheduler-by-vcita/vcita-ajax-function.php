@@ -126,11 +126,10 @@ function vcita_logout_callback() {
 		unset( $wpshd_vcita_widget[ 'dismiss_time' ] );
 		
 		if ( isset( $wpshd_vcita_widget[ 'wp_id' ] ) && ! empty( $wpshd_vcita_widget[ 'wp_id' ] ) ) {
-			$response = vcita_send_get( 'https://us-central1-scheduler-272415.cloudfunctions.net/scheduler-proxy/logout/' . sanitize_text_field( $wpshd_vcita_widget[ 'wp_id' ] ) );
-			
-			if ( is_wp_error( $response ) ) {
-				wp_send_json_error( 'Logout failed: ' . $response->get_error_message(), 500 );
-			}
+			// Revokes the vcita token that the proxy holds for this site. If the proxy cannot be
+			// reached, the site still disconnects. The site keeps its wp_id and its proxy secret:
+			// they identify the site, not the business.
+			wpshd_vcita_proxy_get( '/logout/' . rawurlencode( $wpshd_vcita_widget[ 'wp_id' ] ) );
 		}
 		
 		update_option( WPSHD_VCITA_WIDGET_KEY, $wpshd_vcita_widget );

@@ -1,0 +1,187 @@
+/*
+ * The "Enjoying vcita?" notice (vcita-rating.php). On the Plugins page it is also a WordPress
+ * .notice, so it sits with the other notices.
+ */
+
+.wpshd-vcita-rating {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin: 16px 0;
+  padding: 20px 48px 20px 20px;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+  color: #212121;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.wpshd-vcita-rating.notice {
+  margin: 16px 0 8px;
+  border: 0;
+  border-left: 4px solid #0093b8;
+  border-radius: 0 14px 14px 0;
+}
+
+.wpshd-vcita-rating * {
+  box-sizing: border-box;
+}
+
+.wpshd-vcita-rating p,
+.wpshd-vcita-rating.notice p {
+  margin: 0;
+  padding: 0;
+}
+
+.wpshd-vcita-rating-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  padding: 10px;
+  border-radius: 10px;
+  background: #edf7fa;
+  object-fit: contain;
+}
+
+.wpshd-vcita-rating-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.wpshd-vcita-rating .wpshd-vcita-rating-title {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+}
+
+.wpshd-vcita-rating .wpshd-vcita-rating-text {
+  margin-top: 4px;
+  color: rgba(33, 33, 33, 0.7);
+}
+
+.wpshd-vcita-rating-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.wpshd-vcita-rating a.wpshd-vcita-rating-btn,
+.wpshd-vcita-rating a.wpshd-vcita-rating-btn:visited {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: #0093b8;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  text-decoration: none;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.15s;
+}
+
+.wpshd-vcita-rating a.wpshd-vcita-rating-btn:hover,
+.wpshd-vcita-rating a.wpshd-vcita-rating-btn:focus {
+  text-decoration: none;
+  background: #007f9f;
+  color: #fff;
+}
+
+.wpshd-vcita-rating-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: rgba(33, 33, 33, 0.6);
+  font: inherit;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.wpshd-vcita-rating-link:hover {
+  color: #212121;
+  text-decoration: underline;
+}
+
+.wpshd-vcita-rating-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: rgba(33, 33, 33, 0.4);
+  cursor: pointer;
+}
+
+.wpshd-vcita-rating-close::before {
+  content: "\00d7";
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.wpshd-vcita-rating-close:hover {
+  background: #f6f6f9;
+  color: #212121;
+}
+
+.wpshd-vcita-rating a:focus-visible,
+.wpshd-vcita-rating button:focus-visible {
+  outline: 2px solid #0093b8;
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+/*
+ * The card on the plugin's pages. Its width, background, border, padding and title come from
+ * the page's own card styles (style_v.css). These rules add only what the card needs on top.
+ */
+
+.wpshd-vcita-rating-wrap {
+  margin-bottom: 20px;
+}
+
+.vcita__page__inner__section.wpshd-vcita-rating-card {
+  position: relative;
+  padding-right: 48px;
+}
+
+.wpshd-vcita-rating-card .wpshd-vcita-rating-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+  /* The page gives every block but the last a bottom margin. The close button comes last here. */
+  margin-bottom: 0 !important;
+}
+
+.wpshd-vcita-rating-card a.vcita__btn__blue {
+  display: inline-block;
+  text-decoration: none;
+}
+
+/* The same look as the links in the other cards' descriptions. */
+.wpshd-vcita-rating-card .wpshd-vcita-rating-link {
+  color: rgb(40, 124, 212);
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+.wpshd-vcita-rating-card .wpshd-vcita-rating-link:hover {
+  color: var(--block-color-dark-blue);
+}
+
+.wpshd-vcita-rating-card .wpshd-vcita-rating-close {
+  top: 20px;
+  right: 16px;
+  /* The page gives every block after a card's title a top margin. */
+  margin-top: 0 !important;
+  border-radius: 0;
+}

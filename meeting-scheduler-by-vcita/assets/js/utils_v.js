@@ -121,11 +121,11 @@ const UIController = function (homeUrl, widget_data = {}) {
   };
 
   this.openSyncFacebookWin = () => {
-    window.open(wpshd_vcita_redirect('/app/facebook-pages'), '_blank')
+    window.open(wpshd_vcita_redirect('/app/online-presence'), '_blank')
   };
 
   this.openSyncGoogleWin = () => {
-    window.open(wpshd_vcita_redirect('/app/reserve-with-google'), '_blank');
+    window.open(wpshd_vcita_redirect('/app/online-presence'), '_blank');
   };
 
   /*

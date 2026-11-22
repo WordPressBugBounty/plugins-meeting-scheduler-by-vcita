@@ -2,8 +2,8 @@
 /*
 Plugin Name: Online Booking & Scheduling Calendar by vcita
 Plugin URI: https://www.vcita.com
-Description: This plugin shows your free time slot on your blog and allows you to book appointments with your clients 24x7x365. Very easy Ajax interface. Easy to setup and can be controlled completely from powerful admin area.
-Version: 4.6.6
+Description: vcita is the #1 scheduling software for service based business. Trusted by over 100,000 users worldwide! vcita's appointment booking and online scheduling plugin for WordPress offers a self-service scheduling software for online sessions, 1-on-1 appointments, group events and classes.
+Version: 4.6.7
 Author: vCita.com
 Author URI: https://www.vcita.com
 License: GPLv2 or later
@@ -213,45 +213,6 @@ function vcita_admin_footer_script() {
           }
         }
         
-        function wpshd_vcita_snooze_rate(e, _this) {
-          e.preventDefault();
-          wpshd_vcita_put_lsr_data("' . esc_js( $wpshd_vcita_widget[ 'uid' ] ) . '", {
-            dismiss: false,
-            wait: true,
-            date: new Date().getTime(),
-            version: "' . esc_js( WPSHD_VCITA_WIDGET_VERSION ) . '"
-          });
-        }
-        
-        function wpshd_vcita_put_lsr_data(key, val) {
-          let rdata = {};
-          try {
-            rdata = localStorage.getItem("wpshd_rate_state");
-            if (rdata !== null) {
-              rdata = JSON.parse(rdata);
-            } else {
-              rdata = {};
-            }
-          } catch (err) {
-            rdata = {};
-          }
-          rdata[key] = val;
-          localStorage.setItem("wpshd_rate_state", JSON.stringify(rdata));
-        }
-        
-        function wpshd_vcita_goToRate(e, _this, open = true) {
-          e.preventDefault();
-          if (open) {
-            window.open("https://wordpress.org/support/plugin/meeting-scheduler-by-vcita/reviews/#new-post", "_blank");
-          }
-          wpshd_vcita_put_lsr_data("' . esc_js( $wpshd_vcita_widget[ 'uid' ] ) . '", {
-            dismiss: true,
-            wait: false,
-            date: new Date().getTime(),
-            version: "' . esc_js( WPSHD_VCITA_WIDGET_VERSION ) . '"
-          });
-        }
-        
         (function () {
           jQuery("[data-slug=\'meeting-scheduler-by-vcita\'] .deactivate a").click(function () {
             window.vcita_deactivate_url = this.getAttribute("href");
@@ -261,55 +222,6 @@ function vcita_admin_footer_script() {
             return false;
           });';
 		
-		if ( $wpshd_vcita_widget[ 'uid' ] ) {
-			echo '
-          try {
-            let rdata = localStorage.getItem("wpshd_rate_state");
-            if (rdata !== null) {
-              rdata = JSON.parse(rdata);
-              if (!rdata["' . esc_js( $wpshd_vcita_widget[ 'uid' ] ) . '"]) {
-                rdata["' . esc_js( $wpshd_vcita_widget[ 'uid' ] ) . '"] = {
-                  dismiss: false,
-                  wait: false,
-                  date: new Date().getTime(),
-                  version: "' . esc_js( WPSHD_VCITA_WIDGET_VERSION ) . '"
-                }
-              }
-            } else {
-              rdata = {
-                "' . esc_js( $wpshd_vcita_widget[ 'uid' ] ) . '": {
-                  dismiss: false,
-                  wait: false,
-                  date: new Date().getTime(),
-                  version: "' . esc_js( WPSHD_VCITA_WIDGET_VERSION ) . '"
-                }
-              };
-            }
-            const rd = rdata["' . esc_js( $wpshd_vcita_widget[ 'uid' ] ) . '"];
-            if (rd.dismiss && rd.version === "' . esc_js( WPSHD_VCITA_WIDGET_VERSION ) . '") return false;
-            if (rd.wait) {
-              const day = 24 * 60 * 60 * 1000;
-              const diffDays = Math.round(Math.abs((rd.date - new Date().getTime()) / day));
-              if (diffDays < 2) return false;
-            }
-            document.addEventListener("DOMContentLoaded", () => {
-              const txt = `<div class="notice notice-info" style="position:relative">
-                <button type="button" class="notice-dismiss" onclick="this.parentNode.remove()"></button>
-                <div style="font-size:20px;font-weight:bold;margin-top:10px"><img style="vertical-align:middle" src="' . esc_url( plugins_url( WPSHD_VCITA_WIDGET_UNIQUE_ID . '/images/settings.png' ) ) . '"/>&nbsp;&nbsp;' . esc_js( __( 'Enjoying vcita?', 'meeting-scheduler-by-vcita' ) ) . '</div>
-                <div style="font-size:16px;margin-top:10px">
-                <div>' . esc_js( __( 'Can you please help us with a BIG favor and rate vcita 5 stars.', 'meeting-scheduler-by-vcita' ) ) . '</div>
-                <div style="text-align:left;margin:10px 0">
-                <button class="button-primary" onclick="wpshd_vcita_goToRate(event,this);this.closest(\'.notice\').remove()">
-                ' . esc_js( __( 'Rate 5 Stars', 'meeting-scheduler-by-vcita' ) ) . '</button>
-                &nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" style="text-decoration:none" onclick="wpshd_vcita_snooze_rate(event,this);this.closest(\'.notice\').remove()">' . esc_js( __( 'maybe later', 'meeting-scheduler-by-vcita' ) ) . '</a>
-                &nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" style="text-decoration:none" onclick="wpshd_vcita_goToRate(event,this,false);this.closest(\'.notice\').remove()">' . esc_js( __( 'already rated', 'meeting-scheduler-by-vcita' ) ) . '</a>
-                </div></div></div>`;
-              document.querySelector(".wp-header-end").insertAdjacentHTML("afterend", txt);
-            })
-          } catch (e) {
-            if (window.WPSHD_VCITA_DEBUG) console.log(e)
-          }';
-		}
 		echo '
         }())
       </script>';
@@ -468,7 +380,7 @@ define( 'WPSHD_VCITA_SERVER_PREFIX', "www." );
 define( 'WPSHD_VCITA_SERVER_BASE', WPSHD_VCITA_USE_MEET2KNOW ? "meet2know.com"
 	: "vcita.com" ); /* Don't include the protocol, added dynamically */
 define( 'WPSHD_VCITA_SERVER_URL', WPSHD_VCITA_SERVER_PREFIX . WPSHD_VCITA_SERVER_BASE );
-define( 'WPSHD_VCITA_WIDGET_VERSION', '4.6.6' );
+define( 'WPSHD_VCITA_WIDGET_VERSION', '4.6.7' );
 define( 'WPSHD_VCITA_WIDGET_PLUGIN_NAME', 'Appointment Booking and Online Scheduling by vCita' );
 define( 'WPSHD_VCITA_WIDGET_KEY', 'vcita_scheduler' );
 define( 'WPSHD_VCITA_WIDGET_API_KEY', 'wp-v-schd' );
@@ -495,6 +407,8 @@ require_once( WP_PLUGIN_DIR . "/" . WPSHD_VCITA_WIDGET_UNIQUE_ID . "/vcita-widge
 require_once( WP_PLUGIN_DIR . "/" . WPSHD_VCITA_WIDGET_UNIQUE_ID . "/vcita-settings-functions.php" );
 require_once( WP_PLUGIN_DIR . "/" . WPSHD_VCITA_WIDGET_UNIQUE_ID . "/vcita-api-functions.php" );
 require_once( WP_PLUGIN_DIR . "/" . WPSHD_VCITA_WIDGET_UNIQUE_ID . "/vcita-ajax-function.php" );
+require_once( WP_PLUGIN_DIR . "/" . WPSHD_VCITA_WIDGET_UNIQUE_ID . "/vcita-proxy.php" );
+require_once( WP_PLUGIN_DIR . "/" . WPSHD_VCITA_WIDGET_UNIQUE_ID . "/vcita-rating.php" );
 /* --- Static initializer for Wordpress hooks --- */
 
 //add_action('rest_api_init', 'wpshd_register_wp_rest_settings');

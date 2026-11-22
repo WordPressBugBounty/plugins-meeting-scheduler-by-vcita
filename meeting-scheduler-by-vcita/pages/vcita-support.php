@@ -75,7 +75,7 @@ $wpshd_vcita_uid = $wpshd_vcita_widget["uid"];
             </header>
             <section>
               <?php echo esc_html__('When a client books a meeting he has to choose a meeting type (aka service) from your service list. Each new vCita account is configured with several default services that you can customize according to your needs. You can also create as many additional services as you require. To learn more click', 'meeting-scheduler-by-vcita') ?>&nbsp;
-              <a href="https://support.<?php echo esc_attr( WPSHD_VCITA_SERVER_BASE ) ?>/hc/en-us/articles/227896348-Configuring-your-services-menu" target="_blank">
+              <a href="https://support.<?php echo esc_attr( WPSHD_VCITA_SERVER_BASE ) ?>/hc/en-us/articles/360041486193-Manage-Your-Service-Menu-in-vcita" target="_blank">
                 <?php echo esc_html__('here', 'meeting-scheduler-by-vcita') ?>
               </a>.
             </section>
@@ -153,7 +153,7 @@ $wpshd_vcita_uid = $wpshd_vcita_widget["uid"];
             </header>
             <section>
               <?php echo esc_html__('Yes. Instructions are available', 'meeting-scheduler-by-vcita') ?>&nbsp;
-              <a href="https://support.<?php echo esc_attr( WPSHD_VCITA_SERVER_BASE ) ?>/hc/en-us/articles/227892408-Add-the-Client-Portal-Widget-on-Selected-Pages-Wordpress" target="_blank">
+              <a href="https://support.<?php echo esc_attr( WPSHD_VCITA_SERVER_BASE ) ?>/hc/en-us/articles/29822716429847-How-to-Embed-vcita-Widgets-or-HTML-Code-on-Your-Website" target="_blank">
                 <?php echo esc_html__('here', 'meeting-scheduler-by-vcita') ?>
               </a>
             </section>
@@ -180,7 +180,7 @@ $wpshd_vcita_uid = $wpshd_vcita_widget["uid"];
             <header><?php echo esc_html__('More unanswered questions?', 'meeting-scheduler-by-vcita') ?></header>
             <section>
               <?php echo esc_html__('Head to', 'meeting-scheduler-by-vcita') ?>&nbsp;
-              <a href="https://www.<?php echo esc_attr( WPSHD_VCITA_SERVER_BASE ) ?>/FAQ" target="_blank">vcita.com/FAQ
+              <a href="https://support.<?php echo esc_attr( WPSHD_VCITA_SERVER_BASE ) ?>/hc/en-us" target="_blank"><?php echo esc_html__('the vcita Help Center', 'meeting-scheduler-by-vcita') ?>
               </a>
             </section>
           </li>

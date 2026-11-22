@@ -1,9 +1,9 @@
 === Online Booking & Scheduling Calendar by vcita ===
 Contributors: vcita
 Tags: scheduling, booking, events, calendar, meetings
-Requires at least: 4.7
+Requires at least: 5.2
 Tested up to: 7.1
-Stable tag: 4.6.6
+Stable tag: 4.6.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Let clients schedule meetings with you online! No more back & forth emails 
@@ -132,11 +132,11 @@ Yes, vcita’s calendar enables you to sync with all other calendars such as Gma
 <br>
 
 = I want to use vcita’s scheduling widget just on specific pages on my site. Is it possible? =
-Yes. Instructions are available  <a href="https://support.vcita.com/hc/en-us/articles/227892408-Add-the-Client-Portal-Widget-on-Selected-Pages-Wordpress">here</a>
+Yes. Instructions are available  <a href="https://support.vcita.com/hc/en-us/articles/29822716429847-How-to-Embed-vcita-Widgets-or-HTML-Code-on-Your-Website">here</a>
 <br>
 
 = Can I use my own UI elements to open my scheduling page on vcita? =
-Yes. You can turn any element on your site into a smart scheduling button. Learn more <a href="https://developers.vcita.com/reference#embedding-action">here</a>
+Yes. You can turn any element on your site into a smart scheduling button. Learn more <a href="https://developers.intandem.tech/docs/website-embedded-actions">here</a>
 
 = Can I send reminders to clients? =
 Yes, By default your clients will get a reminder email 30 minutes before the meeting. You can change how many minutes/hours/days in advance, they will get the alert. You can also create another reminder if needed. Reminders can also be sent via sms
@@ -147,7 +147,7 @@ Yes, vcita is HIPAA compliant!
 <br>
 
 = Have More questions? Need assistance? =
-Please visit our <a href="https://support.vcita.com/hc/en-us/sections/115000809147-Booking/"> Scheduling FAQ page</a> to get all the answers you are looking for.
+Please visit our <a href="https://support.vcita.com/hc/en-us/articles/360041001614-Manage-Online-Bookings"> Scheduling FAQ page</a> to get all the answers you are looking for.
 <br>
 
 = What are vcita Terms and Conditions? =
@@ -160,6 +160,17 @@ Please visit <a href="https://www.vcita.com/about/privacy_policy?invite=wp-v-sch
 
 
 == Changelog ==
+
+= 4.6.7 =
+ * Security: Connecting now checks that the sign-in was started from this site, by an administrator who is still signed in to WordPress in the same browser. Sites that are already connected do not need to connect again.
+ * Security: The admin pages no longer call the vcita sign-in service from your browser. WordPress makes these calls from the server.
+ * Improved: The "Enjoying vcita?" request no longer opens a pop-up on every page. It is now a notice that is part of the page, and your answer is remembered for your WordPress user in every browser. "Maybe later" hides it for 2 days.
+ * Security: Users who are not administrators can no longer change the site's connection id at vcita.
+ * Requires WordPress 5.2 or later.
+ * Fixed: "Support & Docs" and the help links on the Support page opened help center pages that no longer exist.
+ * Fixed: "Reserve with Google" and "Facebook" on the Add to site page now open the Online presence page in vcita.
+ * Changed: The plugin description on the Plugins screen now describes online scheduling.
+ * Changed: Shorter wording for the rating request.
 
 = 4.6.6 =
  * Fixed: Creating a new vcita account from "Let's get started" left the plugin disconnected - the account was created but the plugin was never told about it, so you still saw the connect prompt. Sign-up now carries the connection details with it, so the plugin connects as soon as you finish creating your account.

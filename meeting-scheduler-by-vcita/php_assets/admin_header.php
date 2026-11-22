@@ -44,20 +44,6 @@
       '</div></div>'
   }
 
-  function wpshd_rate_popup() {
-    return '<div id="vcita_reg_popup">' +
-      '<div class="vcita__btn__close" onclick="VcitaUI.hidePopup(true)"></div>' +
-      '<div class="vcita_reg_popup-title"><?php echo esc_js(__('Enjoying vcita?', 'meeting-scheduler-by-vcita')) ?></div>' +
-      '<div class="vcita_reg_popup-text">' +
-      '<div><?php echo esc_js(__('Can you please help us with a BIG favor and rate vcita 5 stars.', 'meeting-scheduler-by-vcita')) ?></div>' +
-      '<div style="text-align:center">' +
-      '<button class="vcita__btn__blue" onclick="wpshd_vcita_goToRate(event,this)">' +
-      '<?php echo esc_js(__('Rate 5 Stars', 'meeting-scheduler-by-vcita')) ?></button>' +
-      '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="wpshd_vcita_snooze_rate(event,this)"><?php echo esc_js(__('maybe later', 'meeting-scheduler-by-vcita')) ?></a>'+
-      '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="wpshd_vcita_goToRate(event,this,false)"><?php echo esc_js(__('already rated', 'meeting-scheduler-by-vcita')) ?></a>'+
-      '</div></div></div>'
-  }
-
   function wpshd_migrated_popup(home_url, ud) {
     return '<div id="vcita_reg_popup">' +
       '<div class="vcita__btn__close" onclick="VcitaUI.hidePopup(true)"></div>' +
@@ -171,45 +157,4 @@ if (wpshd_vcita_check_need_to_reconnect($wpshd_vcita_widget) && !WPSHD_VCITA_ANO
   </div>
   <div class="vcita__page__alert-container"></div>
 </div>
-<script type="text/javascript">
-  function wpshd_vcita_goToRate(e, _this, open = true) {
-    e.preventDefault();
-    if (open) {
-      window.open('https://wordpress.org/support/plugin/meeting-scheduler-by-vcita/reviews/#new-post', '_blank');
-    }
-    VcitaUI.hidePopup(true);
-    wpshd_vcita_put_lsr_data('<?php echo esc_js($wpshd_vcita_widget['uid']) ?>', {
-      dismiss: true,
-      wait: false,
-      date: new Date().getTime(),
-      version: '<?php echo esc_js( WPSHD_VCITA_WIDGET_VERSION ); ?>'
-    });
-  }
-
-  function wpshd_vcita_snooze_rate(e, _this) {
-    e.preventDefault();
-    VcitaUI.hidePopup(true);
-    wpshd_vcita_put_lsr_data('<?php echo esc_js($wpshd_vcita_widget['uid']) ?>', {
-      dismiss: false,
-      wait: true,
-      date: new Date().getTime(),
-      version: '<?php echo esc_js( WPSHD_VCITA_WIDGET_VERSION ); ?>'
-    });
-  }
-
-  function wpshd_vcita_put_lsr_data(key, val) {
-    let rdata = {};
-    try {
-      rdata = localStorage.getItem('wpshd_rate_state');
-      if (rdata !== null) {
-        rdata = JSON.parse(rdata);
-      } else {
-        rdata = {};
-      }
-    } catch (err) {
-      rdata = {};
-    }
-    rdata[key] = val;
-    localStorage.setItem('wpshd_rate_state', JSON.stringify(rdata));
-  }
-</script>
+<?php if ( wpshd_vcita_rating_due() ) { wpshd_vcita_render_rating( 'page' ); } ?>

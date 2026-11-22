@@ -96,7 +96,13 @@ $wpshd_vcita_widget = (array) get_option('vcita_scheduler');
 wpshd_vcita_trash_contact_page($wpshd_vcita_widget);
 wpshd_vcita_trash_current_calendar_page($wpshd_vcita_widget);
 
-vcita_send_get('https://us-central1-scheduler-272415.cloudfunctions.net/scheduler-proxy/logout/' . $wpshd_vcita_widget['wp_id']);
+// The plugin is not loaded during uninstall, so this cannot send the proxy secret. A proxy that
+// requires it refuses this call, and the stored vcita token stays until the proxy removes it.
+if ( ! empty( $wpshd_vcita_widget['wp_id'] ) ) {
+	vcita_send_get( 'https://us-central1-scheduler-272415.cloudfunctions.net/scheduler-proxy/logout/' . rawurlencode( $wpshd_vcita_widget['wp_id'] ) );
+}
+delete_option( 'wpshd_vcita_proxy_secret' );
+delete_transient( 'wpshd_vcita_connect_pending' );
 
 if (isset($wpshd_vcita_widget['widget_img']) && $wpshd_vcita_widget['widget_img']) {
     wp_delete_attachment($wpshd_vcita_widget['widget_img'], true);

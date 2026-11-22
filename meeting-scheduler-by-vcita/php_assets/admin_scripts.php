@@ -65,7 +65,7 @@ $vcita_nonce = wp_create_nonce( 'wpshd_vcita_nonce_action' );
   window.VcitaUI
     = new UIController('<?php echo esc_url( plugins_url( WPSHD_VCITA_WIDGET_UNIQUE_ID ) ) ?>',<?php echo json_encode( $wpshd_vcita_widget ) ?>)
   window.VcitaApi
-    = new ApiController('<?php echo esc_js( $wpshd_vcita_widget[ 'wp_id' ] ) ?>', '<?php echo esc_url( WPSHD_VCITA_WIDGET_CALLBACK_URL ) ?>')
+    = new ApiController('<?php echo esc_js( $wpshd_vcita_widget[ 'wp_id' ] ) ?>')
   
   window.dispatchEvent(new CustomEvent('vcita_api_initialized', {
     bubbles: true,
@@ -87,51 +87,6 @@ $vcita_nonce = wp_create_nonce( 'wpshd_vcita_nonce_action' );
   if ( isset( $_GET[ 'show_login' ] ) && ( ! isset( $wpshd_vcita_widget[ 'uid' ] ) || ! $wpshd_vcita_widget[ 'uid' ] ) ) {
 	  echo 'window.VcitaUI.openAuthWin(true);';
   } ?>
-  <?php if (isset( $wpshd_vcita_widget[ 'uid' ] ) && $wpshd_vcita_widget[ 'uid' ]) { ?>
-  (function () {
-    try {
-      let rdata = localStorage.getItem('wpshd_rate_state')
-      if (rdata !== null) {
-        rdata = JSON.parse(rdata)
-        if ( !rdata['<?php echo esc_js( $wpshd_vcita_widget[ 'uid' ] ) ?>']) {
-          rdata['<?php echo esc_js( $wpshd_vcita_widget[ 'uid' ] ) ?>'] = {
-            dismiss: false,
-            wait   : false,
-            date   : new Date().getTime(),
-            version: '<?php echo esc_js( WPSHD_VCITA_WIDGET_VERSION ); ?>'
-          }
-        }
-      }
-      else {
-        rdata = {
-          '<?php echo esc_js( $wpshd_vcita_widget[ 'uid' ] ) ?>': {
-            dismiss: false,
-            wait   : false,
-            date   : new Date().getTime(),
-            version: '<?php echo esc_js( WPSHD_VCITA_WIDGET_VERSION ); ?>'
-          }
-        }
-      }
-      
-      const rd = rdata['<?php echo esc_js( $wpshd_vcita_widget[ 'uid' ] ) ?>']
-      if (rd.dismiss && rd.version === '<?php echo esc_js( WPSHD_VCITA_WIDGET_VERSION ); ?>') {
-        return false
-      }
-      if (rd.wait) {
-        const day = 24 * 60 * 60 * 1000
-        const diffDays = Math.round(Math.abs((rd.date - new Date().getTime()) / day))
-        if (diffDays < 2) {
-          return false
-        }
-      }
-      document.addEventListener('DOMContentLoaded', () => {
-        window.VcitaUI.constructPopup({}, wpshd_rate_popup())
-      })
-    } catch (e) {
-      if (window.WPSHD_VCITA_DEBUG) console.log(e)
-    }
-  })()
-  <?php } ?>
   <?php if (
   $wpshd_vcita_widget[ 'new_install' ] && ( ! isset( $wpshd_vcita_widget[ 'track_new' ] ) || ! $wpshd_vcita_widget[ 'track_new' ] )
   ) { ?>

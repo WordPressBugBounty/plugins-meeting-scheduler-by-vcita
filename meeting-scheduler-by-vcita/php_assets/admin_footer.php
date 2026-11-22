@@ -52,7 +52,7 @@
   }
 
   function wpshd_fab_support() {
-    window.open("https://support.<?php echo esc_js( WPSHD_VCITA_SERVER_BASE ) ?>/hc/en-us/sections/206185508-Wordpress", "_blank");
+    window.open("https://support.<?php echo esc_js( WPSHD_VCITA_SERVER_BASE ) ?>/hc/en-us/articles/360048517893-vcita-Appointment-Booking-and-Online-Scheduling-Plugin-for-WordPress", "_blank");
   }
 
   function wpshd_fab_suggest() {

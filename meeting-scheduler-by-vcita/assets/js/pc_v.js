@@ -1,94 +1,52 @@
 
 
-const ApiController = function (wpid, callbackURL) {
+// The admin pages' access to vcita. Every request goes to this site's admin-ajax, which calls
+// scheduler-proxy from the server (see vcita-proxy.php). The browser never calls the proxy.
+const ApiController = function (wpid) {
   const DEBUG = window.WPSHD_VCITA_DEBUG;
-  this.WPSHD_VCITA_URL = `https://app.${window.WPSHD_VCITA_SERVER_BASE}/app`;
   this.AJAX_URL = window.$_ajaxurl;
-  this.API_URL = window.WPSHD_VCITA_USE_MEET2KNOW ? 'https://us-central1-scheduler-272415.cloudfunctions.net/scheduler-proxy-meet2know' : 'https://us-central1-scheduler-272415.cloudfunctions.net/scheduler-proxy';
-  this.clientId = window.WPSHD_VCITA_USE_MEET2KNOW ? 'a27f3c7639bf18840038cce2acb231111e69b9b4167c694c5e62224294abb1ff' : 'cc46751cc204610d8e62157d61c1a50fe59299a2384bde258cf85e60b1f55ea8';
-  this.callbackURL = callbackURL;
   this.wpid = wpid;
   const _this = this;
   this.business_data = null;
 
-  if (typeof this.callbackURL !== 'string' || this.callbackURL.length === 0) {
-    throw new Error('parameter callbackURL is invalid')
-  }
-
-  this.checkIfInstalled = function () {
-    return new Promise((resolve, reject) => {
-      if (!_this.isInstalled()) {
-        _this.install()
-          .then((data) => {
-            if (data.success && data.wp_id) {
-              _this.wpid = data.wp_id;
-              _this.saveData('wp_id', data.wp_id).then((res) => {});
-              resolve()
-            } else reject(new Error('app not installed'))
-          })
-      } else resolve();
-    })
+  this.proxy = function (resource) {
+    return _this.sendPost(_this.AJAX_URL, {}, {
+      action: 'wpshd_vcita_proxy',
+      resource: resource,
+      nonce: vcitaSchedulerData.nonce
+    });
   };
 
-  this.getAvailability = function () {
-    return _this.checkIfInstalled()
-      .then(() => { return _this.sendGet(`${this.API_URL}/availability/${wpid}`) })
-      .catch((err) => { throw err })
-  };
+  this.getAvailability = function () { return _this.proxy('availability') };
+  this.getBusiness = function () { return _this.proxy('business') };
+  this.getServices = function () { return _this.proxy('services') };
+  this.getStaff = function () { return _this.proxy('staff') };
 
-  this.getBusiness = function () {
-    return _this.checkIfInstalled()
-      .then(() => { return _this.sendGet(`${this.API_URL}/business/${wpid}`) })
-      .catch((err) => { throw err })
-  };
-
-  this.getAuthURL = function (reg = false, logout = false) {
-    return _this.checkIfInstalled()
-      .then(() => {
-        const email = jQuery('#vcita__input-email').val();
-        let url = `/oauth/authorize?response_type=code&client_id=${this.clientId}&lang=${window.WPSHD_VCITA_LOCALE}`;
-        if (reg) url += '&intent=["add_online_scheduling"]';
-        if (logout) url += '&logout=true';
-        url += `&redirect_uri=${encodeURIComponent(`${_this.API_URL}/callback`)}&state=${_this.wpid}&invite=WP-V-SCHD`;
-
-        const authUrl = `${this.WPSHD_VCITA_URL}${url}${(typeof email == 'string' && email.length > 0 ? `&email=${email}` : '')}`;
-
-        // Sign-up used to pass registration=true to /app/oauth/authorize, which
-        // made app.vcita.com bounce to the marketing sign-up page and drop
-        // client_id, redirect_uri and - critically - state. state carries the
-        // wp_id and is the only thing telling the scheduler proxy which site to
-        // link, so the account was created but the plugin never heard back.
-        //
-        // Go to the sign-up page directly, but hand it the whole authorize URL as
-        // redirect_to so the OAuth parameters travel with the user instead of
-        // relying on session state. invite and lang are repeated on the sign-up
-        // URL so attribution survives too.
-        if (reg) {
-          const authPath = authUrl.replace(/^https?:\/\/[^/]+/, '');
-          return `https://www.${window.WPSHD_VCITA_SERVER_BASE}/signup`
-            + `?redirect_to=${encodeURIComponent(authPath)}`
-            + `&invite=WP-V-SCHD&lang=${window.WPSHD_VCITA_LOCALE}`;
-        }
-
-        return authUrl
-      })
-      .catch((err) => { throw err })
-  };
-
-  this.getServices = function () {
-    return _this.checkIfInstalled()
-      .then(() => { return _this.sendGet(`${this.API_URL}/services/${wpid}`) })
-      .catch((err) => { throw err })
-  };
-
-  this.getStaff = function () {
-    return _this.checkIfInstalled()
-      .then(() => { return _this.sendGet(`${this.API_URL}/staff/${wpid}`) })
-      .catch((err) => { throw err })
-  };
-
+  // The server registers the site with the proxy when it has no wp_id yet.
   this.isInstalled = function () { return typeof _this.wpid == 'string' && _this.wpid.length > 0 };
-  this.install = function () { return _this.sendGet(`${this.API_URL}/install?callback=${this.callbackURL}`) };
+  this.install = function () {
+    return _this.proxy('install').then((data) => {
+      if (data && data.success && data.wp_id) _this.wpid = data.wp_id;
+      return data;
+    });
+  };
+
+  // Resolves to the vcita sign-in URL. The server also records that this administrator
+  // started a Connect, which the sign-in result is checked against.
+  this.getAuthURL = function (reg = false, logout = false) {
+    const email = jQuery('#vcita__input-email').val();
+    return _this.sendPost(_this.AJAX_URL, {}, {
+      action: 'wpshd_vcita_connect_url',
+      signup: reg ? '1' : '0',
+      logout: logout ? '1' : '0',
+      email: typeof email == 'string' ? email : '',
+      nonce: vcitaSchedulerData.nonce
+    }).then((data) => {
+      if (!data || typeof data.url !== 'string') throw new Error((data && data.message) || 'no sign-in URL');
+      return data.url;
+    });
+  };
+
   // vcitaSchedulerData
   this.saveData = function (key, data) {
     return _this.sendPost(this.AJAX_URL, {}, {
